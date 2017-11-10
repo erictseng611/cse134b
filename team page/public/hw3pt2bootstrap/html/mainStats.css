@@ -1,36 +1,37 @@
-
-h1 {
-    text-align: center;
-    padding-top: 30px;
-    font-size: 4em;
-    font-family: serif;
-    font-weight: bold;
-}
-
-h3 {
-    text-align: center;
-}
-
-.mx-auto {
-    text-align: center;
-}
-.row {
-    text-align: center;
+* {
+    margin: 0;
 }
 
 .form-actions {
     text-align: center;
 }
 
-.custom {
-    width: 180px !important;
+h1 {
+    text-align: center;
+    font-size: 3em;
+    font-family: serif;
+    font-weight: bold;
+    background-color: rgb(0, 119, 255);
+    color: white;
+    margin: 0px;
 }
+
+h3, h4 {
+    padding: 20px;
+    text-align: center;
+}
+
+.col-sm-5 {
+    text-align: center;
+}
+
+.nav-link {
+    color: white;
+}
+
 .wrap {
     margin: 0 auto;
-    padding-top: 64px;
-    max-width: 940px;
-    width: 94%;
-  }
+}
  
 html {
     height: 100%;
