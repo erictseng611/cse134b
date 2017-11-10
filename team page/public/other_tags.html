@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Global Key Testing</title>
+    
+  </head>
+  
+  <body>
+    <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fother_tags.html"> Validate </a>
+    <section>
+        <h1> Tag #1: Blockquote </h1>
+        <blockquote cite="ajaygiri.com">
+        <p> Ajay Giri's cats are hypoallergenic. </p>
+        </blockquote>
+    </section>
+
+    <section>
+        <h1> Tag #2: KBD </h1>
+        <p>Type the following in the linux terminal:
+            <kbd>man cat</kbd><br /> You will be disappointed to find that there are no cats.</p>
+    </section>
+
+    <section>
+        <h1> Tag #3 &amp; 4: Details and Summary</h1>
+        <details>
+            <summary>A cat's hairball is called a bezoar</summary>
+            <p> More stuff </p>
+        </details>
+        <details>
+            <summary>A group of cats is called a clowder</summary>       
+            <p> I bet you never knew that </p>        
+        </details>
+    </section>
+    
+    <section>
+        <!-- This marquee will cause an error because it is a child of a section and it is also no longer supported  -->
+        <h1> Tag #5: Marquee </h1>
+        <marquee> This is such a fun tag! Why would it be removed?</marquee>
+    </section>
+
+    <section>
+        <!-- This nobr will cause an error because it is a child of a section and it is also no longer supported  -->
+        <h1> Tag #6: nobr </h1>
+        <p> THis no break element allows the text to keep on going </p>
+        <nobr>Fall asleep on the washing machine put butt in owner's face for scratch at fleas, meow until belly rubs, hide behind curtain when vacuum cleaner is on scratch strangers and poo on owners food inspect anything brought into the house, or annoy kitten brother with poking behind the couch eats owners hair then claws head. Scratch at the door then walk away scream for no reason at 4 am my slave human didn't give me any food so i pooped on the floor. Sit in box intrigued by the shower, so man running from cops stops to pet cats, goes to jail, and put butt in owner's face but rub face on everything. Eat half my food and ask for more i can haz or milk the cow mice. Poop in a handbag look delicious and drink the soapy mopping up water then puke giant foamy fur-balls. Sniff sniff. Steal the warm chair right after you get up thug cat or cereal boxes make for five star accommodation for scratch the postman wake up lick paw wake up owner meow meow plays league of legends but roll over and sun my belly, pelt around the house and up and down stairs chasing phantoms. Scamper knock over christmas tree. When in doubt, wash i'm going to lap some water out of my master's cup meow and that box? i can fit in that box sleep but shake treat bag, yet hunt by meowing loudly at 5am next to human slave food dispenser. </nobr>
+    </section>
+
+    <section>
+        <!-- This strike tag does not pass through the validator because it is obsolote -->
+        <h1>Tag #7: Strike </h1>
+        <p> <strike> This strike element </strike> simulates the del or s tag </p>
+    </section>
+
+    <section>
+        <!-- This xmp tag is obsolete and not supported my all browsers. The feature may be removed at any time. -->
+        <h1>Tag #8: xmp </h1>
+        <xmp> This xmp tag allows me to type in <p> </p> <div> </div> without it rendering as elements </xmp>       
+    </section>
+
+    <section>
+        <!-- Base font is obsolete and will cause validator error. Recommended to use css instead -->
+        <h1>Tag #9: Basefont </h1>
+        <basefont color="#eee" face="Helvetica" size="+2" />
+        <p> This tag used to allow me to change the base font for the entire document. However it is no longer supported so thats why you still see no difference in the change of font. </p>
+    </section>
+
+    <section>
+        <!-- Center tag is obsolete and will cause validator error. Recommend to use css text-align property -->
+        <h1>Tag #10: Center</h1>
+        <center> <p> Anything inside these tags will be centered </p> Its better to use css property text-align instead</center>
+    </section>
+  </body>
+</html>

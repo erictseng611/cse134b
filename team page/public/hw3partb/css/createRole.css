@@ -1,0 +1,22 @@
+/* Create Team/Player/Fan Page */
+
+.create-team{}
+
+.team-logo{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.team-logo h1{
+	font-size: 1rem;
+	margin: 1rem 0;
+}
+
+.team-logo img{
+	width: 50%;
+	max-width: 400px;
+}
+
+.create-Acc-Form{
+	padding: 1rem 0;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Embedded Content</title>
+</head>
+<body>
+  <h1>Embedded Home</h1>
+  <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fembedded_content.html"> Validate </a>
+  <section>
+    <h2>Image Map</h2>
+    <h3>Click on the ball or cat</h3>
+    <p><img src="./embedded/map.jpeg" width="275" alt="Soccer or Cat" height="183" usemap="#Map"></p>
+    <map name="Map">
+      <area shape="rect" coords="20,50,137,160"
+      href="./embedded/soccer.html" alt="soccer">
+      <area shape="rect" coords="137,10,220,183"
+      alt="cat" href="./embedded/cat.html">
+    </map> 
+  </section>
+
+  <section>
+    <h2>iframe</h2>
+    <h3>Sneakpeek at the cat page</h3>
+    <iframe src="./embedded/cat.html" title="sneakpeak of cat" width="500" height="300">
+    </iframe>
+  </section>
+
+  <section>
+    <h2>embed</h2>
+    <embed src="./images/animals1.swf" quality="high" height="500" width="500">
+    </section>
+
+    <section>
+      <h2> object</h2>
+      <object data="./images/animals1.swf">
+        <param name="quality" value="high">
+      </object>
+    </section>
+
+    <section>
+      <h2>Sounds</h2>
+      <a href="./embedded/catsound.html">Sound will automatically play</a>
+    </section>
+
+    <section>
+      <h2>Video</h2>
+      <a href="./embedded/catvideo.html">Video will automatically play</a>
+    </section>
+
+    <div>
+      <h2>MathML</h2>
+      <math>
+        <mrow>
+          <msup>
+            <mi>  a </mi>
+            <mn>2</mn>
+          </msup>
+          <mo> + </mo> 
+          <msup>
+            <mi> b </mi>
+            <mn>2</mn>
+          </msup> 
+          <mo> = </mo> 
+          <msup>
+            <mi> c </mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </math>
+    </div>
+
+    <section>
+      <h2>SVG</h2>
+      <svg width='200' height='300'>
+        <title>SVG cat</title>
+
+        <circle cx='70' cy='95' r='50' style='stroke:black;fill:none' />
+        <circle cx="55" cy="80" r="5" stroke="black" fill="#339933"/>
+        <circle cx="85" cy="80" r="5" stroke="black" fill="#339933"/>
+        <polyline points="108 62,  90 10,  70 45,  50, 10,  32, 62"
+        style="stroke: black; fill: none;" />
+        <!-- mouth -->
+        <polyline points="35 110, 45 120, 95 120, 105, 110"
+        style="stroke: black; fill: none;" />
+        <path d="M 75 90 L 65 90 A 5 10 0  0 0 75 90"
+        style="stroke: black; fill: #ffcccc"/>
+      </svg>
+
+    </section>
+
+
+  </body>
+  </html>

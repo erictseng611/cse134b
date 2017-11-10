@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> Tables </title>
+  <style>
+      table { border-collapse: collapse; border; solid thick; }
+      colgroup, tbody { border: solid medium; }
+      td { border: solid thin; height 1.4em; width: 1.4em; text-align: center; padding: 10; }
+  </style>
+</head>
+
+
+<body>
+  <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Ftables.html">Validate</a>
+    <h1> Cat Characteristics </h1>
+    <table>
+      <colgroup span="4"></colgroup>
+      <tr>
+        <th>Cat Breed </th>
+        <th>Weight</th>
+        <th>Color</th>
+        <th>Name</th>
+      </tr>
+      <tr>
+        <td>Persian Cat</td>
+        <td>8 lbs</td>
+        <td>White/Grey</td>
+        <td>Mr. JellyBean</td>
+      </tr>
+      <tr>
+        <td>Bengal Cat</td>
+        <td>5 lbs</td>
+        <td>Orange/Brown</td>
+        <td>Muffins</td>
+      </tr>
+      <tr>
+        <td>Siberian Cat</td>
+        <td>6 lbs</td>
+        <td>Grey</td>
+        <td>Grant</td>
+      </tr>
+      <tr>
+        <td>Himalayan Cat</td>
+        <td>10 lbs</td>
+        <td>Yellow/Brown</td>
+        <td>Sniffers</td>
+      </tr>
+    </table>
+
+  <br>
+  <br>
+
+<section>
+  <h2>Cat Emotions</h2>
+    <table aria-describedby="n">
+      <caption>Characteristics with positive and negative sides</caption>        <thead>
+        <tr>
+        <th id="n"> Favorite Toy
+        <th> Name
+        <th> Least Favorite Toy
+        <tbody>
+        <tr>
+        <td headers="n r1"> Mouse
+        <th id="r1"> Mr. JellyBean
+        <td> Ball of Yarn
+        <tr>
+        <td headers="n r2"> Ball of Yarn
+        <th id="r2"> Muffins
+        <td> Feather
+        <tr>
+        <td headers="n r3"> Stuffed Animal
+        <th id="r3"> Grant
+        <td> Vacuum Cleaner
+        <tr>
+        <td headers="n r4"> Tickle me Elmo
+        <th id="r4"> Sniffers
+        <td> Chewy Toy
+    </table>
+</section>
+</body>
+</html>

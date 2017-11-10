@@ -1,0 +1,35 @@
+/* Login Page */
+
+.login-header{
+	font-size: 2rem;
+	padding-top: 2rem;
+}
+
+.login-form{
+	margin-top: 1rem;
+}
+
+.login-form input{
+	width: 90%;
+	max-width: 600px;
+	height: 1.5rem;
+	font-size: 1rem;
+	margin: .5rem;
+	border: 1px solid grey;
+}
+
+
+.login-form div {
+	width: 200px;
+}
+
+.form-button{
+	border: none;
+	background-color: blue;
+	color: white;
+	width: 200px;
+	height: 2rem;
+	font-size: 1rem;
+	margin-top: 1rem;
+}
+

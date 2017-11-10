@@ -1,0 +1,12 @@
+/* Add player container */
+
+.add-player img{
+	height: 10rem;
+	width: auto;
+	border: 2px solid black;
+	background-color: white;
+}
+
+.add-player form{
+	padding-top: 5rem;
+}

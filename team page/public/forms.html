@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Forms</title>
+</head>
+
+<body>
+	<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fforms.html"> Validate </a>
+
+	<section>
+		<h1> Form #1 </h1>
+		<form method="post" action="http://httpbin.org/post" autocomplete="on" name="form1" enctype="multipart/form-data" oninput="calculator.value = age.valueAsNumber * dogYear.valueAsNumber; calculator.value += ' dog years'">
+			<p> Space left available <meter min="0" max="15" value="2"></meter></p>
+			<p><label> Cat Name: <input required name="catName" type="text" placeholder="kitty name" autofocus> </label></p>
+			<!-- Keygen is an obsolete element -->
+			<p><keygen name="key" challenge="challenge"></p>
+			<p><label> Address: <input name="address" type="tel"></label></p>
+			<p><label> Owner's email: <input name="email" type="email" readonly="readonly" value="hi@d.com"></label></p>
+			<p><label> Owner's phone: <input name="phone" type="tel"></label></p>
+			<p><label> Owner's personal website: <input name="website" type="url"></label></p>
+			<p><label> Country Code: <input name="country-code" type="text" placeholder="Ex. USA" pattern="[A-Za-z]{3}"></label></p>		
+			<!-- Date type for input is not supported in all browsers -->
+			<p><label> Date of drop off: <input name="date" type="date"></label></p>	
+			<!-- Time type for input is not supported in all browsers -->
+			<p><label> Type in drop-off time <input name="drop-off" type="time" min="10:00" max="23:00"></label></p>
+			<p><input name="hidden" type="hidden" value="yes"></p>
+			<fieldset>
+				<legend> Cat Size</legend>
+				<p><label><input type="radio" name="size" value="small">Small</label></p>
+				<p><label><input type="radio" name="size" value="medium" checked >Medium</label></p>
+				<p><label><input type="radio" name="size" value="large">Large</label></p>
+			</fieldset>
+			<fieldset>
+				<p>
+					<label> Cat's favorite toys <input name="toys" type="text" list="toysList"></label>
+					<datalist id="toysList">
+						<option value="yarn" label="yarn"></option>
+						<option value="mouse" label="mouse"></option>
+						<option value="life" label="life"></option>
+					</datalist>
+				</p>
+			</fieldset>
+			<!-- Color type for input is not supported in all browsers -->
+			<p><label> Cat's color <input name="color" type="color"></label></p>
+			<fieldset>
+				<legend> Pests your pets have (select all that apply)</legend>
+				<p><label><input type="checkbox" name="pests" value="fleas"> Fleas</label></p>
+				<p><label><input type="checkbox" name="pests" value="lice"> Lice</label></p>
+				<p><label><input type="checkbox" name="pests" value="ticks"> Ticks</label></p>
+				<p><label><input type="checkbox" name="pests" value="mosquitos"> Mosquitos</label></p>
+			</fieldset>
+
+				<p><label>Special Instructions: <textarea name="instructions" maxlength=1000 cols="25" rows="10"></textarea></label></p>
+				<p><label> or upload instructions: <input name="upload" type="file" multiple></label></p>
+				<p><label>Number of cats you will bring <input type="range" min="1" max="5" step=".5"></label></p>
+				<p><label>Are your cat(s) stinky? 
+					<select required>
+						<option value="" label="Please Select One"></option>
+						<optgroup label="Yes">
+							<option value="HellYes"> Hell Yes </option>
+							<option value="Yes"> Yes </option>
+							<option value="PrettyMuch"> Pretty Much </option>
+						</optgroup>
+						<optgroup label="No">
+							<option value="no" label="No"> </option>
+							<option value="kind of"> Kind of </option>
+						</optgroup>
+					</select>
+				</label></p>
+				<input name="age" type="number" placeholder="Dog's age">
+				<input name="dogYear" type="number" value="7" readonly="readonly"> 
+				<output name="calculator" for="age dogYear"></output>
+				<p><label><input type="image" src="./images/submitbutton.jpg" height="50" alt="submit" formnovalidate="formnovalidate"></label></p>
+				<button type="reset"> Clear</button>
+				<p> Request % done: <progress value="70" max="100">70 %</progress></p>
+		</form>
+	</section>
+
+
+</body>
+</html>

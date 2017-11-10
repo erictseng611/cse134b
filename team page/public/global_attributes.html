@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Global Key Testing</title>
+    <style>
+        h1.classy { color: orange; }
+    </style>
+  </head>
+  
+  <body>
+    <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fglobal_attributes.html"> Validate </a>
+    <section>
+        <h1> Access Key </h1>
+        <a title = "Catkey" accesskey="c"> Cat key </a>
+    </section>
+    
+    <section>
+        <h1 class = "classy"> This is the color of my cat  </h1>
+        
+    </section>
+
+    <section>
+        <h1> contendeditable </h1>
+        <p contenteditable="true"> Try to edit this! 🐱</p>
+    </section>
+
+    <section>
+        <h1> dir </h1>
+        <p dir="rtl"> [^._.^]ﾉ彡 I'm on the right side of the page!</p>  
+    </section>
+
+    <section>
+        <h1> hidden </h1>
+        <p hidden> 【～～～ヽ(=^‥^=)丿～～～】You found me!</p>
+        <p> Nothing to see here</p>
+    </section>
+
+    <section>
+        <h1> id </h1>
+        <p id="catHeader"> o(=^‥^)~ ┫ </p>
+        <button onclick="flipTable()"> Put the table back upright! </button>
+        <script>
+        function flipTable() { document.getElementById("catHeader").innerHTML = " ~(=^‥^)o┳";}
+        </script>
+    </section>
+    
+    <section>
+        <h1> lang </h1>
+        <p> Cat </p>
+        <p lang="es"> Gato </p>
+        <!-- lang is pretty useless, it seems to serve more purpose to the coder than the user. -->
+    </section>    
+
+    <section>
+        <h1> spellcheck </h1>
+        <p contenteditable="true" spellcheck="true"> The cattastic cat</p> 
+        <!-- Spellcheck only works when the text can be edited, so it will only show when we use contenteditable -->    
+    </section>
+            
+    <section>
+        <h1 style = "color:blue;text-align:center"> /ᐠ｡ꞈ｡ᐟ\  This is </h1>
+        <p style = "color:green;text-align:center"> style ^._.^= ∫  </p>
+                        
+    </section>
+                
+    <section>
+        <h1> tabindex </h1>
+        <img src="./images/mimi.jpg" tabindex="2" height="360" width="240" alt="Kitten"><br>
+        <img src="./images/mimi2.jpg" tabindex="3" height="360" width="240" alt="Kat"><br>
+        <img src="./images/mimison.jpg" tabindex="1" height="360" width="240" alt="Katson"><br>      
+    </section>                
+
+    <section>
+        <h1> title </h1>
+        <p title="CATS ARE THE BEST"> Hover over me </p>                    
+    </section>
+
+    <section>
+        <h1> translate </h1>
+        <p translate="no">Meow meow</p> 
+        <p> This means "I am hungry" in cat </p>
+        <!-- According to w3schools.com, translate isn't supported in Chrome, Firefox, and IE.-->
+    </section>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 4em;
+    font-family: serif;
+    font-weight: bold;
+}
+
+.row {
+    text-align: center;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.custom {
+    width: 180px !important;
+}
+
+.fixed-bottom {
+    text-align: center;
+}

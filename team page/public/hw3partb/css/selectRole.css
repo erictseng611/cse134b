@@ -1,0 +1,14 @@
+/* Select Role Page */
+
+.select-role{
+	width: 90%;
+	margin: 0 auto;
+	font-size: 1rem;
+}
+
+.select-role p{
+	text-align: center;
+	padding: 2rem 0;
+	width: 100%;
+	margin: 1rem 0;
+}

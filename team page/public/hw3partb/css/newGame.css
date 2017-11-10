@@ -1,0 +1,11 @@
+/* Add New Game Page*/
+
+#add-game-form {
+	text-align: left;
+}
+
+#opponent-input{
+	width: 70%;
+	display: inline-block;
+	border-radius: 5px;
+}

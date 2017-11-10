@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Event Attributes </title>
+</head>
+
+<body onload="console.log('onload fired')" onscroll="console.log('onscroll fired')">
+	<h1> Event Attributes </h1>
+	<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fevent_attributes.html">Validate</a>
+
+	<section>
+		<h2> On Blur, On Focus, On Input, on Invalid, on Reset, on Submit</h2>
+		<form onreset="console.log('onreset fired')" onsubmit="console.log('onsubmit fired')">
+			<input type="text" onblur="console.log('onblur fired')" onfocus="console.log('onfocus fired')" oninput="console.log('oninput fired')" oninvalid="console.log('oninvalid fired')" required>
+			<input type="submit">
+			<input type="reset">
+		</form>
+	</section>
+
+	<section>
+		<h2> On Change </h2>
+		<select onchange="console.log('onchange fired')">
+			<option> change </option>
+			<option>don't change</option>
+		</select>
+	</section>
+
+	<section>
+		<h2> On Click </h2>
+		<a href="#" onclick="console.log('onclick fired')"> test onclick </a>
+	</section>
+
+		<section>
+		<h2> On double click </h2>
+		<p ondblclick="console.log('ondblclick fired')"> test ondblclick </p>
+	</section>
+
+	<section>
+		<h2> On Error </h2>
+		<img src="./embedded/cat.jpg" onerror="console.log('onerror fired')" width="100" alt="cat"> 
+	</section>
+
+	<section>
+		<h2> on Keydown</h2>
+		<input type="text" onkeydown="console.log('onkeydown fired')">
+	</section>
+
+	<section>
+		<h2>on KeyPress </h2>
+		<input type="text"  onkeypress="console.log('onkeypress fired')">
+	</section>
+
+	<section>
+		<h2>on KeyUp </h2>
+		<input type="text" onkeyup="console.log('onkeyup fired')">
+	</section>
+
+	<section>
+		<h2>on Load, on Scroll (tested on body tag)</h2>
+	</section>
+
+	<section>
+		<h2> on Mousedown, on mouseenter, on mouseleave, on mousemove, on mousewheel</h2>
+		<div style="height:300px; width: 100%; background-color: red;" onmousedown="console.log('onmousedown fired')" onmouseenter="console.log('mouseenter fired')" onmouseleave="console.log('onmouseleave fired')" onmousemove="console.log('mouseMove fired')" onmousewheel="console.log('monmousewheel fired')"></div>
+		<!-- onMouseWheel is deprecated so an error is shown from the validator -->
+	</section>
+
+	<section>
+		<h2> On mouseout, on mouseover </h2>
+		<img src="./images/erictseng.jpg" alt="Eric Tseng" width=100 onmouseout="console.log('onmouseout fired')" onmouseover="console.log('onmouseover fired')">
+	</section>
+
+	<section>
+		<h2> On Select </h2>
+		<input type="text" onselect="console.log('onselect fired')" value="select me">
+	</section>
+
+
+<script>
+
+</script>
+</body>
+</html>

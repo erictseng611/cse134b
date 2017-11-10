@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Scripts</title>
+</head>
+
+<body>
+	<h1> Scripts </h1>
+	<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Fscript.html">Validate</a>
+
+	<section class="script">
+		<h2> Script Tag </h2>
+		<button onclick="turnGrey()"> Click me to turn the background grey! </button>
+	</section>
+
+	<section>
+		<h2> Noscript Tag </h2>
+		<p> If scripting is disabled, then a link to cats will appear below. </p>
+		<noscript>
+			<a href="https://www.pexels.com/search/cat/"> Cats </a>
+		</noscript>
+	</section>
+
+	<section>
+		<h2> Template </h2>
+		<div id="normal"> Normal Content </div>
+		<template id="template">
+			<p> I just got added. Click the button again to clone me! </p>
+		</template>
+		<button onclick="template()"> Click to clone! </button>
+	</section>
+
+	<section>
+		<h2> Canvas </h2>
+		<p> My attempt at a soccer ball.... </p>
+		<canvas id="canvas" width="500" height="500"></canvas>
+	</section>
+
+
+
+<script>
+	const button = document.querySelector('button');
+	button.addEventListener('click', turnGrey);
+	const section = document.querySelector('.script');
+
+	function turnGrey(){
+		section.style.backgroundColor = 'grey';
+	}
+
+
+	function template(){
+		const normal = document.getElementById('normal');
+		const template = document.getElementById('template');
+		const clonedTemp = template.content.cloneNode(true);
+		normal.appendChild(clonedTemp);
+	}
+
+	const canvas = document.getElementById('canvas');
+	const context = canvas.getContext('2d');
+
+	// const image = document.createElement('img');
+	// image.src = './embedded/cat.jpg';
+
+	// context.drawImage(image, 0, 0)
+
+	// Draw the face
+	context.fillStyle = "white";
+	context.beginPath();
+	context.arc(100, 100, 40, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+	context.lineWidth = 2;
+	context.stroke();
+	context.fillStyle = "black";
+
+	context.beginPath();
+	context.arc(95, 75, 15, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+	context.beginPath();
+	context.arc(122, 90, 15, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+	context.beginPath();
+	context.arc(75, 100, 15, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+	context.beginPath();
+	context.arc(102, 113, 15, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+	context.beginPath();
+	context.arc(120, 125, 8, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+	context.beginPath();
+	context.arc(85, 130, 8, 0, 2*Math.PI);
+	context.closePath();
+	context.fill();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8" /> 
+	<link rel="stylesheet" href="../index.css" type="text/css">
+	<title> Team Watch </title>
+</head>
+<body>
+	<main class="container">
+		<h1 class="no_margin"> Add Game </h1>
+		<p><label> Opponent: <input id="opponent-input" type="text" name="opponent" list="opponentlist">
+			<datalist id="opponentlist">
+				<option value="Turtles">
+				<option value="Lions">
+				<option value="Sea Lions">
+				<option value="Monkeys">
+				<option value="Dogs">
+				<option value="Ravens">
+				<option value="Rhinos">
+				<option value="Elepehants">
+				<option value="Hogs">
+			</datalist> </label> </p>
+		<img src="../images/turtles.jpg" class="margin_center block" width="100" alt="opponent's logo">
+		<form>
+			<input type="text" name="location" placeholder="location">
+			<!-- Date  and Time input type is not supported on all browsers -->
+			<input type="date" name="date">
+			<input type="time" name="time">
+			<!-- <button class="form-button" type="submit">Sign Up</button> -->
+		</form>
+		<!-- Only used to stimulate clicking of button -->
+		<form action="./homepage.html" class="text_align_center">
+		   <button class="form-button" type="submit">Sign Up</button>
+		</form>
+	</main>
+	<footer class="bottom-logo">
+		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
+		<p class="inline_block">Team Watch</p>
+	</footer>
+</body>
+</html>

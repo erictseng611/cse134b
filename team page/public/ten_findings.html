@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> 10 Findings</title>
+</head>
+
+<body>
+
+<h1> 10 Findings </h1>
+<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fcse-134b-hw2-702d4.firebaseapp.com%2Ften_findings.html">Validate</a>
+<ol>
+	<li> &lt;bdi&gt; elements are not supported in every browser so we get a warning from the validator. Through more research we found that internet explorer does not support this feature. Another way to do this is through css of unicode-bidi</li>
+	<li> Date, time, and color input types are not supported in every browser so the validator gave us a warning. We found that the date type input is inconsistent among different browsers so developers have to pay attention to the format of the date. This is also the case with time and color.</li>
+	<li> Keygen is deprecated and may be no longer supported at anytime. It is an obsolete element.</li>
+	<li> onMouseWheel is deprecated. It is recommended to use the onwheel attribute instead. Onmousewheel event is inconsistent among browsers so the cross-browser compatibility is poor.</li>
+	<li> The validator found that prefetching with an anchor tag was invalid even though the w3 website said that it was. Through further research it was found on MDN that only link supports the rel="prefetch" value. To remediate this, we used a link tag to prefetch the url so that it is in cache, and then we added an anchor link to hyperlink to the site.</li>
+	<li> MathML is only supported by firefox and safari. However on chrome, even though it says it is not supported, it looks like it renders normally. </li>
+	<li> The strike, baseline, nobr, and center elements are obsolete and all of the suggestions is to use CSS properties <li> Spellcheck only works when the text can be edited, so it will only show when we use contenteditable. </li>
+	<li> The lang tag seems to serve more purpose to the coder than the user. When we use the lang tag, it doesn't explicitly specify to the user the language that it is in, it will only be clear to whoever is editing or looking at the code. </li>
+	<li> Translate is new to HTMl5, it is used to explicitly indicate which elements should or should not be translated. Even though it passed the validation test, it is currently not supported on Chrome, IE, FireFox, Safari, and Opera. </li>
+
+</ol>
+
+
+</body>
+</html>
