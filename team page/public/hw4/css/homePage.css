@@ -1,0 +1,22 @@
+/* Home page */
+
+.homepage{
+	width: 90%;
+}
+
+.team-stats{
+	text-align: center;
+	margin: 0 auto;
+	font-size: 1rem;
+}
+
+
+.team-stats img{
+	width: 60%;
+	height: auto;
+	max-width: 400px;
+}
+
+.goal-count{
+	margin:0 1rem;
+}

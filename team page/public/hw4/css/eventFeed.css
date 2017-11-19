@@ -1,0 +1,23 @@
+/* Event Page */
+
+.add-event{
+	text-align: center;
+	padding-top: 2rem;
+}
+
+#event-type-selection{
+	width: 100%;
+}
+
+#event-container{
+	overflow-y: scroll;
+	height: 350px;
+	max-width: 500px;
+}
+
+.event-item{
+	background-color: blue;
+	color: white;
+	margin: 1rem;
+	padding: .5rem;
+}

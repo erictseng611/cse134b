@@ -1,0 +1,447 @@
+/* Global classes ******************************* */
+html {
+	margin: 0;
+	padding: 0;
+	font-size: 12pt;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 20px;
+	box-sizing: inherit;	
+}
+
+*, *:before, *:after{
+	box-sizing: border-box;
+}
+
+.no_margin{
+	margin: 0;
+}
+
+.font_xl{
+	font-size: 2rem;
+}
+
+.font_xxl{
+	font-size: 3rem;
+}
+
+.text_align_center{
+	text-align: center;
+}
+
+.margin_center{
+	margin: 0 auto;
+}
+
+.inline_block{
+	display: inline-block;
+}
+
+.block{
+	display: block;
+}
+
+
+.container{
+	width: 90%;
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 1rem;
+}
+
+form{
+	max-width: 350px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+input {
+	padding-left: 5%;
+	border: 1.5px solid grey;
+	height: 1.5rem;
+	width: 100%;
+	margin: .5rem 0 ;
+	max-width: 350px;
+	display: block;
+
+}
+
+.large_input{
+	height: 3rem;
+	width: 95%;
+	padding-left: 5%;
+	font-size: 1.5rem;
+}
+
+.settings-bar {
+	height: 3rem;
+}
+
+.settings-bar img{
+	padding: 1rem 1rem 0 0;
+	float: right;
+	width: 3rem;
+}
+
+
+.contain{
+	min-height: 100%;
+	position: relative;
+}
+
+.body {
+	padding-bottom: 60px;
+}
+
+.bottom-logo{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	background-color: white;
+}
+
+.bottom-logo > *{
+	vertical-align: middle;
+	margin: 0;
+	font-size: 1em;
+}
+
+.bottom-logo > img{
+	width: 20px;
+}
+
+.large_button{
+	text-decoration: none;
+	text-align: center;
+}
+
+.large_button p{
+	background-color: blue;
+	color: white;
+	font-size: 12pt;
+	padding: 1em;
+	transition: transform .5s;
+}
+
+
+.button{
+	text-decoration: none;
+}
+
+.button p{
+	background-color: blue;
+	color: white;
+	font-size: 12pt;
+	width: 200px;
+	margin: 0 auto;
+}
+
+
+/* Login Page */
+
+.login-header{
+	font-size: 2rem;
+	padding-top: 2rem;
+}
+
+.login-form{
+	margin-top: 1rem;
+}
+
+.login-form input{
+	width: 90%;
+	max-width: 600px;
+	height: 1.5rem;
+	font-size: 1rem;
+	margin: .5rem;
+	border: 1px solid grey;
+}
+
+
+.login-form div {
+	width: 200px;
+}
+
+.form-button{
+	border: none;
+	background-color: blue;
+	color: white;
+	width: 200px;
+	height: 2rem;
+	font-size: 1rem;
+	margin-top: 1rem;
+}
+
+
+/* Select Role Page */
+
+.select-role{
+	width: 90%;
+	margin: 0 auto;
+	font-size: 1rem;
+}
+
+.select-role p{
+	text-align: center;
+	padding: 2rem 0;
+	width: 100%;
+	margin: 1rem 0;
+}
+
+/* Create Team/Player/Fan Page */
+
+.create-team{}
+
+.team-logo{
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.team-logo h1{
+	font-size: 1rem;
+	margin: 1rem 0;
+}
+
+.team-logo img{
+	width: 50%;
+	max-width: 400px;
+}
+
+.create-Acc-Form{
+	padding: 1rem 0;
+}
+
+/* Home page */
+
+.homepage{
+	width: 90%;
+}
+
+.team-stats{
+	text-align: center;
+	margin: 0 auto;
+	font-size: 1rem;
+}
+
+
+.team-stats img{
+	width: 60%;
+	height: auto;
+	max-width: 400px;
+}
+
+.goal-count{
+	margin:0 1rem;
+}
+
+/* Schedule */
+
+.schedule{
+	width: 90%;
+}
+
+.schedule_container{
+	overflow-y: scroll;
+	height: 500px;
+}
+
+.schedule_container .large_button p:first-child{
+	margin-top: 0;
+}
+
+.schedule_container p:hover{
+	transform: scale(1, 1.2);
+	background-color: darkblue;
+}
+
+/* Live Games */
+
+.live-game-teams{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
+}
+
+.live-game-team{
+	flex: 2 100px;
+	text-align: center
+}
+
+.live-game-team img{
+	max-height: 150px;
+	width: auto;
+}
+
+.live-game-stats-team{
+	border-top: 1px solid grey;
+	margin-top: 1rem;
+}
+
+.live-game-stats-team:first-child{
+	border-right: 1px solid grey;
+}
+
+.live-game-stats{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+}
+
+
+.live-game-stats-team{
+	flex: 1;
+}
+
+.stat-container {
+	width: 70%;
+	margin: 0 auto;
+	padding-left: 1rem;
+	min-width: 135px;
+}
+
+.stat-container ul{
+	list-style-type: none;
+}
+
+.stat-container ul > li{
+	text-indent: -2rem;
+}
+
+.event-feed-button{
+	margin: .5rem 0;
+}
+
+.event-feed-button p{
+	padding: .5rem 0;
+}
+
+/* Add New Game Page*/
+
+#add-game-form {
+	text-align: left;
+}
+
+#opponent-input{
+	width: 70%;
+	display: inline-block;
+	border-radius: 5px;
+}
+
+/* Event Page */
+
+.add-event{
+	text-align: center;
+	padding-top: 2rem;
+}
+
+#event-type-selection{
+	width: 100%;
+}
+
+#event-container{
+	overflow-y: scroll;
+	height: 350px;
+}
+
+.event-item{
+	background-color: blue;
+	color: white;
+	margin: 1rem;
+	padding: .5rem;
+}
+
+/* players page*/
+
+.player-list{
+	height: 500px;
+	overflow-y: scroll;
+	margin-top: 1rem;
+}
+
+#player-filter{
+	width: 100%;
+
+}
+
+figure.player-card{
+	margin-left:0;
+	margin-right: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.player-card {
+	background-color: blue;
+	padding: .5rem;
+	box-sizing: border-box;
+}
+
+.player-card:first-child{
+	margin-top: 0;
+}
+
+.player-card p{
+	margin:0;
+	text-align: left;
+	color: white;
+	padding-left: 1rem;
+}
+
+.player-card img{
+	background-color: white;
+	width: auto;
+	height: 75px;
+}
+
+/* Player profile */
+
+.player-figure{
+	margin-top: 0;
+	padding-top: 3rem;
+}
+
+.player-profile-pic{
+	height: 10rem;
+	width: auto;
+	border: 2px solid black;
+}
+
+.player-stats{
+	padding-top: 1rem;
+	padding-left: 1rem;
+	border-top: 1px solid grey;
+}
+
+.player-stats > div{
+	width: 90%;
+	max-width: 300px
+}
+
+.player-stats p{
+	margin: 0;
+}
+
+/* Add player container */
+
+.add-player img{
+	height: 10rem;
+	width: auto;
+	border: 2px solid black;
+	background-color: white;
+}
+
+.add-player form{
+	padding-top: 5rem;
+}

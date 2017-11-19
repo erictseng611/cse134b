@@ -1,0 +1,20 @@
+/* Schedule */
+
+.schedule{
+	width: 90%;
+}
+
+.schedule_container{
+	overflow-y: scroll;
+	height: 500px;
+	max-width: 500px;
+}
+
+.schedule_container .large_button p:first-child{
+	margin-top: 0;
+}
+
+.schedule_container p:hover{
+	transform: scale(1, 1.2);
+	background-color: darkblue;
+}
