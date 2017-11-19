@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", function(event) {
+	const teamCodeInput = document.getElementById('teamCode-input');
 	const emailInput = document.getElementById('email-input');
 	const usernameInput = document.getElementById('username-input');
 	const passwordInput = document.getElementById('pw-input');
@@ -6,6 +7,13 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	const signUpButton = document.getElementById('signUp-button');
 
 	var inputs = document.getElementsByTagName('input');
+
+	teamCodeInput.addEventListener('input', teamLookUp);
+
+	function teamLookUp(e){
+		console.log('searching ' + e.target.value);
+		//do something here that searches for a team code which will display team name and logo
+	}
 
 
 	function checkPassword(){

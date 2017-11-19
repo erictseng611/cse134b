@@ -10,114 +10,24 @@
 	<header class="settings-bar">
 		<a href="./addPlayer.html"><img src="../images/plus.png" alt="settings"></a>
 	</header>
-	<main class="container text_align_center">
+	<main class="container text_align_center" id="view">
 		<h1 class="no_margin"> Players </h1>
 		<select id="player-filter">
 			<option value="goals"> Sort By: Goals </option>
 		</select>
-		<div class="player-list">
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-			<figure class="player-card" onclick="location.href='playerProfile.html'">
-				<img src="../images/soccerplayer.png" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-					<p> Jeff Evans #1 </p>
-					<p> Forward </p>
-					<p> Goals: 10 </p>
-				</figcaption>
-			</figure>
-		</div>
+		
 	</main>
+
+	<template id="roster-view">
+		<div id="player-list"></div>
+	</template>
+
 	<footer class="bottom-logo">
 		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
 		<p class="inline_block">Team Watch</p>
 	</footer>
+
+	<script src="../js/roster.js"></script>
 </body>
 </html>
 <!-- 5 requests | 102 KB transferred | Finish: 606 ms |

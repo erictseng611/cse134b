@@ -13,16 +13,7 @@
 	<main class="schedule margin_center">
 		<section>
 			<h1 class="no_margin text_align_center">Schedule</h1>
-			<div class="schedule_container margin_center">
-				<a href="./liveGame.html" class="large_button"><p> 10/1 Tritons vs. Turtles</p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/5 Tritons vs. Lions </p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/7  Tritons vs. Sea Lions</p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/11 Tritons vs. Monkeys</p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/12 Tritons vs. Dogs</p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/20  Tritons vs. Ravens</p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/25 Tritons vs. Rhinos  </p></a>
-				<a href="./liveGame.html" class="large_button"><p> 10/26 Tritons vs. Elephants </p></a>
-				<a href="./liveGame.html" class="large_button"><p> 11/15 Tritons vs. Hogs </p></a>
+			<div class="schedule_container margin_center" id="view">
 			</div>
 		</section>
 	</main>
@@ -30,6 +21,12 @@
 		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
 		<p class="inline_block">Team Watch</p>
 	</footer>
+
+	<template id="schedule-view">
+		<div id="schedule-list"></div>
+	</template>
+
+	<script src="../js/schedule.js"></script>
 </body>
 </html>
 

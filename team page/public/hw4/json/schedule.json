@@ -1,0 +1,49 @@
+{
+	"schedule": [
+		{
+			"team1": "Tritons",
+			"team2": "Turtles",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Rhinos",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Seagulls",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Hawks",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Lions",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Bears",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Mongeese",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Palatypi",
+			"date": "11/19/17"
+		},
+		{
+			"team1": "Tritons",
+			"team2": "Turtles",
+			"date": "11/19/17"
+		}
+	]
+}
