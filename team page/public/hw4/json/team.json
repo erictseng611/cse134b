@@ -1,28 +1,32 @@
 {
 	"team": [
 		{
-			"name": "Jeff Evans #1",
+			"name": "Jeff Evans",
+			"number": "1",
 			"position": "Forward",
 			"goals": 10,
 			"img": "../images/soccerplayer.png"
 		},	
 
 		{
-			"name": "Ajay Giri #5",
+			"name": "Ajay Giri",
+			"number": "2",
 			"position": "Goalie",
 			"goals": 0,
 			"img": "../images/soccerplayer.png"
 		},
 
 		{
-			"name": "Eric Tseng #2",
+			"name": "Eric Tseng",
+			"number": "3",
 			"position": "Center",
 			"goals": 1,
 			"img": "../images/soccerplayer.png"
 		},
 
 		{
-			"name": "Hans Gamboa #3",
+			"name": "Hans Gamboa",
+			"number": "4",
 			"position": "Defender",
 			"goals": 2,
 			"img": "../images/soccerplayer.png"
