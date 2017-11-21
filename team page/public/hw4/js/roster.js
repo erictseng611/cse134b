@@ -1,7 +1,7 @@
 
 window.addEventListener("DOMContentLoaded", function(event) {
 
-	var roster = localStorage.getItem('roster');
+	var roster = JSON.parse(localStorage.getItem('roster'));
 	var team;
 	var rosterContainer = document.querySelector('#view');
 
@@ -14,17 +14,36 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		var retrieved = localStorage.getItem('roster');
 		team = JSON.parse(retrieved);
 		renderRoster(team);
-		makeRequest(team);
+		//makeRequest(team);
 	}
+
+	const editButtons = document.querySelectorAll('.edit-button');
+	editButtons.forEach(button => button.addEventListener('click', editPlayer));
+
+	const saveButtons = document.querySelectorAll('.save-button');
+	saveButtons.forEach(button => button.addEventListener('click', savePlayer));
+
+	document.addEventListener('click', function(e){
+		if(e.target.classList.contains('delete-button')){
+			deletePlayer(e);
+		} else if (e.target.classList.contains('edit-button')){
+			editPlayer(e);
+		} else if(e.target.classList.contains('save-button')){
+			savePlayer(e);
+		}
+
+	});
 
 	function renderRoster(team){
 		let t = document.getElementById('roster-view');
-		let markup = team.map(player =>	`<figure class="player-card" onclick="location.href='playerProfile.html'">
+		let markup = team.map(player =>	`<figure class="player-card" id="${player.name}">
 											<img src="${player.img}" class="inline_block" alt="player headshot">
 											<figcaption class="inline_block">
-												<p> ${player.name} #${player.number}</p>
+												<p class="inline_block">${player.name}</p><span>#${player.number}</span>
 												<p> ${player.position} </p>
-												<p> Goals: ${player.goals} </p>
+												<button class="delete-button" data-player="${player.name}">Delete</button>
+												<button class="inline_block edit-button" data-player="${player.name}"> Edit </button>
+												<button class="hidden inline_bloc save-button" data-player="${player.name}"> Save </button>
 											</figcaption>
 										</figure>`).join('');
 		t.content.querySelector('#player-list').innerHTML = markup;
@@ -32,23 +51,76 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		rosterContainer.appendChild(clonedTemplate);
 	}
 
+	function deletePlayer(e){
+		var finder = e.target.dataset.player;
+		var el = document.getElementById(finder);
+		el.parentNode.removeChild(el);
+		
+		//perform get request when using REST
+		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+		var result = rosterCopy.filter(function(player){
+			return player.name !== e.target.dataset.player;
+		});
+
+		// perform post request when using REST
+		localStorage.setItem('roster', JSON.stringify(result));
+	}
+
+	function editPlayer(e){
+		var figCaption = e.target.parentNode;
+		var pTags = figCaption.getElementsByTagName('p');
+		var saveButton = figCaption.querySelector('.save-button');
+		saveButton.classList.remove('hidden');
+		console.log(pTags);
+		for(var i = 0; i < pTags.length; i++){
+			pTags[i].contentEditable = "true";
+			pTags[i].classList.add('contentEditable');
+		}
+	}
+
+	function savePlayer(e){
+
+		//perform get request when using REST
+		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+
+		var figCaption = e.target.parentNode;
+		e.target.classList.add('hidden');
+		var pTags = figCaption.getElementsByTagName('p');
+		for(var i = 0; i < pTags.length; i++){
+			pTags[i].contentEditable = "false";
+			pTags[i].classList.remove('contentEditable');
+		}
+		var newPlayerName = pTags[0].innerHTML;
+		var newPlayerPosition = pTags[1].innerHTML;
+		rosterCopy.forEach(player =>{
+			if(player.name == e.target.dataset.player){
+				player.name = newPlayerName;
+				player.position = newPlayerPosition;
+			}
+		});
+		// perform post when using REST endpoint
+		localStorage.setItem('roster', JSON.stringify(rosterCopy));
+	}
+
+
 	function makeRequest(compare){
 		loadJSON(function(response) {
 
 		    jsonresponse = JSON.parse(response);
-		    team = jsonresponse.team;
+		    roster = jsonresponse.team;
+
 		    //set item with key and value pair and then render
-		    localStorage.setItem('roster', JSON.stringify(team));
+		    localStorage.setItem('roster', JSON.stringify(roster));
 
 		    // now that there is something on screen, make a request and update the container if local and request data differs
 		    // make sure schedule container is empty
-		    if(JSON.stringify(team) !== JSON.stringify(compare)){
+		    if(JSON.stringify(roster) !== JSON.stringify(compare)){
 		    	console.log('local and request different');
 		    	while(rosterContainer.firstChild){
 		    		console.log('remove children');
 		    		rosterContainer.removeChild(rosterContainer.firstChild);
 		    	}
-		    	renderRoster(team);
+		    	renderRoster(roster);
 			}
 		});
 	}

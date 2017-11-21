@@ -15,6 +15,5 @@
 }
 
 .schedule_container p:hover{
-	transform: scale(1, 1.2);
 	background-color: darkblue;
 }

@@ -1,8 +1,11 @@
 
 window.addEventListener("DOMContentLoaded", function(event) {
 	const signUpButton = document.getElementById('signUp-button');
+	var schedule = JSON.parse(localStorage.getItem('schedule'));
+	var inputs = document.getElementsByTagName('input');
 
-  var inputs = document.getElementsByTagName('input');
+	signUpButton.addEventListener('click', submitInfo);
+
 
 	function checkEmptyInput(arr){
 		console.log('checking for empty inputs');
@@ -21,12 +24,24 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		e.preventDefault();
 		if(checkEmptyInput(inputs)){
 			var location = inputs.location.value;
-			var date = inputs.date.value;
+			var date = inputs.date.value.replace(/(^|-)0+/g, "$1");
 			var time = inputs.time.value;
 		    var opponent = inputs.opponent.value;
+
+		    var addedGame = {
+		    	"team1": "Tritons",
+		    	"team2": opponent,
+		    	"location": location,
+		    	"date": date,
+		    	"time": time
+		    }
+
+		    schedule.push(addedGame);
+
+		    //sets local browser storage for now, do a post on a rest endpoint when we get there
+		    localStorage.setItem('schedule', JSON.stringify(schedule));
 		    window.location.href = "./schedule.html";		
 		}
 	}
-	signUpButton.addEventListener('click', submitInfo);
 
 });

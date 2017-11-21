@@ -8,15 +8,21 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	var inputs = document.getElementsByTagName('input');
 
 	var curFile;
+	var photo;
 	const playerContainer = document.querySelector('#player-photo');
 	uploadPhoto.addEventListener('change', previewPlayer);
 
+
+	// retrieve from local storage from now, update when using REST
+	var roster = JSON.parse(localStorage.getItem('roster'));
+
 	function previewPlayer(){
 		curFile = uploadPhoto.files;
-		var photo = document.createElement('img');
+		photo = document.createElement('img');
 		photo.width = '200';
 		photo.style.textAlign = "center";
-		photo.src =  window.URL.createObjectURL(curFile[0]);
+		// photo.src =  window.URL.createObjectURL(curFile[0]);
+		photo.src = '../images/soccerplayer.png';
 		playerContainer.appendChild(photo);
 	}
 
@@ -40,10 +46,22 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			var name = nameInput.value;
 			var number = numberInput.value;
 			var position = positionInput.value;
-			var photo = curFile[0];
+			//photo = 
 			
 			// do something here to create a new team and then redirect the team to their new
 			// populated home page
+
+			var addedPlayer = {
+				"name": name,
+				"number": number,
+				"position": position,
+				"img": '../images/soccerplayer.png'
+			}
+
+			console.log(addedPlayer);
+
+			roster.push(addedPlayer);
+			localStorage.setItem('roster', JSON.stringify(roster));
 
 			window.location.href = "./roster.html";
 		} 

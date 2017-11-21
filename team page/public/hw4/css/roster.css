@@ -19,6 +19,15 @@ figure.player-card{
 	flex-direction: row;
 }
 
+figcaption {
+	margin-left: 1rem;
+	text-align: left; 
+}
+
+figcaption button{
+	margin-left: 1rem;
+}
+
 .player-card {
 	background-color: blue;
 	padding: .5rem;
@@ -34,6 +43,10 @@ figure.player-card{
 	text-align: left;
 	color: white;
 	padding-left: 1rem;
+}
+
+.player-card span{
+	color: white;
 }
 
 .player-card img{

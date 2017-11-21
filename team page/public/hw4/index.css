@@ -200,14 +200,15 @@ input {
 .large_button {
   text-decoration: none;
   text-align: center;
-}
-
-.large_button p {
   background-color: blue;
   color: white;
   font-size: 12pt;
   padding: 1em;
-  transition: transform .5s;
+}
+
+.anchor_normalize {
+  text-decoration: none;
+  color: inherit;
 }
 
 .button {
@@ -383,6 +384,15 @@ figure.player-card {
   flex-direction: row;
 }
 
+figcaption {
+  margin-left: 1rem;
+  text-align: left;
+}
+
+figcaption button {
+  margin-left: 1rem;
+}
+
 .player-card {
   background-color: blue;
   padding: .5rem;
@@ -400,10 +410,23 @@ figure.player-card {
   padding-left: 1rem;
 }
 
+.player-card span {
+  color: white;
+}
+
 .player-card img {
   background-color: white;
   width: auto;
   height: 75px;
+}
+
+.contentEditable {
+  background-color: white;
+  color: black !important;
+}
+
+.hidden {
+  visibility: hidden;
 }
 /* Schedule */
 
@@ -422,7 +445,6 @@ figure.player-card {
 }
 
 .schedule_container p:hover {
-  transform: scale(1, 1.2);
   background-color: darkblue;
 }
 /* Select Role Page */

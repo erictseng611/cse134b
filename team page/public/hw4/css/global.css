@@ -122,16 +122,16 @@ input {
 .large_button{
 	text-decoration: none;
 	text-align: center;
-}
-
-.large_button p{
 	background-color: blue;
 	color: white;
 	font-size: 12pt;
 	padding: 1em;
-	transition: transform .5s;
 }
 
+.anchor_normalize{
+	text-decoration: none;
+	color: inherit;
+}
 
 .button{
 	text-decoration: none;
@@ -143,4 +143,13 @@ input {
 	font-size: 12pt;
 	width: 200px;
 	margin: 0 auto;
+}
+
+.contentEditable{
+	background-color: white;
+	color: black !important;
+}
+
+.hidden{
+	visibility: hidden;
 }
