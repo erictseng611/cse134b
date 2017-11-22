@@ -5,6 +5,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	const positionInput = document.getElementById('playerPosition-input');
 	const addPlayerButton = document.getElementById('addPlayer-button');
 
+	var userType = localStorage.getItem('userType');
+
 	var inputs = document.getElementsByTagName('input');
 
 	var curFile;
@@ -41,30 +43,39 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function submitInfo(e){
-		e.preventDefault();
-		if(checkEmptyInput(inputs)){
-			var name = nameInput.value;
-			var number = numberInput.value;
-			var position = positionInput.value;
-			//photo = 
-			
-			// do something here to create a new team and then redirect the team to their new
-			// populated home page
 
-			var addedPlayer = {
-				"name": name,
-				"number": number,
-				"position": position,
-				"img": '../images/soccerplayer.png'
+		if(userType === 'coach'){
+			e.preventDefault();
+			if(checkEmptyInput(inputs)){
+				var name = nameInput.value;
+				var number = numberInput.value;
+				var position = positionInput.value;
+				//photo = 
+				
+				// do something here to create a new team and then redirect the team to their new
+				// populated home page
+
+				var addedPlayer = {
+					"name": name,
+					"number": number,
+					"position": position,
+					"img": '../images/soccerplayer.png'
+				}
+
+				console.log(addedPlayer);
+
+				roster.push(addedPlayer);
+				localStorage.setItem('roster', JSON.stringify(roster));
+
+				window.location.href = "./roster.html";
+			} 
+		} else{
+			var container = document.querySelector('#add-player');
+			while(container.firstChild){
+				container.removeChild(container.firstChild);
 			}
-
-			console.log(addedPlayer);
-
-			roster.push(addedPlayer);
-			localStorage.setItem('roster', JSON.stringify(roster));
-
-			window.location.href = "./roster.html";
-		} 
+			container.innerHTML = "<h1> You don't have permission to add a player <h1>";
+		}
 	}
 
 	addPlayerButton.addEventListener('click', submitInfo);

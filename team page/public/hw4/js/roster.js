@@ -19,6 +19,10 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//makeRequest(team);
 	}
 
+	if(userType === 'coach'){
+		document.querySelector('#addPlayer-button').classList.remove('hidden');
+	}
+
 	document.addEventListener('click', function(e){
 		if(e.target.classList.contains('delete-button')){
 			deletePlayer(e);

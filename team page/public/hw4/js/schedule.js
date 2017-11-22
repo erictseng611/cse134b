@@ -35,7 +35,10 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		}
 	});
 
-
+	// only allow addition of games if coach
+	if(userType === "coach"){
+		document.querySelector('#addGame-button').classList.remove('hidden');
+	}
 
 	function makeRequest(compare){
 		loadJSON(function(response) {

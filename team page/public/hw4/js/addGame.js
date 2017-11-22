@@ -1,5 +1,6 @@
 
 window.addEventListener("DOMContentLoaded", function(event) {
+	var userType = localStorage.getItem('userType');
 	const signUpButton = document.getElementById('signUp-button');
 	var schedule = JSON.parse(localStorage.getItem('schedule'));
 	var inputs = document.getElementsByTagName('input');
@@ -21,26 +22,35 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function submitInfo(e){
-		e.preventDefault();
-		if(checkEmptyInput(inputs)){
-			var location = inputs.location.value;
-			var date = inputs.date.value.replace(/(^|-)0+/g, "$1");
-			var time = inputs.time.value;
-		    var opponent = inputs.opponent.value;
+		if(userType === 'coach'){
+			e.preventDefault();
+			if(checkEmptyInput(inputs)){
+				var location = inputs.location.value;
+				var date = inputs.date.value.replace(/(^|-)0+/g, "$1");
+				var time = inputs.time.value;
+			    var opponent = inputs.opponent.value;
 
-		    var addedGame = {
-		    	"team1": "Tritons",
-		    	"team2": opponent,
-		    	"location": location,
-		    	"date": date,
-		    	"time": time
-		    }
+			    var addedGame = {
+			    	"team1": "Tritons",
+			    	"team2": opponent,
+			    	"location": location,
+			    	"date": date,
+			    	"time": time
+			    }
 
-		    schedule.push(addedGame);
+			    schedule.push(addedGame);
 
-		    //sets local browser storage for now, do a post on a rest endpoint when we get there
-		    localStorage.setItem('schedule', JSON.stringify(schedule));
-		    window.location.href = "./schedule.html";		
+			    //sets local browser storage for now, do a post on a rest endpoint when we get there
+			    localStorage.setItem('schedule', JSON.stringify(schedule));
+			    window.location.href = "./schedule.html";		
+			}
+		} else{
+			var container = document.querySelector('#addGame_container')
+			while(container.firstChild){
+				container.removeChild(container.firstChild);
+			}
+
+			container.innerHTML = "<h1> You don't have permission to add a game </h1>";
 		}
 	}
 
