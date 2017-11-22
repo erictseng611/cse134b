@@ -4,16 +4,17 @@
 	width: 90%;
 }
 
-.schedule_container{
-	overflow-y: scroll;
-	height: 500px;
-	max-width: 500px;
-}
-
 .schedule_container .large_button p:first-child{
 	margin-top: 0;
 }
 
-.schedule_container p:hover{
+#returnToSchedule-button{
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+	margin-left: 2rem;
+}
+
+#returnToSchedule-button:hover{
 	background-color: darkblue;
 }

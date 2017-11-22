@@ -126,6 +126,12 @@ input {
 	color: white;
 	font-size: 12pt;
 	padding: 1em;
+	margin: 1rem;
+}
+
+.large_button:hover{
+	background-color: darkblue;
+	cursor: pointer;
 }
 
 .anchor_normalize{
@@ -152,4 +158,8 @@ input {
 
 .hidden{
 	visibility: hidden;
+}
+
+.remove{
+	display: none;
 }

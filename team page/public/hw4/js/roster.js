@@ -17,21 +17,16 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//makeRequest(team);
 	}
 
-	const editButtons = document.querySelectorAll('.edit-button');
-	editButtons.forEach(button => button.addEventListener('click', editPlayer));
-
-	const saveButtons = document.querySelectorAll('.save-button');
-	saveButtons.forEach(button => button.addEventListener('click', savePlayer));
-
 	document.addEventListener('click', function(e){
 		if(e.target.classList.contains('delete-button')){
 			deletePlayer(e);
-		} else if (e.target.classList.contains('edit-button')){
+		} else if(e.target.classList.contains('edit-button')){
 			editPlayer(e);
 		} else if(e.target.classList.contains('save-button')){
 			savePlayer(e);
+		} else if(e.target.classList.contains('player-card')){
+			renderPlayerProfile(e);
 		}
-
 	});
 
 	function renderRoster(team){
@@ -100,6 +95,23 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		});
 		// perform post when using REST endpoint
 		localStorage.setItem('roster', JSON.stringify(rosterCopy));
+	}
+
+	function renderPlayerProfile(e){
+		var roster = document.querySelector('#roster');
+		var playerProfile = document.querySelector('#playerProfile-view');
+		roster.classList.add('remove');
+
+		//perform get request when using REST
+		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+		var currPlayer;
+		rosterCopy.forEach(player =>{
+			console.log(player.name, e.target.id);
+			if(player.name === e.target.id){
+				currPlayer = player;
+			} 
+		});
+		console.log(currPlayer);
 	}
 
 

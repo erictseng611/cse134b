@@ -18,6 +18,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//makeRequest(schedule);
 	}
 
+	var backToScheduleButton = document.querySelector('#returnToSchedule-button')
+
 	document.addEventListener('click', function(e){
 		if(e.target.classList.contains('delete-button')){
 			deleteGame(e);
@@ -25,8 +27,14 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			editGame(e);
 		} else if(e.target.classList.contains('save-button')){
 			saveGame(e);
+		} else if(e.target.classList.contains('large_button')){
+			renderGamePage(e);
+		} else if(e.target.id === 'returnToSchedule-button'){
+			returnToSchedule();
 		}
 	});
+
+
 
 	function makeRequest(compare){
 		loadJSON(function(response) {
@@ -53,12 +61,12 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function renderSchedule(schedule){
 		console.log('render schedule');
 		let t = document.getElementById('schedule-view');
-		let markup = schedule.map(game =>`<p class="large_button" id="${game.date}">
-											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span>
+		let markup = schedule.map(game =>`<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}">
+											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span> <br>
 											<button class="delete-button" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
 											<button class="edit-button" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
 											<button class="hidden save-button" data-date="${game.date}" data-opponent="${game.team2}"> save </button>
-											</p>`).join('');
+											</div>`).join('');
 		t.content.querySelector('#schedule-list').innerHTML = markup;
 		let clonedTemplate = document.importNode(t.content, true);
 		scheduleContainer.appendChild(clonedTemplate);
@@ -85,7 +93,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function editGame(e){
-		var gameContainer = e.target.parentNode;
+		var gameContainer = e.target.parentNode.parentNode;
+		console.log(gameContainer);
 		var spanTags = gameContainer.getElementsByTagName('span');
 		var saveButton = gameContainer.querySelector('.save-button');
 		saveButton.classList.remove('hidden');
@@ -101,7 +110,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//perform get request when using REST
 		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 
-		var gameContainer = e.target.parentNode;
+		var gameContainer = e.target.parentNode.parentNode;
 		e.target.classList.add('hidden');
 		var spanTags = gameContainer.getElementsByTagName('span');
 		for(var i = 0; i < spanTags.length; i++){
@@ -112,7 +121,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		}
 		var newDate = spanTags[0].innerHTML;
 		var newOpponent = spanTags[2].innerHTML;
-		console.log(newOpponent);
 		scheduleCopy.forEach(game =>{
 			if(game.date === e.target.dataset.date){
 				console.log('run');
@@ -123,7 +131,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		// perform post when using REST endpoint
 		localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
 
-		//this is gonna be a makeRequest() when using REST
 	}
 
 	function loadJSON(callback) {
@@ -140,6 +147,104 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	    }
 	    xobj.send(null);
 	}
+
+	function renderGamePage(e){
+		//hide the schedule container
+		var schedule = document.querySelector('.schedule');
+		var gamePage = document.getElementById('gamePage-view');
+
+		schedule.classList.add('remove');
+		//perform get request when using REST
+		//should only return an array with the 1 game with the fit date and opponent
+		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+		var currentGame = scheduleCopy.filter(function(game){
+			if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+				return false;
+			} else{
+				return true;
+			}
+		})[0];
+
+		console.log(currentGame);
+
+
+		let markup = `<main class="margin_center">
+						<button id="returnToSchedule-button"> Return to Schedule </button>
+						<div class="live-game-info text_align_center">
+							<h1 class="no_margin"> ${currentGame.date} </h1>
+							<h3 class="no_margin"> ${currentGame.location} </h3>
+						</div>
+						<div class="live-game-teams">
+							<div class="live-game-team">
+								<h1 class="no_margin"> ${currentGame.team1}</h1>
+							</div>
+							<div id="live-game-vs">
+								<p> vs. </p>
+							</div>
+							<div class="live-game-team">
+								<h1 class="no_margin"> ${currentGame.team2} </h1>
+							</div>
+						</div>
+						<div class="live-game-stats">
+							<div class="live-game-stats-team">
+								<div class="stat-container">
+									<div class="stat-item">
+										<h2> Goals: ${currentGame.team1Goals} </h2>
+										<ul> 
+											<li>Shots on Goal: ${currentGame.team1Shots}</li>
+											<li>Corner Kicks: ${currentGame.team1Corners} </li>
+											<li>Goal Kicks: ${currentGame.team1GoalKicks}</li>
+										</ul>
+									</div>
+									<div class="stat-item">
+										<h2> Cards </h2>
+										<ul>
+											<li> Yellow: ${currentGame.team1YellowCards} </li>
+											<li> Red: ${currentGame.team1RedCards} </li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="live-game-stats-team">
+								<div class="stat-container">
+									<div class="stat-item">
+										<h2> Goals: ${currentGame.team2Goals} </h2>
+										<ul> 
+											<li>Shots on Goal: ${currentGame.team2Shots}</li>
+											<li>Corner Kicks: ${currentGame.team2Corners} </li>
+											<li>Goal Kicks: ${currentGame.team2GoalKicks}</li>
+										</ul>
+									</div>
+									<div class="stat-item">
+										<h2> Cards </h2>
+										<ul>
+											<li> Yellow: ${currentGame.team2YellowCards} </li>
+											<li> Red: ${currentGame.team2RedCards} </li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="event-feed-button button text_align_center">
+							<a href="./eventFeed.html" class="button"><p>Event Feed </p></a>
+						</div>
+					</main>`;
+
+		//insert html into the game page and display it
+		gamePage.innerHTML = markup;
+		gamePage.classList.remove('remove');
+		};
+
+		function returnToSchedule(){
+			var gamePage = document.getElementById('gamePage-view');
+			//hide the schedule container
+			var schedule = document.querySelector('.schedule');
+			schedule.classList.remove('remove');
+			while(gamePage.firstChild){
+				gamePage.removeChild(gamePage.firstChild);
+			}
+		}
+
 
 });
 

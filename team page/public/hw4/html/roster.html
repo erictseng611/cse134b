@@ -10,17 +10,16 @@
 	<header class="settings-bar">
 		<a href="./addPlayer.html"><img src="../images/plus.png" alt="settings"></a>
 	</header>
-	<main class="container text_align_center">
+	<main class="container text_align_center" id="roster">
 		<h1 class="no_margin"> Players </h1>
-		<select id="player-filter">
-			<option value="goals"> Sort By: Goals </option>
-		</select>
 		<div id="view"></div>
 	</main>
 
 	<template id="roster-view">
 		<div id="player-list"></div>
 	</template>
+
+	<div class="remove" id="playerProfile-view"></div>
 
 	<footer class="bottom-logo">
 		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
