@@ -2,8 +2,10 @@
 window.addEventListener("DOMContentLoaded", function(event) {
 
 	var roster = JSON.parse(localStorage.getItem('roster'));
-	var team;
 	var rosterContainer = document.querySelector('#view');
+	var userType = localStorage.getItem('userType');
+	var team;
+
 
 
 	if(!roster){
@@ -26,6 +28,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			savePlayer(e);
 		} else if(e.target.classList.contains('player-card')){
 			renderPlayerProfile(e);
+		} else if(e.target.id === 'returnToPlayers-button'){
+			returnToPlayers();
 		}
 	});
 
@@ -34,67 +38,79 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		let markup = team.map(player =>	`<figure class="player-card" id="${player.name}">
 											<img src="${player.img}" class="inline_block" alt="player headshot">
 											<figcaption class="inline_block">
-												<p class="inline_block">${player.name}</p><span>#${player.number}</span>
+												<p class="inline_block">${player.name}</p><span> #${player.number}</span>
 												<p> ${player.position} </p>
-												<button class="delete-button" data-player="${player.name}">Delete</button>
-												<button class="inline_block edit-button" data-player="${player.name}"> Edit </button>
-												<button class="hidden inline_bloc save-button" data-player="${player.name}"> Save </button>
+												<button class="delete-button hidden" data-player="${player.name}">Delete</button>
+												<button class="inline_block edit-button hidden" data-player="${player.name}"> Edit </button>
+												<button class="hidden inline_bloc save-button hidden" data-player="${player.name}"> Save </button>
 											</figcaption>
 										</figure>`).join('');
 		t.content.querySelector('#player-list').innerHTML = markup;
 		let clonedTemplate = document.importNode(t.content, true);
 		rosterContainer.appendChild(clonedTemplate);
+		if(userType === "coach"){
+			var actionButtons = Array.from(rosterContainer.getElementsByTagName('button'));
+			actionButtons.forEach(button => {button.classList.remove('hidden')});
+		}
 	}
 
 	function deletePlayer(e){
-		var finder = e.target.dataset.player;
-		var el = document.getElementById(finder);
-		el.parentNode.removeChild(el);
-		
-		//perform get request when using REST
-		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
-		var result = rosterCopy.filter(function(player){
-			return player.name !== e.target.dataset.player;
-		});
 
-		// perform post request when using REST
-		localStorage.setItem('roster', JSON.stringify(result));
+		if(userType === "coach"){
+			var finder = e.target.dataset.player;
+			var el = document.getElementById(finder);
+			el.parentNode.removeChild(el);
+			
+			//perform get request when using REST
+			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+			var result = rosterCopy.filter(function(player){
+				return player.name !== e.target.dataset.player;
+			});
+
+			// perform post request when using REST
+			localStorage.setItem('roster', JSON.stringify(result));
+		}
 	}
 
 	function editPlayer(e){
-		var figCaption = e.target.parentNode;
-		var pTags = figCaption.getElementsByTagName('p');
-		var saveButton = figCaption.querySelector('.save-button');
-		saveButton.classList.remove('hidden');
-		console.log(pTags);
-		for(var i = 0; i < pTags.length; i++){
-			pTags[i].contentEditable = "true";
-			pTags[i].classList.add('contentEditable');
+		if(userType === "coach"){
+			var figCaption = e.target.parentNode;
+			var pTags = figCaption.getElementsByTagName('p');
+			var saveButton = figCaption.querySelector('.save-button');
+			saveButton.classList.remove('hidden');
+			console.log(pTags);
+			for(var i = 0; i < pTags.length; i++){
+				pTags[i].contentEditable = "true";
+				pTags[i].classList.add('contentEditable');
+			}
 		}
 	}
 
 	function savePlayer(e){
 
-		//perform get request when using REST
-		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+		if(userType === "coach"){
 
-		var figCaption = e.target.parentNode;
-		e.target.classList.add('hidden');
-		var pTags = figCaption.getElementsByTagName('p');
-		for(var i = 0; i < pTags.length; i++){
-			pTags[i].contentEditable = "false";
-			pTags[i].classList.remove('contentEditable');
-		}
-		var newPlayerName = pTags[0].innerHTML;
-		var newPlayerPosition = pTags[1].innerHTML;
-		rosterCopy.forEach(player =>{
-			if(player.name == e.target.dataset.player){
-				player.name = newPlayerName;
-				player.position = newPlayerPosition;
+			//perform get request when using REST
+			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+
+			var figCaption = e.target.parentNode;
+			e.target.classList.add('hidden');
+			var pTags = figCaption.getElementsByTagName('p');
+			for(var i = 0; i < pTags.length; i++){
+				pTags[i].contentEditable = "false";
+				pTags[i].classList.remove('contentEditable');
 			}
-		});
-		// perform post when using REST endpoint
-		localStorage.setItem('roster', JSON.stringify(rosterCopy));
+			var newPlayerName = pTags[0].innerHTML;
+			var newPlayerPosition = pTags[1].innerHTML;
+			rosterCopy.forEach(player =>{
+				if(player.name == e.target.dataset.player){
+					player.name = newPlayerName;
+					player.position = newPlayerPosition;
+				}
+			});
+			// perform post when using REST endpoint
+			localStorage.setItem('roster', JSON.stringify(rosterCopy));
+		}
 	}
 
 	function renderPlayerProfile(e){
@@ -106,37 +122,44 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
 		var currPlayer;
 		rosterCopy.forEach(player =>{
-			console.log(player.name, e.target.id);
 			if(player.name === e.target.id){
 				currPlayer = player;
 			} 
 		});
-		console.log(currPlayer);
 
-		let markup = `<div>
+		let markup = `<button id="returnToPlayers-button"> Back to Players </button>
+					<div class="text_align_center">
 						<figure class="player-figure text_align_center">
 							<img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
-							<figcaption>
-								<h1> Jeff Evans #1 </h1>
+							<figcaption class="text_align_center no_margin">
+								<h1> ${currPlayer.name} #${currPlayer.number}</h1>
 								<h2 class="no_margin"> Forward </h2>
 							</figcaption>
 						</figure>
 						<div class="player-stats">
 							<div class="margin_center">
-								<p> Goals: 10 </p>
-								<p> Fouls: 0 </p>
-								<p> Yellow Cards: 0 </p>
-								<p> Red Cards: 0 </p>
-								<p> Shots on Goal: 21 </p>
-								<p> Corner Kicks: 2 </p>
-								<p> Goal Kicks: 17 </p>
-								<p> Throw-ins: 5 </p>
-								<p> Games Played: 5 </p>
+								<p> Goals: ${currPlayer.goals} </p>
+								<p> Fouls: ${currPlayer.fouls} </p>
+								<p> Yellow Cards: ${currPlayer.yellowCards} </p>
+								<p> Red Cards: ${currPlayer.redCards} </p>
+								<p> Shots on Goal: ${currPlayer.shotsOnGoal} </p>
+								<p> Corner Kicks: ${currPlayer.cornerKicks} </p>
+								<p> Goal Kicks: ${currPlayer.goalKicks} </p>
 							</div>
 						</div>
 					</div>`;
-		roster.innerHTML = markup;
+		playerProfile.innerHTML = markup;
+		playerProfile.classList.remove('remove');
+	}
+
+	function returnToPlayers(){
+		var roster = document.querySelector('#roster');
+		var playerProfile = document.querySelector('#playerProfile-view');
 		roster.classList.remove('remove');
+		playerProfile.classList.add('remove');
+		while(playerProfile.firstChild){
+			playerProfile.removeChild(playerProfile.firstChild);
+		}
 	}
 
 

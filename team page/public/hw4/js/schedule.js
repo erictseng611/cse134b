@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	var games = localStorage.getItem('schedule');
 	var schedule;
 	var scheduleContainer = document.querySelector('#view');
+	var userType = localStorage.getItem('userType');
 
 	if(!games){
 		console.log('there wasnt anything in local storage so make a fake network request to get data');
@@ -59,77 +60,92 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}	
 
 	function renderSchedule(schedule){
-		console.log('render schedule');
 		let t = document.getElementById('schedule-view');
 		let markup = schedule.map(game =>`<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}">
 											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span> <br>
-											<button class="delete-button" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
-											<button class="edit-button" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
-											<button class="hidden save-button" data-date="${game.date}" data-opponent="${game.team2}"> save </button>
+											<button class="delete-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
+											<button class="edit-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
+											<button class="hidden save-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> save </button>
 											</div>`).join('');
 		t.content.querySelector('#schedule-list').innerHTML = markup;
 		let clonedTemplate = document.importNode(t.content, true);
 		scheduleContainer.appendChild(clonedTemplate);
+
+		if(userType === "coach"){
+			// collect buttons and turn it into an array
+			var actionButtons = Array.from(scheduleContainer.getElementsByTagName('button'));
+			actionButtons.forEach(button => {button.classList.remove('hidden')});
+		}
 	}
 
 	function deleteGame(e){
-		var finder = e.target.dataset.date;
-		var el = document.getElementById(finder);
-		el.parentNode.removeChild(el);
-		
-		//perform get request when using REST
-		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
-		var result = scheduleCopy.filter(function(game){
-			if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
-				return true;
-			} else{
-				return false;
-			}
-		});
-		// perform post request when using REST
-		localStorage.setItem('schedule', JSON.stringify(result));
 
-		// make request when using REST
+		if(userType === 'coach'){
+
+			var finder = e.target.dataset.date;
+			var el = document.getElementById(finder);
+			el.parentNode.removeChild(el);
+			
+			//perform get request when using REST
+			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+			var result = scheduleCopy.filter(function(game){
+				if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+					return true;
+				} else{
+					return false;
+				}
+			});
+			// perform post request when using REST
+			localStorage.setItem('schedule', JSON.stringify(result));
+		} else{
+			//do nothing, user doesn't have permissions
+		}
 	}
 
 	function editGame(e){
-		var gameContainer = e.target.parentNode.parentNode;
-		console.log(gameContainer);
-		var spanTags = gameContainer.getElementsByTagName('span');
-		var saveButton = gameContainer.querySelector('.save-button');
-		saveButton.classList.remove('hidden');
-		for(var i = 0; i < spanTags.length; i++){
-			if(i != 1){
-				spanTags[i].contentEditable = "true";
-				spanTags[i].classList.add('contentEditable');
+
+		if(userType === 'coach'){
+			var gameContainer = e.target.parentNode;
+			console.log(gameContainer);
+			var spanTags = gameContainer.getElementsByTagName('span');
+			var saveButton = gameContainer.querySelector('.save-button');
+			saveButton.classList.remove('hidden');
+			for(var i = 0; i < spanTags.length; i++){
+				if(i != 1){
+					spanTags[i].contentEditable = "true";
+					spanTags[i].classList.add('contentEditable');
+				}
 			}
 		}
 	}
 
 	function saveGame(e){
-		//perform get request when using REST
-		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 
-		var gameContainer = e.target.parentNode.parentNode;
-		e.target.classList.add('hidden');
-		var spanTags = gameContainer.getElementsByTagName('span');
-		for(var i = 0; i < spanTags.length; i++){
-			if(i != 1){
-				spanTags[i].contentEditable = "false";
-				spanTags[i].classList.remove('contentEditable');
+		if(userType === 'coach'){
+			//perform get request when using REST
+			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+
+			var gameContainer = e.target.parentNode.parentNode;
+			e.target.classList.add('hidden');
+			var spanTags = gameContainer.getElementsByTagName('span');
+			for(var i = 0; i < spanTags.length; i++){
+				if(i != 1){
+					spanTags[i].contentEditable = "false";
+					spanTags[i].classList.remove('contentEditable');
+				}
 			}
+			var newDate = spanTags[0].innerHTML;
+			var newOpponent = spanTags[2].innerHTML;
+			scheduleCopy.forEach(game =>{
+				if(game.date === e.target.dataset.date){
+					console.log('run');
+					game.date = newDate;
+					game.team2 = newOpponent;
+				}
+			});
+			// perform post when using REST endpoint
+			localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
 		}
-		var newDate = spanTags[0].innerHTML;
-		var newOpponent = spanTags[2].innerHTML;
-		scheduleCopy.forEach(game =>{
-			if(game.date === e.target.dataset.date){
-				console.log('run');
-				game.date = newDate;
-				game.team2 = newOpponent;
-			}
-		});
-		// perform post when using REST endpoint
-		localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
 
 	}
 
@@ -234,7 +250,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 		function returnToSchedule(){
 			var gamePage = document.getElementById('gamePage-view');
-			//hide the schedule container
+			//show the schedule container
 			var schedule = document.querySelector('.schedule');
 			schedule.classList.remove('remove');
 			while(gamePage.firstChild){
@@ -244,4 +260,5 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 
 });
+
 

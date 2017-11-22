@@ -262,6 +262,17 @@ input {
 .goal-count {
   margin: 0 1rem;
 }
+
+#signOut-button {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: blue;
+  color: white;
+}
+
+#signOut-button:hover {
+  background-color: darkblue;
+}
 /* Live Games */
 
 .live-game-teams {
@@ -385,8 +396,16 @@ input {
 }
 /* players page*/
 
-#player-filter {
-  width: 100%;
+#returnToPlayers-button {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: blue;
+  color: white;
+}
+
+#returnToPlayers-button:hover {
+  background-color: darkblue;
+  cursor: pointer;
 }
 
 figure.player-card {
@@ -399,6 +418,7 @@ figure.player-card {
 
 figure.player-card:hover {
   background-color: darkblue;
+  cursor: pointer;
 }
 
 figcaption {
@@ -408,6 +428,11 @@ figcaption {
 
 figcaption button {
   margin-left: 1rem;
+}
+
+figcaption:hover {
+  background-color: blue;
+  cursor: default;
 }
 
 .player-card {
@@ -455,6 +480,7 @@ figcaption button {
 
 #returnToSchedule-button:hover {
   background-color: darkblue;
+  cursor: pointer;
 }
 /* Select Role Page */
 

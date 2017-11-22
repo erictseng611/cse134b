@@ -1,8 +1,15 @@
 /* players page*/
 
-#player-filter{
-	width: 100%;
+#returnToPlayers-button{
+	margin: 1rem;
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+}
 
+#returnToPlayers-button:hover{
+	background-color: darkblue;
+	cursor: pointer;
 }
 
 figure.player-card{
@@ -25,6 +32,11 @@ figcaption {
 
 figcaption button{
 	margin-left: 1rem;
+}
+
+figcaption:hover{
+	background-color: blue;
+	cursor: default;
 }
 
 .player-card {

@@ -20,3 +20,14 @@
 .goal-count{
 	margin:0 1rem;
 }
+
+#signOut-button{
+	margin: 1rem;
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+}
+
+#signOut-button:hover{
+	background-color: darkblue;
+}

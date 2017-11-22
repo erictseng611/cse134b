@@ -17,4 +17,5 @@
 
 #returnToSchedule-button:hover{
 	background-color: darkblue;
+	cursor: pointer;
 }
