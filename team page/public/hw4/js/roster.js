@@ -112,6 +112,31 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			} 
 		});
 		console.log(currPlayer);
+
+		let markup = `<div>
+						<figure class="player-figure text_align_center">
+							<img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
+							<figcaption>
+								<h1> Jeff Evans #1 </h1>
+								<h2 class="no_margin"> Forward </h2>
+							</figcaption>
+						</figure>
+						<div class="player-stats">
+							<div class="margin_center">
+								<p> Goals: 10 </p>
+								<p> Fouls: 0 </p>
+								<p> Yellow Cards: 0 </p>
+								<p> Red Cards: 0 </p>
+								<p> Shots on Goal: 21 </p>
+								<p> Corner Kicks: 2 </p>
+								<p> Goal Kicks: 17 </p>
+								<p> Throw-ins: 5 </p>
+								<p> Games Played: 5 </p>
+							</div>
+						</div>
+					</div>`;
+		roster.innerHTML = markup;
+		roster.classList.remove('remove');
 	}
 
 

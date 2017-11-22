@@ -165,9 +165,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			}
 		})[0];
 
-		console.log(currentGame);
-
-
 		let markup = `<main class="margin_center">
 						<button id="returnToSchedule-button"> Return to Schedule </button>
 						<div class="live-game-info text_align_center">
