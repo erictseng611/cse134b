@@ -5,8 +5,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	const positionInput = document.getElementById('playerPosition-input');
 	const addPlayerButton = document.getElementById('addPlayer-button');
 
-	var userType = localStorage.getItem('userType');
-
 	var inputs = document.getElementsByTagName('input');
 
 	var curFile;
@@ -45,6 +43,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function submitInfo(e){
 
 		if(userType === 'coach'){
+			var userType = localStorage.getItem('userType');
 			e.preventDefault();
 			if(checkEmptyInput(inputs)){
 				var name = nameInput.value;
@@ -74,7 +73,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			while(container.firstChild){
 				container.removeChild(container.firstChild);
 			}
-			container.innerHTML = "<h1> You don't have permission to add a player <h1>";
+			container.innerHTML = "<h1> You don't have permission to add a player <h1>"
+			;
 		}
 	}
 

@@ -1,25 +1,22 @@
 window.addEventListener("DOMContentLoaded", function(event) {
 
 	var games = localStorage.getItem('schedule');
-	var schedule;
-	var scheduleContainer = document.querySelector('#view');
 	var userType = localStorage.getItem('userType');
+	var scheduleContainer = document.querySelector('#view');
 
 	if(!games){
-		console.log('there wasnt anything in local storage so make a fake network request to get data');
-		makeRequest(null);
+			console.log('there wasnt anything in local storage so make a fake network request to get data');
+			makeRequest(null);
 
-	} else{
-		console.log('render list using local browser data for now then make a network request to get updated items');
-		var retrieved = localStorage.getItem('schedule');
-		schedule = JSON.parse(retrieved);
-		renderSchedule(schedule);
+		} else{
+			console.log('render list using local browser data for now then make a network request to get updated items');
+			var retrieved = localStorage.getItem('schedule');
+			schedule = JSON.parse(retrieved);
+			renderSchedule(schedule);
 
-		//temporarily commented out until we use rest endpoint
-		//makeRequest(schedule);
+			//temporarily commented out until we use rest endpoint
+			//makeRequest(schedule);
 	}
-
-	var backToScheduleButton = document.querySelector('#returnToSchedule-button')
 
 	document.addEventListener('click', function(e){
 		if(e.target.classList.contains('delete-button')){
@@ -40,13 +37,17 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		document.querySelector('#addGame-button').classList.remove('hidden');
 	}
 
+
 	function makeRequest(compare){
 		loadJSON(function(response) {
+
+			var currentTeam = localStorage.getItem('currentTeam');
+
 		    // Do Something with the response e.g.
 		    jsonresponse = JSON.parse(response);
 
 		    // Assuming json data is wrapped in square brackets as Drew suggests
-		    schedule = jsonresponse.schedule;
+		    schedule = jsonresponse.teams[currentTeam].schedule;
 		    localStorage.setItem('schedule', JSON.stringify(schedule));
 
 		    // now that there is something on screen, make a request and update the container if local and request data differs
@@ -68,7 +69,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span> <br>
 											<button class="delete-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
 											<button class="edit-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
-											<button class="hidden save-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> save </button>
 											</div>`).join('');
 		t.content.querySelector('#schedule-list').innerHTML = markup;
 		let clonedTemplate = document.importNode(t.content, true);
@@ -108,48 +108,59 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function editGame(e){
 
 		if(userType === 'coach'){
-			var gameContainer = e.target.parentNode;
-			console.log(gameContainer);
-			var spanTags = gameContainer.getElementsByTagName('span');
-			var saveButton = gameContainer.querySelector('.save-button');
-			saveButton.classList.remove('hidden');
-			for(var i = 0; i < spanTags.length; i++){
-				if(i != 1){
-					spanTags[i].contentEditable = "true";
-					spanTags[i].classList.add('contentEditable');
+
+			var scheduleContainer = document.querySelector('.schedule');
+			//perform get request when using REST
+			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+			var result = scheduleCopy.filter(function(game){
+				if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+					return false;
+				} else{
+					return true;
 				}
-			}
+			})[0];			
+
+			let t = document.getElementById('update-view');
+			let markup = `<label>Date<input name="date" data-date="${result.date}" value="${result.date}"></label>
+						  <label>Opponent<input name="team2" data-opponent="${result.team2}" value="${result.team2}"></label>
+						  <button class="save-button"> save </button>`;
+			t.innerHTML = markup;
+			t.classList.remove('hidden');
+			scheduleContainer.classList.add('hidden');
 		}
 	}
 
 	function saveGame(e){
 
-		if(userType === 'coach'){
-			//perform get request when using REST
-			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+		var scheduleContainer = document.querySelector('.schedule');
+		var scheduleView = document.getElementById('view');
+		let t = document.getElementById('update-view');
+		// get request 
+		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 
-			var gameContainer = e.target.parentNode.parentNode;
-			e.target.classList.add('hidden');
-			var spanTags = gameContainer.getElementsByTagName('span');
-			for(var i = 0; i < spanTags.length; i++){
-				if(i != 1){
-					spanTags[i].contentEditable = "false";
-					spanTags[i].classList.remove('contentEditable');
+		var inputs = document.getElementsByTagName('input');
+		var result = scheduleCopy.filter(function(game){
+				if(game.date !== inputs.date.dataset.date || game.team2 !== inputs.team2.dataset.opponent){
+					return false;
+				} else{
+					return true;
 				}
-			}
-			var newDate = spanTags[0].innerHTML;
-			var newOpponent = spanTags[2].innerHTML;
-			scheduleCopy.forEach(game =>{
-				if(game.date === e.target.dataset.date){
-					console.log('run');
-					game.date = newDate;
-					game.team2 = newOpponent;
-				}
-			});
-			// perform post when using REST endpoint
-			localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
-		}
+			})[0];
 
+		result.date = inputs.date.value;
+		result.team2 = inputs.team2.value;
+
+		localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
+
+		// delete the existing stuff and add some new stuff in
+		while(scheduleView.firstChild){
+		    console.log('remove kid');
+		    scheduleView.removeChild(scheduleView.firstChild);
+		 }
+		
+		renderSchedule(scheduleCopy);
+		t.classList.add('hidden');
+		scheduleContainer.classList.remove('hidden');
 	}
 
 	function loadJSON(callback) {
@@ -157,7 +168,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	    var xobj = new XMLHttpRequest();
 	    xobj.overrideMimeType("application/json");
 	    // when using network, change the json file to a REST endpoint
-	    xobj.open('GET', '../json/schedule.json', true);
+	    xobj.open('GET', '../json/teams.json', true);
 	    xobj.onreadystatechange = function() {
 	        if (xobj.readyState == 4 && xobj.status == "200") {
 	            // .open will NOT return a value but simply returns undefined in async mode so use a callback
@@ -172,7 +183,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		var schedule = document.querySelector('.schedule');
 		var gamePage = document.getElementById('gamePage-view');
 
-		schedule.classList.add('remove');
+		schedule.classList.add('hidden');
 		//perform get request when using REST
 		//should only return an array with the 1 game with the fit date and opponent
 		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
@@ -248,14 +259,14 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 		//insert html into the game page and display it
 		gamePage.innerHTML = markup;
-		gamePage.classList.remove('remove');
+		gamePage.classList.remove('hidden');
 		};
 
 		function returnToSchedule(){
 			var gamePage = document.getElementById('gamePage-view');
 			//show the schedule container
 			var schedule = document.querySelector('.schedule');
-			schedule.classList.remove('remove');
+			schedule.classList.remove('hidden');
 			while(gamePage.firstChild){
 				gamePage.removeChild(gamePage.firstChild);
 			}

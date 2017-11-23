@@ -2,6 +2,9 @@
 
 .schedule{
 	width: 90%;
+	position: absolute;
+	left: 0;
+	right: 0;
 }
 
 .schedule_container .large_button p:first-child{
@@ -18,4 +21,22 @@
 #returnToSchedule-button:hover{
 	background-color: darkblue;
 	cursor: pointer;
+}
+
+#update-view {
+	margin: 0 auto;
+	width: 80%;
+	max-width: 500px;
+}
+
+#update-view button{
+	background-color: blue;
+	padding: .5rem;
+	color: white;
+}
+
+#gamePage-view{
+	position: absolute;
+	left: 0;
+	right: 0;
 }

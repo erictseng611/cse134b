@@ -1,5 +1,17 @@
 /* players page*/
 
+#roster{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#playerProfile-vew{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
 #returnToPlayers-button{
 	margin: 1rem;
 	padding: 1rem;

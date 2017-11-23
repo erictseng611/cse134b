@@ -1,19 +1,19 @@
 window.addEventListener("DOMContentLoaded", function(event) {
-	const teamNameInput = document.getElementById('teamName-input');
 	const uploadLogo = document.getElementById('uploadLogo');
-	const emailInput = document.getElementById('email-input');
-	const usernameInput = document.getElementById('username-input');
-	const passwordInput = document.getElementById('pw-input');
-	const confirmPasswordInput = document.getElementById('confirmpw-input');
 	const signUpButton = document.getElementById('signUp-button');
+	var curFile;
 
 	var inputs = document.getElementsByTagName('input');
 
 	const teamLogoContainer = document.querySelector('.team-logo');
 	uploadLogo.addEventListener('change', previewLogo);
+	signUpButton.addEventListener('click', makeRequest);
+
+
+
 
 	function previewLogo(){
-		var curFile = uploadLogo.files;
+		curFile = uploadLogo.files;
 		var logo = document.createElement('img');
 		logo.width = '400';
 		console.log(uploadLogo.files[0]	);
@@ -22,11 +22,11 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function checkPassword(){
-		if(passwordInput.value === confirmPasswordInput.value){
+		if(inputs.password.value === inputs.confirmPassword.value){
 			return true;
 		} else{
-			passwordInput.style.border = "2px solid red";
-			confirmPasswordInput.style.border = "2px solid red";
+			inputs.password.style.border = "2px solid red";
+			inputs.confirmPassword.style.border = "2px solid red";
 		}
 	}
 
@@ -44,23 +44,68 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		return isFilled;
 	}
 
-	function submitInfo(e){
-		e.preventDefault();
+	function submitInfo(users, teams){
 		if(checkEmptyInput(inputs) && checkPassword()){
-			var teamName = teamNameInput.value;
-			var email = emailInput.value;
-			var username = usernameInput.value;
-			var password = passwordInput.value;
+			var teamName = inputs.teamName.value;
+			var email = inputs.email.value;
+			var username = inputs.username.value;
+			var password = inputs.password.value;
 			var logo = curFile[0];
-			
 			// do something here to create a new team and then redirect the team to their new
 			// populated home page
 
-			window.location.href = "./homepage.html";
+			if(!users[username]){
+				console.error('this user already exists');
+				users[username] = username;
+				users[username] = {
+					"password": password,
+					"team": teamName,
+					"userType": "coach",
+				};
+
+				teams[teamName] = {
+					"schedule": {},
+					"roster": [],
+					"logo": logo,
+					"inviteCode": `${teamName}123`
+				}
+
+				// going into local
+				localStorage.setItem('userType', 'coach');
+				localStorage.setItem('currentTeam', teamName);
+
+				// going to be a post request 
+				localStorage.setItem('users', JSON.stringify(users));
+				localStorage.setItem('teams', JSON.stringify(teams));
+				
+				window.location.href = "./homepage.html";
+			}
 		} 
 	}
 
-	signUpButton.addEventListener('click', submitInfo);
+	// get the list of users 
+	function makeRequest(e){
+		e.preventDefault();
+		loadJSON(function(response) {
+		    jsonresponse = JSON.parse(response);
+		    submitInfo(jsonresponse.users, jsonresponse.teams);
+		});
+	}	
+
+	function loadJSON(callback) {
+
+	    var xobj = new XMLHttpRequest();
+	    xobj.overrideMimeType("application/json");
+
+	    // when using network, change the json file to a REST endpoint
+	    xobj.open('GET', '../json/teams.json', true);
+	    xobj.onreadystatechange = function() {
+	        if (xobj.readyState == 4 && xobj.status == "200") {
+	            callback(xobj.responseText);
+	        }
+	    }
+	    xobj.send(null);
+	}
 
 
 

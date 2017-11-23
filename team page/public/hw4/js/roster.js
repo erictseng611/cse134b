@@ -44,9 +44,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 											<figcaption class="inline_block">
 												<p class="inline_block">${player.name}</p><span> #${player.number}</span>
 												<p> ${player.position} </p>
-												<button class="delete-button hidden" data-player="${player.name}">Delete</button>
-												<button class="inline_block edit-button hidden" data-player="${player.name}"> Edit </button>
-												<button class="hidden inline_bloc save-button hidden" data-player="${player.name}"> Save </button>
+												<button class="delete-button hidden" data-player="${player.name}" data-number="${player.number}">Delete</button>
+												<button class="inline_block edit-button hidden" data-player="${player.name}" data-number="${player.number}"> Edit </button>
 											</figcaption>
 										</figure>`).join('');
 		t.content.querySelector('#player-list').innerHTML = markup;
@@ -69,6 +68,11 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
 			var result = rosterCopy.filter(function(player){
 				return player.name !== e.target.dataset.player;
+				if(player.name !== e.target.dataset.player || player.number !== e.target.dataset.number){
+					return false;
+				} else{ 
+					return true;
+				}
 			});
 
 			// perform post request when using REST
@@ -78,49 +82,72 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 	function editPlayer(e){
 		if(userType === "coach"){
-			var figCaption = e.target.parentNode;
-			var pTags = figCaption.getElementsByTagName('p');
-			var saveButton = figCaption.querySelector('.save-button');
-			saveButton.classList.remove('hidden');
-			console.log(pTags);
-			for(var i = 0; i < pTags.length; i++){
-				pTags[i].contentEditable = "true";
-				pTags[i].classList.add('contentEditable');
-			}
+
+			let rosterContainer = document.getElementById('roster');
+
+			//perform get request when using REST
+			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
+
+			// get the player based on the name and number
+			var result = rosterCopy.filter(function(player){
+				if(player.name !== e.target.dataset.player || player.number.toString() !== e.target.dataset.number){
+					return false;
+				} else{
+					return true;
+				}
+			})[0];			
+
+			let t = document.getElementById('update-view');
+			let markup = `<label>Player<input name="name" data-player="${result.name}" value="${result.name}"></label>
+						  <label>Number<input name="number" data-number="${result.number}" value="${result.number}"></label>
+						  <label>Position<input name="position" data-position="${result.position}" value="${result.position}"></label>
+						  <button class="save-button"> save </button>`;
+			t.innerHTML = markup;
+			rosterContainer.classList.add('hidden');
+			t.classList.remove('hidden');
 		}
 	}
 
 	function savePlayer(e){
 
 		if(userType === "coach"){
+			var rosterContainer = document.getElementById('roster');
+			var playerlist = document.getElementById('player-list');
+			let t = document.getElementById('update-view');
+			var inputs = document.getElementsByTagName('input');
 
 			//perform get request when using REST
 			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
 
-			var figCaption = e.target.parentNode;
-			e.target.classList.add('hidden');
-			var pTags = figCaption.getElementsByTagName('p');
-			for(var i = 0; i < pTags.length; i++){
-				pTags[i].contentEditable = "false";
-				pTags[i].classList.remove('contentEditable');
-			}
-			var newPlayerName = pTags[0].innerHTML;
-			var newPlayerPosition = pTags[1].innerHTML;
-			rosterCopy.forEach(player =>{
-				if(player.name == e.target.dataset.player){
-					player.name = newPlayerName;
-					player.position = newPlayerPosition;
+			// get the player based on the name and number
+			var result = rosterCopy.filter(function(player){
+				// console.log(player.name, e.target.dataset.player);
+				// console.log(player.number.toString(), e.target.dataset.number);
+				if(player.name !== inputs.name.dataset.player || player.number.toString() !== inputs.number.dataset.number){
+					return false;
+				} else{
+					return true;
 				}
-			});
-			// perform post when using REST endpoint
+			})[0];	
+
+			result.name = inputs.name.value;
+			result.number = inputs.number.value;
+			result.position = inputs.position.value;
+
 			localStorage.setItem('roster', JSON.stringify(rosterCopy));
+			while(playerlist.firstChild){
+				playerlist.removeChild(playerlist.firstChild);
+			}
+			renderRoster(rosterCopy);
+			rosterContainer.classList.remove('hidden');
+			t.classList.add('hidden');
 		}
 	}
 
 	function renderPlayerProfile(e){
 		var roster = document.querySelector('#roster');
 		var playerProfile = document.querySelector('#playerProfile-view');
-		roster.classList.add('remove');
+		roster.classList.add('hidden');
 
 		//perform get request when using REST
 		let rosterCopy = JSON.parse(localStorage.getItem('roster'));
@@ -153,14 +180,14 @@ window.addEventListener("DOMContentLoaded", function(event) {
 						</div>
 					</div>`;
 		playerProfile.innerHTML = markup;
-		playerProfile.classList.remove('remove');
+		playerProfile.classList.remove('hidden');
 	}
 
 	function returnToPlayers(){
 		var roster = document.querySelector('#roster');
 		var playerProfile = document.querySelector('#playerProfile-view');
-		roster.classList.remove('remove');
-		playerProfile.classList.add('remove');
+		roster.classList.remove('hidden');
+		playerProfile.classList.add('hidden');
 		while(playerProfile.firstChild){
 			playerProfile.removeChild(playerProfile.firstChild);
 		}
@@ -170,8 +197,9 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function makeRequest(compare){
 		loadJSON(function(response) {
 
+			let currentTeam = localStorage.getItem('currentTeam');
 		    jsonresponse = JSON.parse(response);
-		    roster = jsonresponse.team;
+		    roster = jsonresponse.teams[currentTeam].roster;
 
 		    //set item with key and value pair and then render
 		    localStorage.setItem('roster', JSON.stringify(roster));
@@ -193,7 +221,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function loadJSON(callback) {
 	    var xobj = new XMLHttpRequest();
 	    xobj.overrideMimeType("application/json");
-	    xobj.open('GET', '../json/team.json', true);
+	    xobj.open('GET', '../json/teams.json', true);
 	    xobj.onreadystatechange = function() {
 	        if (xobj.readyState == 4 && xobj.status == "200") {
 	            // .open will NOT return a value but simply returns undefined in async mode so use a callback
