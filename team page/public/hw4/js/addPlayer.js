@@ -19,16 +19,13 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	function previewPlayer(){
 		curFile = uploadPhoto.files;
 		photo = document.createElement('img');
-		photo.width = '200';
 		photo.style.textAlign = "center";
-		// photo.src =  window.URL.createObjectURL(curFile[0]);
-		photo.src = '../images/soccerplayer.png';
+		photo.src =  window.URL.createObjectURL(curFile[0]);
 		playerContainer.appendChild(photo);
 	}
 
 	function checkEmptyInput(arr){
-		console.log('checking for empty inputs');
-		var isFilled = true;
+   		var isFilled = true;
 		for(var i = 0; i < arr.length; i++){
 			if(arr[i].value === ""){
 				console.log('something is empty');
@@ -41,24 +38,27 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function submitInfo(e){
-
+		var userType = localStorage.getItem('userType');
 		if(userType === 'coach'){
-			var userType = localStorage.getItem('userType');
 			e.preventDefault();
 			if(checkEmptyInput(inputs)){
 				var name = nameInput.value;
 				var number = numberInput.value;
 				var position = positionInput.value;
-				//photo = 
 				
-				// do something here to create a new team and then redirect the team to their new
-				// populated home page
+				var imgCanvas = document.createElement("canvas");
+				var imgContext = imgCanvas.getContext('2d');
+				console.log(photo.width, photo.height);
+				imgCanvas.height = photo.height;
+				imgCanvas.width = photo.width;
+				imgContext.drawImage(photo, 0, 0, photo.width, photo.height);
+
 
 				var addedPlayer = {
 					"name": name,
 					"number": number,
 					"position": position,
-					"img": '../images/soccerplayer.png'
+					"img": imgCanvas.toDataURL('image/png', .5)
 				}
 
 				console.log(addedPlayer);

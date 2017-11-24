@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 	function renderSchedule(schedule){
 		let t = document.getElementById('schedule-view');
-		let markup = schedule.map(game =>`<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}">
+		let markup = schedule.map(game =>`<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}" onclick="">
 											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span> <br>
 											<button class="delete-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
 											<button class="edit-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
