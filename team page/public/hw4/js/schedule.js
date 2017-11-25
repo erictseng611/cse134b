@@ -1,77 +1,79 @@
-window.addEventListener("DOMContentLoaded", function(event) {
+window.addEventListener("DOMContentLoaded", function() {
 
 	var games = localStorage.getItem('schedule');
 	var userType = localStorage.getItem('userType');
 	var scheduleContainer = document.querySelector('#view');
 	var mainGame;
 
-	if(!games){
-			console.log('there wasnt anything in local storage so make a fake network request to get data');
-			makeRequest(null);
+	if (!games) {
+		// console.log('there wasnt anything in local storage so make a fake network request to get data');
+		makeRequest(null);
 
-		} else{
-			console.log('render list using local browser data for now then make a network request to get updated items');
-			var retrieved = localStorage.getItem('schedule');
-			schedule = JSON.parse(retrieved);
-			renderSchedule(schedule);
+	} else {
+		// console.log('render list using local browser data for now then make a network request to get updated items');
+		var retrieved = localStorage.getItem('schedule');
+		var schedule = JSON.parse(retrieved);
+		renderSchedule(schedule);
 
-			//temporarily commented out until we use rest endpoint
-			//makeRequest(schedule);
+		//temporarily commented out until we use rest endpoint
+		//makeRequest(schedule);
 	}
 
-	document.addEventListener('click', function(e){
-		if(e.target.classList.contains('delete-button')){
+	document.addEventListener('click', function(e) {
+		if (e.target.classList.contains('delete-button')) {
 			deleteGame(e);
-		} else if (e.target.classList.contains('edit-button')){
+		} else if (e.target.classList.contains('edit-button')) {
 			editGame(e);
-		} else if(e.target.classList.contains('save-button')){
+		} else if (e.target.classList.contains('save-button')) {
 			saveGame(e);
-		} else if(e.target.classList.contains('large_button')){
+		} else if (e.target.classList.contains('large_button')) {
 			renderGamePage(e);
-		} else if(e.target.id === 'returnToSchedule-button'){
-			returnToSchedule();
-		} else if (e.target.id === 'goEventFeed-button'){
+		} else if (e.target.id === 'returnToSchedule-button') {
+			returnToSchedule(e);
+		} else if (e.target.id === 'goEventFeed-button') {
 			renderEventPage(e);
-		} else if(e.target.id === 'addEvent-button'){
+		} else if (e.target.id === 'addEvent-button') {
 			addEvent(e);
+		} else if (e.target.id === 'returnToGamePage-button') {
+			returnToGamePage(e);
 		}
 	});
 
 	// only allow addition of games if coach
-	if(userType === "coach"){
+	if (userType === "coach") {
 		document.querySelector('#addGame-button').classList.remove('hidden');
 	}
 
 
-	function makeRequest(compare){
+	function makeRequest(compare) {
 		loadJSON(function(response) {
 
 			var currentTeam = localStorage.getItem('currentTeam');
 
-		    // Do Something with the response e.g.
-		    jsonresponse = JSON.parse(response);
-		    // Assuming json data is wrapped in square brackets as Drew suggests
-		    schedule = jsonresponse.teams[currentTeam].schedule;
-				roster = jsonresponse.teams[currentTeam].roster;
-		    localStorage.setItem('schedule', JSON.stringify(schedule));
-				localStorage.setItem('roster', JSON.stringify(roster));
+			// Do Something with the response e.g.
+			var jsonresponse = JSON.parse(response);
+			// Assuming json data is wrapped in square brackets as Drew suggests
+			var schedule = jsonresponse.teams[currentTeam].schedule;
+			var roster = jsonresponse.teams[currentTeam].roster;
+			localStorage.setItem('schedule', JSON.stringify(schedule));
+			localStorage.setItem('roster', JSON.stringify(roster));
 
-		    // now that there is something on screen, make a request and update the container if local and request data differs
-		    // make sure schedule container is empty
-		    if(JSON.stringify(schedule) !== JSON.stringify(compare)){
-		    	console.log('local and request different');
-		    	while(scheduleContainer.firstChild){
-		    		console.log('remove kid');
-		    		scheduleContainer.removeChild(scheduleContainer.firstChild);
-		    	}
-		    	renderSchedule(schedule);
+			// now that there is something on screen, make a request and update the container if local and request data differs
+			// make sure schedule container is empty
+			if (JSON.stringify(schedule) !== JSON.stringify(compare)) {
+				// console.log('local and request different');
+				while (scheduleContainer.firstChild) {
+					// console.log('remove kid');
+					scheduleContainer.removeChild(scheduleContainer.firstChild);
+				}
+				renderSchedule(schedule);
 			}
 		});
 	}
 
-	function renderSchedule(schedule){
+	function renderSchedule(schedule) {
 		let t = document.getElementById('schedule-view');
-		let markup = schedule.map(game =>`<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}" onclick="">
+		let markup = schedule.map(game => `<div class="large_button" id="${game.date}" data-date="${game.date}" data-opponent="${game.team2}" onclick="">
 											<span>${game.date} </span><span>${game.team1}</span> vs. <span>${game.team2}</span> <br>
 											<button class="delete-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> delete </button>
 											<button class="edit-button hidden" data-date="${game.date}" data-opponent="${game.team2}"> edit </button>
@@ -80,16 +82,18 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		let clonedTemplate = document.importNode(t.content, true);
 		scheduleContainer.appendChild(clonedTemplate);
 
-		if(userType === "coach"){
+		if (userType === "coach") {
 			// collect buttons and turn it into an array
 			var actionButtons = Array.from(scheduleContainer.getElementsByTagName('button'));
-			actionButtons.forEach(button => {button.classList.remove('hidden')});
+			actionButtons.forEach(button => {
+				button.classList.remove('hidden')
+			});
 		}
 	}
 
-	function deleteGame(e){
+	function deleteGame(e) {
 
-		if(userType === 'coach'){
+		if (userType === 'coach') {
 
 			var finder = e.target.dataset.date;
 			var el = document.getElementById(finder);
@@ -97,31 +101,31 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 			//perform get request when using REST
 			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
-			var result = scheduleCopy.filter(function(game){
-				if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+			var result = scheduleCopy.filter(function(game) {
+				if (game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent) {
 					return true;
-				} else{
+				} else {
 					return false;
 				}
 			});
 			// perform post request when using REST
 			localStorage.setItem('schedule', JSON.stringify(result));
-		} else{
+		} else {
 			//do nothing, user doesn't have permissions
 		}
 	}
 
-	function editGame(e){
+	function editGame(e) {
 
-		if(userType === 'coach'){
+		if (userType === 'coach') {
 
 			var scheduleContainer = document.querySelector('.schedule');
 			//perform get request when using REST
 			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
-			var result = scheduleCopy.filter(function(game){
-				if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+			var result = scheduleCopy.filter(function(game) {
+				if (game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent) {
 					return false;
-				} else{
+				} else {
 					return true;
 				}
 			})[0];
@@ -136,7 +140,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 
-	function saveGame(e){
+	function saveGame() {
 
 		var scheduleContainer = document.querySelector('.schedule');
 		var scheduleView = document.getElementById('view');
@@ -145,13 +149,13 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 
 		var inputs = document.getElementsByTagName('input');
-		var result = scheduleCopy.filter(function(game){
-				if(game.date !== inputs.date.dataset.date || game.team2 !== inputs.team2.dataset.opponent){
-					return false;
-				} else{
-					return true;
-				}
-			})[0];
+		var result = scheduleCopy.filter(function(game) {
+			if (game.date !== inputs.date.dataset.date || game.team2 !== inputs.team2.dataset.opponent) {
+				return false;
+			} else {
+				return true;
+			}
+		})[0];
 
 		result.date = inputs.date.value;
 		result.team2 = inputs.team2.value;
@@ -159,10 +163,10 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
 
 		// delete the existing stuff and add some new stuff in
-		while(scheduleView.firstChild){
-		    console.log('remove kid');
-		    scheduleView.removeChild(scheduleView.firstChild);
-		 }
+		while (scheduleView.firstChild) {
+			// console.log('remove kid');
+			scheduleView.removeChild(scheduleView.firstChild);
+		}
 
 		renderSchedule(scheduleCopy);
 		t.classList.add('hidden');
@@ -171,20 +175,20 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 	function loadJSON(callback) {
 
-	    var xobj = new XMLHttpRequest();
-	    xobj.overrideMimeType("application/json");
-	    // when using network, change the json file to a REST endpoint
-	    xobj.open('GET', '../json/teams.json', true);
-	    xobj.onreadystatechange = function() {
-	        if (xobj.readyState == 4 && xobj.status == "200") {
-	            // .open will NOT return a value but simply returns undefined in async mode so use a callback
-	            callback(xobj.responseText);
-	        }
-	    }
-	    xobj.send(null);
+		var xobj = new XMLHttpRequest();
+		xobj.overrideMimeType("application/json");
+		// when using network, change the json file to a REST endpoint
+		xobj.open('GET', '../json/teams.json', true);
+		xobj.onreadystatechange = function() {
+			if (xobj.readyState == 4 && xobj.status == "200") {
+				// .open will NOT return a value but simply returns undefined in async mode so use a callback
+				callback(xobj.responseText);
+			}
+		}
+		xobj.send(null);
 	}
 
-	function renderGamePage(e){
+	function renderGamePage(e) {
 		//hide the schedule container
 		var schedule = document.querySelector('.schedule');
 		var gamePage = document.getElementById('gamePage-view');
@@ -193,16 +197,16 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//perform get request when using REST
 		//should only return an array with the 1 game with the fit date and opponent
 		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
-		var currentGame = scheduleCopy.filter(function(game){
-			if(game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent){
+		var currentGame = scheduleCopy.filter(function(game) {
+			if (game.date !== e.target.dataset.date || game.team2 !== e.target.dataset.opponent) {
 				return false;
-			} else{
+			} else {
 				return true;
 			}
 		})[0];
-    mainGame = currentGame;
+		mainGame = currentGame;
 		let markup = `<main class="margin_center">
-						<button id="returnToSchedule-button"> Return to Schedule </button>
+						<button id="returnToSchedule-button" class="returnTo"> Return to Schedule </button>
 						<div class="live-game-info text_align_center">
 							<h1 class="no_margin"> ${currentGame.date} </h1>
 							<h3 class="no_margin"> ${currentGame.location} </h3>
@@ -266,17 +270,15 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		//insert html into the game page and display it
 		gamePage.innerHTML = markup;
 		gamePage.classList.remove('hidden');
-		};
+	}
 
-		function renderEventPage(e){
-			var schedule = document.querySelector('.schedule');
-			var gamePage = document.getElementById('gamePage-view');
-			var eventPage = document.getElementById('eventPage-view');
+	function renderEventPage() {
+		var gamePage = document.getElementById('gamePage-view');
+		var eventPage = document.getElementById('eventPage-view');
 
-			gamePage.classList.add('hidden');
-			let markup = `<main class="margin_center">	<section class="add-event">
+		let markup = `<main class="margin_center">	<section class="add-event">
+					<button id="returnToGamePage-button" class="returnTo" data-date="${mainGame.date}" data-opponent="${mainGame.team2}"> Return to Game Page </button>
 					<h1> Add Event </h1>
-					<button id="returnToSchedule-button"> Return to Schedule </button>
 					<form id="event-form">
 						<select form="event-form" name="event-type" id="event-type-selection">
 							<option value="Goal Attempt"> Goal Attempt</option>
@@ -289,106 +291,118 @@ window.addEventListener("DOMContentLoaded", function(event) {
 							<option value="${mainGame.team1}">${mainGame.team1}</option>
 							<option value="${mainGame.team2}">${mainGame.team2}</option>
 						</select>
-						<input type="number" name="player-number" placeholder="Enter Player #" id="playerNumber-input">
+						<input type="number" name="playerNumber" placeholder="Enter Player #">
 						<button class="form-button" type="submit" id="addEvent-button">Add Event</button>
 					</form>
 				</section>
 				</main>`;
-			eventPage.innerHTML = markup;
-			eventPage.classList.remove('hidden');
-		}
+		eventPage.innerHTML = markup;
+		gamePage.classList.add('hidden');
+		eventPage.classList.remove('hidden');
+	}
 
-		function addEvent(e){
-			e.preventDefault();
-			const playerNumberInput = document.getElementById('playerNumber-input');
-			const eventSelect = document.getElementById('event-type-selection');
-			const teamSelect = document.getElementById('team-type-selection');
-			const eventValue = eventSelect.options[eventSelect.selectedIndex].value;
-			const teamValue = teamSelect.options[teamSelect.selectedIndex].value;
-			const inputs = document.getElementsByTagName('input');
+	function addEvent(e) {
+		e.preventDefault();
+		var inputs = document.getElementsByTagName('input');
+		var playerNumberInput = inputs.playerNumber;
+		var eventSelect = document.getElementById('event-type-selection');
+		var teamSelect = document.getElementById('team-type-selection');
+		var eventValue = eventSelect.options[eventSelect.selectedIndex].value;
+		var teamValue = teamSelect.options[teamSelect.selectedIndex].value;
+		var schedule = localStorage.getItem('schedule');
 
-			if(checkEmptyInput(inputs)){
-				var newEvent = {
-					"playerNumber": playerNumberInput.value,
-					"event": eventValue,
-					"team": teamValue
+		checkEmptyInput(inputs);
+		// eslint said this was unused. please delete if not needed
+		// if (checkEmptyInput(inputs)) {
+		// 	var newEvent = {
+		// 		"playerNumber": playerNumberInput.value,
+		// 		"event": eventValue,
+		// 		"team": teamValue
+		// 	};
+		// }
+
+		let updatedStats = JSON.parse(localStorage.getItem('schedule'));
+		let rosterData = JSON.parse(localStorage.getItem('roster'));
+		let playerIndex;
+		var isTeamOne = (teamValue === mainGame.team1);
+		const playerData = rosterData.find((player, i) => {
+			playerIndex = i;
+			return player.number == playerNumberInput.value ? player : false;
+		});
+
+		for (var i = 0; i < (Object.keys(schedule)).length; i++) {
+			if ((updatedStats[i]).date == mainGame.date) {
+				if (isTeamOne) {
+					// console.log('updating team 1 stats');
+					if (eventValue === "Goal Attempt") {
+						updatedStats[i].team1GoalKicks += 1;
+					} else if (eventValue === "Corner Kick") {
+						updatedStats[i].team1Corners += 1;
+					} else if (eventValue === "Yellow Card") {
+						updatedStats[i].team1YellowCards += 1;
+					} else if (eventValue === "Red Card") {
+						updatedStats[i].team1RedCards += 1;
+					}
+				} else if (!isTeamOne) {
+					// console.log('updating team 2 stats');
+					if (eventValue === "Goal Attempt") {
+						updatedStats[i].team2GoalKicks += 1;
+					} else if (eventValue === "Corner Kick") {
+						updatedStats[i].team2Corners += 1;
+					} else if (eventValue === "Yellow Card") {
+						updatedStats[i].team2YellowCards += 1;
+					} else if (eventValue === "Red Card") {
+						updatedStats[i].team2RedCards += 1;
+					}
+				}
+
+				rosterData[playerIndex] = {
+					...playerData,
+					yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
+					redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
+					goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
+					cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
 				};
 			}
+		}
 
-			let updatedStats = JSON.parse(localStorage.getItem('schedule'));
-			let rosterData = JSON.parse(localStorage.getItem('roster'));
-			let playerIndex;
-			const isTeamOne = !!teamChoice;
-			var teamChoice = (newEvent.team == mainGame.team1);
-			const playerData = rosterData.find((player, i) => {
-				playerIndex = i;
-				return player.number == playerNumberInput.value ? player : false;
-			});
+		localStorage.setItem('schedule', JSON.stringify(updatedStats));
+		localStorage.setItem('roster', JSON.stringify(rosterData));
+		renderEventPage(e);
+	}
 
-
-			for (var i = 0; i < (Object.keys(schedule)).length; i++) {
-				if(  (updatedStats[i]).date == mainGame.date) {
-					if(isTeamOne){
-						if(eventValue == "Goal Attempt"){
-							updatedStats[i].team1GoalKicks += 1;
-						}	else if(eventValue == "Corner Kick"){
-							updatedStats[i].team1Corners += 1;
-						} else if(eventValue == "Yellow Card"){
-							updatedStats[i].team1YellowCards += 1;
-						} else if(eventValue == "Red Card"){
-							updatedStats[i].team1RedCards += 1;
-						}
-					} else {
-						if(eventValue == "Goal Attempt"){
-							updatedStats[i].team2GoalKicks += 1;
-						}	else if(eventValue == "Corner Kick"){
-							updatedStats[i].team2Corners += 1;
-						} else if(eventValue == "Yellow Card"){
-							updatedStats[i].team2YellowCards += 1;
-						} else if(eventValue == "Red Card"){
-							updatedStats[i].team2RedCards += 1;
-						}
-					}
-
-					rosterData[playerIndex] = {
-						...playerData,
-						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
-						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
-						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
-						cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
-					};
-				}
+	function checkEmptyInput(arr) {
+		// console.log('checking for empty inputs');
+		var isFilled = true;
+		for (var i = 0; i < arr.length; i++) {
+			if (arr[i].value === "") {
+				// console.log('something is empty');
+				isFilled = false;
+				arr[i].style.border = "2px solid red";
 			}
+		}
+		return isFilled;
+	}
 
-			localStorage.setItem('schedule', JSON.stringify(updatedStats));
-			localStorage.setItem('roster', JSON.stringify(rosterData));
-			renderEventPage(e);
-
-
+	function returnToSchedule() {
+		var gamePage = document.getElementById('gamePage-view');
+		//show the schedule container
+		var schedule = document.querySelector('.schedule');
+		schedule.classList.remove('hidden');
+		while (gamePage.firstChild) {
+			gamePage.removeChild(gamePage.firstChild);
 		}
 
-		function checkEmptyInput(arr){
-			console.log('checking for empty inputs');
-			var isFilled = true;
-			for(var i = 0; i < arr.length; i++){
-				if(arr[i].value === ""){
-					console.log('something is empty');
-					isFilled = false;
-					arr[i].style.border = "2px solid red";
-				}
-			}
-			return isFilled;
-		}
+	}
 
-		function returnToSchedule(){
-			var views = document.body.querySelectorAll(".view");
-			//show the schedule container
-			var schedule = document.querySelector('.schedule');
-			schedule.classList.remove('hidden');
-			views.forEach(e => {
-				if (e.firstChild) {
-					e.removeChild(e.firstChild);
-				}
-			});
-		}
+	function returnToGamePage(e) {
+		var gamePage = document.getElementById('gamePage-view');
+		var eventPage = document.getElementById('eventPage-view');
+		// while (gamePage.firstChild) {
+		// 	gamePage.removeChild(gamePage.firstChild);
+		// }
+		gamePage.innerHTML = "";
+		eventPage.classList.add('hidden');
+		renderGamePage(e);
+	}
 });

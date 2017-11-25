@@ -1,7 +1,6 @@
-window.addEventListener("DOMContentLoaded", function(event) {
+window.addEventListener("DOMContentLoaded", function() {
 	const logInButton = document.getElementById('logIn-button');
 	const newUserButton = document.getElementById('newUser-button');
-	const form = document.querySelector('.login-form');
 	const logInInput = document.getElementById('logIn-input');
 	const passwordInput = document.getElementById('password-input')
 
@@ -18,55 +17,55 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	Username: fan
 	Password: fan
 	*/
-	function authenticateUser(users){
+	function authenticateUser(users) {
 		var inputtedUsername = logInInput.value;
 		var inputtedPassword = passwordInput.value;
 
 		var user = users[inputtedUsername];
 
-		if(!user){
-			console.log('this user doesnt exist');
+		if (!user) {
+			//console.log('this user doesnt exist');
 			logInInput.style.border = "2px solid red";
 			return;
-		} else if(user.password === inputtedPassword){
-			console.log('log in successful');
+		} else if (user.password === inputtedPassword) {
+			//console.log('log in successful');
 			localStorage.setItem('currentTeam', user.team);
 			localStorage.setItem('userType', user.userType);
 			window.location.href = './html/homepage.html';
-		} else{
+		} else {
 			logInInput.style.border = "2px solid red";
 			passwordInput.style.border = "2px solid red";
-			console.log('user/pw authentication failed');
+			//console.log('user/pw authentication failed');
 		}
-	};
+	}
 
-	function createNewUser(){
+	function createNewUser() {
 		window.location.href = "./html/createAcc.html";
-	};
+	}
 
 	// get the list of users 
-	function makeRequest(e,username, itemToCompare){
+	function makeRequest(e) {
 		e.preventDefault();
 		loadJSON(function(response) {
-		    jsonresponse = JSON.parse(response);
-		    var users = jsonresponse.users;
-		    authenticateUser(users);
+			var jsonresponse = JSON.parse(response);
+			var users = jsonresponse.users;
+			authenticateUser(users);
 		});
-	}	
+	}
 
 	function loadJSON(callback) {
 
-	    var xobj = new XMLHttpRequest();
-	    xobj.overrideMimeType("application/json");
+		var xobj = new XMLHttpRequest();
+		xobj.overrideMimeType("application/json");
 
-	    // when using network, change the json file to a REST endpoint
-	    xobj.open('GET', './json/teams.json', true);
-	    xobj.onreadystatechange = function() {
-	        if (xobj.readyState == 4 && xobj.status == "200") {
-	            callback(xobj.responseText);
-	        }
-	    }
-	    xobj.send(null);
+		// when using network, change the json file to a REST endpoint
+		xobj.open('GET', './json/teams.json', true);
+		xobj.onreadystatechange = function() {
+			if (xobj.readyState == 4 && xobj.status == "200") {
+				callback(xobj.responseText);
+			}
+		}
+		xobj.send(null);
 	}
 
 });

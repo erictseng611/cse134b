@@ -18,7 +18,8 @@
 					"team2Corners": 2,
 					"team2GoalKicks": 3,
 					"team2RedCards": 5,
-					"team2YellowCards": 1 
+					"team2YellowCards": 1,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",

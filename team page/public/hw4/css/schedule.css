@@ -11,14 +11,14 @@
 	margin-top: 0;
 }
 
-#returnToSchedule-button{
+.returnTo{
 	padding: 1rem;
 	background-color: blue;
 	color: white;
 	margin-left: 2rem;
 }
 
-#returnToSchedule-button:hover{
+.returnTo:hover{
 	background-color: darkblue;
 	cursor: pointer;
 }
@@ -39,4 +39,18 @@
 	position: absolute;
 	left: 0;
 	right: 0;
+}
+
+#goEventFeed-button {
+	margin: 1rem;
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+}
+
+#goEventFeed-button:hover {
+	margin: 1rem;
+	padding: 1rem;
+	background-color: darkblue;
+	cursor: pointer;
 }
