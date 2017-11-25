@@ -279,11 +279,13 @@ window.addEventListener("DOMContentLoaded", function(event) {
 					<button id="returnToSchedule-button"> Return to Schedule </button>
 					<form id="event-form">
 						<select form="event-form" name="event-type" id="event-type-selection">
-							<option value="Goal Attempt"> Goal Attempt</option>
-							<option value="Corner Kick"> Corner Kick</option>
-							<option value="Goal Kick"> Goal Kick</option>
-							<option value="Yellow Card"> Yellow Card</option>
-							<option value="Red Card"> Red Card</option>
+							<option value="Goal Attempt">Goal Attempt</option>
+						  <option value="Goal">Goal</option>
+							<option value="Foul">Foul</option>
+							<option value="Goal Kick">Goal Kick</option>
+							<option value="Corner Kick">Corner Kick</option>
+							<option value="Yellow Card">Yellow Card</option>
+							<option value="Red Card">Red Card</option>
 						</select>
 						<select form="team-form" name="team-type" id="team-type-selection">
 							<option value="${mainGame.team1}">${mainGame.team1}</option>
@@ -313,6 +315,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 					"event": eventValue,
 					"team": teamValue
 				};
+			} else {
+				return false;
 			}
 
 			let updatedStats = JSON.parse(localStorage.getItem('schedule'));
@@ -325,13 +329,18 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				return player.number == playerNumberInput.value ? player : false;
 			});
 
-
 			for (var i = 0; i < (Object.keys(schedule)).length; i++) {
 				if(  (updatedStats[i]).date == mainGame.date) {
 					if(isTeamOne){
 						if(eventValue == "Goal Attempt"){
+							updatedStats[i].team1Shots += 1;
+						}	else if(eventValue == "Goal"){
+							updatedStats[i].team1Goals += 1;
+						} else if(eventValue == "Foul") {
+
+						}	else if (eventValue == "Goal Kick") {
 							updatedStats[i].team1GoalKicks += 1;
-						}	else if(eventValue == "Corner Kick"){
+						} else if(eventValue == "Corner Kick"){
 							updatedStats[i].team1Corners += 1;
 						} else if(eventValue == "Yellow Card"){
 							updatedStats[i].team1YellowCards += 1;
@@ -340,8 +349,14 @@ window.addEventListener("DOMContentLoaded", function(event) {
 						}
 					} else {
 						if(eventValue == "Goal Attempt"){
+							updatedStats[i].team2Shots += 1;
+						}	else if(eventValue == "Goal"){
+							updatedStats[i].team2Goals += 1;
+						} else if(eventValue == "Foul") {
+
+						} else if (eventValue == "Goal Kick") {
 							updatedStats[i].team2GoalKicks += 1;
-						}	else if(eventValue == "Corner Kick"){
+						} else if(eventValue == "Corner Kick"){
 							updatedStats[i].team2Corners += 1;
 						} else if(eventValue == "Yellow Card"){
 							updatedStats[i].team2YellowCards += 1;
@@ -352,6 +367,8 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 					rosterData[playerIndex] = {
 						...playerData,
+						goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
+	          shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
 						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
 						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
 						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
