@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function(event) {
+window.addEventListener("DOMContentLoaded", function() {
 	const uploadPhoto = document.getElementById('uploadPhoto');
 	const nameInput = document.getElementById('playerName-input');
 	const numberInput = document.getElementById('playerNumber-input');
@@ -25,10 +25,10 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function checkEmptyInput(arr){
-   		var isFilled = true;
+		var isFilled = true;
 		for(var i = 0; i < arr.length; i++){
 			if(arr[i].value === ""){
-				console.log('something is empty');
+				//console.log('something is empty');
 				isFilled = false;
 				arr[i].style.border = "2px solid red";
 			}
@@ -38,9 +38,9 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function submitInfo(e){
+		e.preventDefault();
 		var userType = localStorage.getItem('userType');
 		if(userType === 'coach'){
-			e.preventDefault();
 			if(checkEmptyInput(inputs)){
 				var name = nameInput.value;
 				var number = numberInput.value;
@@ -52,7 +52,6 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				imgCanvas.width = photo.width;
 				imgContext.drawImage(photo, 0, 0, photo.width, photo.width);
 
-
 				var addedPlayer = {
 					"name": name,
 					"number": number,
@@ -60,7 +59,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 					"img": imgCanvas.toDataURL('image/png', .5)
 				}
 
-				console.log(addedPlayer);
+				//console.log(addedPlayer);
 
 				roster.push(addedPlayer);
 				localStorage.setItem('roster', JSON.stringify(roster));

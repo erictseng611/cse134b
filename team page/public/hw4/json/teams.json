@@ -13,12 +13,15 @@
 					"team1GoalKicks": 2,
 					"team1RedCards": 0,
 					"team1YellowCards": 1,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 5,
 					"team2Shots": 1,
 					"team2Corners": 2,
 					"team2GoalKicks": 3,
 					"team2RedCards": 5,
-					"team2YellowCards": 1 
+					"team2YellowCards": 1,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -31,12 +34,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -49,12 +55,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -67,12 +76,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -85,12 +97,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -103,12 +118,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -121,12 +139,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -139,12 +160,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				},
 				{
 					"team1": "Tritons",
@@ -157,12 +181,15 @@
 					"team1GoalKicks": 0,
 					"team1RedCards": 0,
 					"team1YellowCards": 0,
+					"team1Fouls":1,
+					"team2Fouls":2,
 					"team2Goals": 0,
 					"team2Shots": 0,
 					"team2Corners": 0,
 					"team2GoalKicks": 0,
 					"team2RedCards": 0,
-					"team2YellowCards": 0 
+					"team2YellowCards": 0,
+					"events" : []
 				}
 			],
 
