@@ -48,10 +48,9 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				
 				var imgCanvas = document.createElement("canvas");
 				var imgContext = imgCanvas.getContext('2d');
-				console.log(photo.width, photo.height);
-				imgCanvas.height = photo.height;
+				imgCanvas.height = photo.width;
 				imgCanvas.width = photo.width;
-				imgContext.drawImage(photo, 0, 0, photo.width, photo.height);
+				imgContext.drawImage(photo, 0, 0, photo.width, photo.width);
 
 
 				var addedPlayer = {

@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 	function renderRoster(team){
 		let t = document.getElementById('roster-view');
-		let markup = team.map(player =>	`<figure class="player-card" id="${player.name}">
+		let markup = team.map(player =>	`<figure class="player-card" id="${player.name}" onclick="">
 											<img src="${player.img}" class="inline_block" alt="player headshot">
 											<figcaption class="inline_block">
 												<p class="inline_block">${player.name}</p><span> #${player.number}</span>
