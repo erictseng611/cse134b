@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 	var games = localStorage.getItem('schedule');
 	var userType = localStorage.getItem('userType');
 	var scheduleContainer = document.querySelector('#view');
+	var mainGame;
 
 	if(!games){
 			console.log('there wasnt anything in local storage so make a fake network request to get data');
@@ -29,6 +30,10 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			renderGamePage(e);
 		} else if(e.target.id === 'returnToSchedule-button'){
 			returnToSchedule();
+		} else if (e.target.id === 'goEventFeed-button'){
+			renderEventPage(e);
+		} else if(e.target.id === 'addEvent-button'){
+			addEvent(e);
 		}
 	});
 
@@ -45,10 +50,11 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 		    // Do Something with the response e.g.
 		    jsonresponse = JSON.parse(response);
-
 		    // Assuming json data is wrapped in square brackets as Drew suggests
 		    schedule = jsonresponse.teams[currentTeam].schedule;
+				roster = jsonresponse.teams[currentTeam].roster;
 		    localStorage.setItem('schedule', JSON.stringify(schedule));
+				localStorage.setItem('roster', JSON.stringify(roster));
 
 		    // now that there is something on screen, make a request and update the container if local and request data differs
 		    // make sure schedule container is empty
@@ -61,7 +67,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		    	renderSchedule(schedule);
 			}
 		});
-	}	
+	}
 
 	function renderSchedule(schedule){
 		let t = document.getElementById('schedule-view');
@@ -88,7 +94,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 			var finder = e.target.dataset.date;
 			var el = document.getElementById(finder);
 			el.parentNode.removeChild(el);
-			
+
 			//perform get request when using REST
 			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 			var result = scheduleCopy.filter(function(game){
@@ -118,7 +124,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				} else{
 					return true;
 				}
-			})[0];			
+			})[0];
 
 			let t = document.getElementById('update-view');
 			let markup = `<label>Date<input name="date" data-date="${result.date}" value="${result.date}"></label>
@@ -135,7 +141,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		var scheduleContainer = document.querySelector('.schedule');
 		var scheduleView = document.getElementById('view');
 		let t = document.getElementById('update-view');
-		// get request 
+		// get request
 		let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
 
 		var inputs = document.getElementsByTagName('input');
@@ -157,7 +163,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		    console.log('remove kid');
 		    scheduleView.removeChild(scheduleView.firstChild);
 		 }
-		
+
 		renderSchedule(scheduleCopy);
 		t.classList.add('hidden');
 		scheduleContainer.classList.remove('hidden');
@@ -194,7 +200,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				return true;
 			}
 		})[0];
-
+    mainGame = currentGame;
 		let markup = `<main class="margin_center">
 						<button id="returnToSchedule-button"> Return to Schedule </button>
 						<div class="live-game-info text_align_center">
@@ -217,7 +223,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 								<div class="stat-container">
 									<div class="stat-item">
 										<h2> Goals: ${currentGame.team1Goals} </h2>
-										<ul> 
+										<ul>
 											<li>Shots on Goal: ${currentGame.team1Shots}</li>
 											<li>Corner Kicks: ${currentGame.team1Corners} </li>
 											<li>Goal Kicks: ${currentGame.team1GoalKicks}</li>
@@ -236,7 +242,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 								<div class="stat-container">
 									<div class="stat-item">
 										<h2> Goals: ${currentGame.team2Goals} </h2>
-										<ul> 
+										<ul>
 											<li>Shots on Goal: ${currentGame.team2Shots}</li>
 											<li>Corner Kicks: ${currentGame.team2Corners} </li>
 											<li>Goal Kicks: ${currentGame.team2GoalKicks}</li>
@@ -253,7 +259,7 @@ window.addEventListener("DOMContentLoaded", function(event) {
 							</div>
 						</div>
 						<div class="event-feed-button button text_align_center">
-							<a href="./eventFeed.html" class="button"><p>Event Feed </p></a>
+						<button id="goEventFeed-button">Go To Event</button>
 						</div>
 					</main>`;
 
@@ -262,17 +268,127 @@ window.addEventListener("DOMContentLoaded", function(event) {
 		gamePage.classList.remove('hidden');
 		};
 
-		function returnToSchedule(){
+		function renderEventPage(e){
+			var schedule = document.querySelector('.schedule');
 			var gamePage = document.getElementById('gamePage-view');
+			var eventPage = document.getElementById('eventPage-view');
+
+			gamePage.classList.add('hidden');
+			let markup = `<main class="margin_center">	<section class="add-event">
+					<h1> Add Event </h1>
+					<button id="returnToSchedule-button"> Return to Schedule </button>
+					<form id="event-form">
+						<select form="event-form" name="event-type" id="event-type-selection">
+							<option value="Goal Attempt"> Goal Attempt</option>
+							<option value="Corner Kick"> Corner Kick</option>
+							<option value="Goal Kick"> Goal Kick</option>
+							<option value="Yellow Card"> Yellow Card</option>
+							<option value="Red Card"> Red Card</option>
+						</select>
+						<select form="team-form" name="team-type" id="team-type-selection">
+							<option value="${mainGame.team1}">${mainGame.team1}</option>
+							<option value="${mainGame.team2}">${mainGame.team2}</option>
+						</select>
+						<input type="number" name="player-number" placeholder="Enter Player #" id="playerNumber-input">
+						<button class="form-button" type="submit" id="addEvent-button">Add Event</button>
+					</form>
+				</section>
+				</main>`;
+			eventPage.innerHTML = markup;
+			eventPage.classList.remove('hidden');
+		}
+
+		function addEvent(e){
+			e.preventDefault();
+			const playerNumberInput = document.getElementById('playerNumber-input');
+			const eventSelect = document.getElementById('event-type-selection');
+			const teamSelect = document.getElementById('team-type-selection');
+			const eventValue = eventSelect.options[eventSelect.selectedIndex].value;
+			const teamValue = teamSelect.options[teamSelect.selectedIndex].value;
+			const inputs = document.getElementsByTagName('input');
+
+			if(checkEmptyInput(inputs)){
+				var newEvent = {
+					"playerNumber": playerNumberInput.value,
+					"event": eventValue,
+					"team": teamValue
+				};
+			}
+
+			let updatedStats = JSON.parse(localStorage.getItem('schedule'));
+			let rosterData = JSON.parse(localStorage.getItem('roster'));
+			let playerIndex;
+			const isTeamOne = !!teamChoice;
+			var teamChoice = (newEvent.team == mainGame.team1);
+			const playerData = rosterData.find((player, i) => {
+				playerIndex = i;
+				return player.number == playerNumberInput.value ? player : false;
+			});
+
+
+			for (var i = 0; i < (Object.keys(schedule)).length; i++) {
+				if(  (updatedStats[i]).date == mainGame.date) {
+					if(isTeamOne){
+						if(eventValue == "Goal Attempt"){
+							updatedStats[i].team1GoalKicks += 1;
+						}	else if(eventValue == "Corner Kick"){
+							updatedStats[i].team1Corners += 1;
+						} else if(eventValue == "Yellow Card"){
+							updatedStats[i].team1YellowCards += 1;
+						} else if(eventValue == "Red Card"){
+							updatedStats[i].team1RedCards += 1;
+						}
+					} else {
+						if(eventValue == "Goal Attempt"){
+							updatedStats[i].team2GoalKicks += 1;
+						}	else if(eventValue == "Corner Kick"){
+							updatedStats[i].team2Corners += 1;
+						} else if(eventValue == "Yellow Card"){
+							updatedStats[i].team2YellowCards += 1;
+						} else if(eventValue == "Red Card"){
+							updatedStats[i].team2RedCards += 1;
+						}
+					}
+
+					rosterData[playerIndex] = {
+						...playerData,
+						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
+						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
+						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
+						cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
+					};
+				}
+			}
+
+			localStorage.setItem('schedule', JSON.stringify(updatedStats));
+			localStorage.setItem('roster', JSON.stringify(rosterData));
+			renderEventPage(e);
+
+
+		}
+
+		function checkEmptyInput(arr){
+			console.log('checking for empty inputs');
+			var isFilled = true;
+			for(var i = 0; i < arr.length; i++){
+				if(arr[i].value === ""){
+					console.log('something is empty');
+					isFilled = false;
+					arr[i].style.border = "2px solid red";
+				}
+			}
+			return isFilled;
+		}
+
+		function returnToSchedule(){
+			var views = document.body.querySelectorAll(".view");
 			//show the schedule container
 			var schedule = document.querySelector('.schedule');
 			schedule.classList.remove('hidden');
-			while(gamePage.firstChild){
-				gamePage.removeChild(gamePage.firstChild);
-			}
+			views.forEach(e => {
+				if (e.firstChild) {
+					e.removeChild(e.firstChild);
+				}
+			});
 		}
-
-
 });
-
-
