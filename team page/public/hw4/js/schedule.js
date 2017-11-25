@@ -50,10 +50,11 @@ window.addEventListener("DOMContentLoaded", function(event) {
 
 		    // Do Something with the response e.g.
 		    jsonresponse = JSON.parse(response);
-
 		    // Assuming json data is wrapped in square brackets as Drew suggests
 		    schedule = jsonresponse.teams[currentTeam].schedule;
+				roster = jsonresponse.teams[currentTeam].roster;
 		    localStorage.setItem('schedule', JSON.stringify(schedule));
+				localStorage.setItem('roster', JSON.stringify(roster));
 
 		    // now that there is something on screen, make a request and update the container if local and request data differs
 		    // make sure schedule container is empty
@@ -314,37 +315,56 @@ window.addEventListener("DOMContentLoaded", function(event) {
 				};
 			}
 
-			let scheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+			let updatedStats = JSON.parse(localStorage.getItem('schedule'));
+			let rosterData = JSON.parse(localStorage.getItem('roster'));
+			let playerIndex;
+			const isTeamOne = !!teamChoice;
 			var teamChoice = (newEvent.team == mainGame.team1);
+			const playerData = rosterData.find((player, i) => {
+				playerIndex = i;
+				return player.number == playerNumberInput.value ? player : false;
+			});
+
 
 			for (var i = 0; i < (Object.keys(schedule)).length; i++) {
-				if(  (scheduleCopy[i]).date == mainGame.date) {
-					if(teamChoice){
+				if(  (updatedStats[i]).date == mainGame.date) {
+					if(isTeamOne){
 						if(eventValue == "Goal Attempt"){
-							scheduleCopy[i].team1GoalKicks += 1;
+							updatedStats[i].team1GoalKicks += 1;
 						}	else if(eventValue == "Corner Kick"){
-							scheduleCopy[i].team1Corners += 1;
+							updatedStats[i].team1Corners += 1;
 						} else if(eventValue == "Yellow Card"){
-							scheduleCopy[i].team1YellowCards += 1;
+							updatedStats[i].team1YellowCards += 1;
 						} else if(eventValue == "Red Card"){
-							scheduleCopy[i].team1RedCards += 1;
+							updatedStats[i].team1RedCards += 1;
 						}
 					} else {
 						if(eventValue == "Goal Attempt"){
-							scheduleCopy[i].team2GoalKicks += 1;
+							updatedStats[i].team2GoalKicks += 1;
 						}	else if(eventValue == "Corner Kick"){
-							scheduleCopy[i].team2Corners += 1;
+							updatedStats[i].team2Corners += 1;
 						} else if(eventValue == "Yellow Card"){
-							scheduleCopy[i].team2YellowCards += 1;
+							updatedStats[i].team2YellowCards += 1;
 						} else if(eventValue == "Red Card"){
-							scheduleCopy[i].team2RedCards += 1;
+							updatedStats[i].team2RedCards += 1;
 						}
 					}
+
+					rosterData[playerIndex] = {
+						...playerData,
+						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
+						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
+						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
+						cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
+					};
 				}
 			}
 
-			localStorage.setItem('schedule', JSON.stringify(scheduleCopy));
+			localStorage.setItem('schedule', JSON.stringify(updatedStats));
+			localStorage.setItem('roster', JSON.stringify(rosterData));
 			renderEventPage(e);
+
+
 		}
 
 		function checkEmptyInput(arr){
