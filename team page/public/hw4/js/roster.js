@@ -5,8 +5,6 @@ window.addEventListener("DOMContentLoaded", function() {
 	var userType = localStorage.getItem('userType');
 	var team;
 
-
-
 	if (!roster) {
 		//console.log('there is nothing in local storage for roster so make a "network" request');
 		makeRequest(null);
@@ -22,6 +20,8 @@ window.addEventListener("DOMContentLoaded", function() {
 		document.querySelector('#addPlayer-button').classList.remove('hidden');
 	}
 
+	document.querySelector('#returnTo-homePage').addEventListener('click', returnToHome);
+
 	document.addEventListener('click', function(e) {
 		if (e.target.classList.contains('delete-button')) {
 			deletePlayer(e);
@@ -35,6 +35,10 @@ window.addEventListener("DOMContentLoaded", function() {
 			returnToPlayers();
 		}
 	});
+
+	function returnToHome() {
+		window.location.href = "./homepage.html";
+	}
 
 	function renderRoster(team) {
 		let t = document.getElementById('roster-view');
@@ -59,7 +63,6 @@ window.addEventListener("DOMContentLoaded", function() {
 	}
 
 	function deletePlayer(e) {
-
 		if (userType === "coach") {
 			var finder = e.target.dataset.player;
 			var el = document.getElementById(finder);
@@ -68,13 +71,13 @@ window.addEventListener("DOMContentLoaded", function() {
 			//perform get request when using REST
 			let rosterCopy = JSON.parse(localStorage.getItem('roster'));
 			var result = rosterCopy.filter(function(player) {
-				if (player.name !== e.target.dataset.player || player.number !== e.target.dataset.number) {
-					return false;
-				} else {
+				if (player.name !== e.target.dataset.player || player.number.toString() !== e.target.dataset.number) {
 					return true;
+				} else {
+					return false;
 				}
 			});
-
+			console.log(result);
 			// perform post request when using REST
 			localStorage.setItem('roster', JSON.stringify(result));
 		}
@@ -159,26 +162,26 @@ window.addEventListener("DOMContentLoaded", function() {
 		});
 
 		let markup = `<button id="returnToPlayers-button"> Back to Players </button>
-<div class="text_align_center">
-<figure class="player-figure text_align_center">
-<img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
-<figcaption class="text_align_center no_margin">
-<h1> ${currPlayer.name} #${currPlayer.number}</h1>
-<h2 class="no_margin"> Forward </h2>
-</figcaption>
-</figure>
-<div class="player-stats">
-<div class="margin_center">
-<p> Goals: ${currPlayer.goals} </p>
-<p> Fouls: ${currPlayer.fouls} </p>
-<p> Yellow Cards: ${currPlayer.yellowCards} </p>
-<p> Red Cards: ${currPlayer.redCards} </p>
-<p> Shots on Goal: ${currPlayer.shotsOnGoal} </p>
-<p> Corner Kicks: ${currPlayer.cornerKicks} </p>
-<p> Goal Kicks: ${currPlayer.goalKicks} </p>
-</div>
-</div>
-</div>`;
+						<div class="text_align_center">
+							<figure class="player-figure text_align_center">
+							<img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
+							<figcaption class="text_align_center no_margin">
+							<h1> ${currPlayer.name} #${currPlayer.number}</h1>
+							<h2 class="no_margin"> ${currPlayer.position} </h2>
+							</figcaption>
+							</figure>
+							<div class="player-stats">
+							<div class="margin_center">
+							<p> Goals: ${currPlayer.goals} </p>
+							<p> Fouls: ${currPlayer.fouls} </p>
+							<p> Yellow Cards: ${currPlayer.yellowCards} </p>
+							<p> Red Cards: ${currPlayer.redCards} </p>
+							<p> Shots on Goal: ${currPlayer.shotsOnGoal} </p>
+							<p> Corner Kicks: ${currPlayer.cornerKicks} </p>
+							<p> Goal Kicks: ${currPlayer.goalKicks} </p>
+							</div>
+							</div>
+						</div>`;
 		playerProfile.innerHTML = markup;
 		playerProfile.classList.remove('hidden');
 	}

@@ -16,6 +16,7 @@
 	background-color: blue;
 	color: white;
 	margin-left: 2rem;
+	display: block;
 }
 
 .returnTo:hover{

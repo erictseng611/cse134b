@@ -47,7 +47,6 @@ figcaption button{
 }
 
 figcaption:hover{
-	background-color: blue;
 	cursor: default;
 }
 

@@ -19,6 +19,8 @@ window.addEventListener("DOMContentLoaded", function() {
 		//makeRequest(schedule);
 	}
 
+	document.querySelector('#returnTo-homepage').addEventListener('click', returnToHome);
+
 	document.addEventListener('click', function(e) {
 		if (e.target.classList.contains('delete-button')) {
 			deleteGame(e);
@@ -42,6 +44,10 @@ window.addEventListener("DOMContentLoaded", function() {
 	// only allow addition of games if coach
 	if (userType === "coach") {
 		document.querySelector('#addGame-button').classList.remove('hidden');
+	}
+
+	function returnToHome(){
+		window.location.href = "./homepage.html";
 	}
 
 
@@ -279,6 +285,10 @@ window.addEventListener("DOMContentLoaded", function() {
 					<button id="returnToGamePage-button" class="returnTo" data-date="${mainGame.date}" data-opponent="${mainGame.team2}"> Return to Game Page </button>
 					<h1> Add Event </h1>
 					<form id="event-form">
+						<select form="team-form" name="team-type" id="team-type-selection">
+							<option value="${mainGame.team1}">${mainGame.team1}</option>
+							<option value="${mainGame.team2}">${mainGame.team2}</option>
+						</select>
 						<select form="event-form" name="event-type" id="event-type-selection">
 							<option value="Goal Attempt">Goal Attempt</option>
 						  <option value="Goal">Goal</option>
@@ -287,10 +297,6 @@ window.addEventListener("DOMContentLoaded", function() {
 							<option value="Corner Kick">Corner Kick</option>
 							<option value="Yellow Card">Yellow Card</option>
 							<option value="Red Card">Red Card</option>
-						</select>
-						<select form="team-form" name="team-type" id="team-type-selection">
-							<option value="${mainGame.team1}">${mainGame.team1}</option>
-							<option value="${mainGame.team2}">${mainGame.team2}</option>
 						</select>
 						<input type="number" name="playerNumber" placeholder="Enter Player #" id="playerNumber-input">
 						<button class="form-button" type="submit" id="addEvent-button">Add Event</button>
@@ -326,17 +332,16 @@ window.addEventListener("DOMContentLoaded", function() {
 
 			let playerIndex;
 			var isTeamOne = (newEvent.team == mainGame.team1)
-			// const playerData = rosterData.find((player, i) => {
-			// 	playerIndex = i;
-			// 	return player.number == playerNumberInput.value ? player : false;
-			// });
+				// const playerData = rosterData.find((player, i) => {
+				// 	playerIndex = i;
+				// 	return player.number == playerNumberInput.value ? player : false;
+				// });
 
 			for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
 				if ((updatedStats[i]).date == mainGame.date) {
 					team = i;
 					//if main team
 					if (isTeamOne) {
-						console.log('updating team 1');
 						if (eventValue == "Goal Attempt") {
 							updatedStats[i].team1Shots += 1;
 						} else if (eventValue == "Goal") {
@@ -353,7 +358,6 @@ window.addEventListener("DOMContentLoaded", function() {
 							updatedStats[i].team1RedCards += 1;
 						}
 					} else {
-						console.log('updating team 2');
 						if (eventValue == "Goal Attempt") {
 							updatedStats[i].team2Shots += 1;
 						} else if (eventValue == "Goal") {
