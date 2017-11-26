@@ -4,7 +4,6 @@ window.addEventListener("DOMContentLoaded", function() {
 	var userType = localStorage.getItem('userType');
 	var scheduleContainer = document.querySelector('#view');
 	var mainGame;
-	var eventObj;
 
 	if (!games) {
 		// console.log('there wasnt anything in local storage so make a fake network request to get data');
@@ -300,96 +299,98 @@ window.addEventListener("DOMContentLoaded", function() {
 					</form>
 				</section>
 				</main>`;
-				eventPage.innerHTML = markup;
-				gamePage.classList.add('hidden');
-				eventPage.classList.remove('hidden');
-				renderEventFeed(mainGame.events);
-		}
+		eventPage.innerHTML = markup;
+		gamePage.classList.add('hidden');
+		eventPage.classList.remove('hidden');
+		renderEventFeed(mainGame.events);
+	}
 
-		function addEvent(e){
-			e.preventDefault();
-			const playerNumberInput = document.getElementById('playerNumber-input');
-			const eventSelect = document.getElementById('event-type-selection');
-			const teamSelect = document.getElementById('team-type-selection');
-			const eventValue = eventSelect.options[eventSelect.selectedIndex].value;
-			const teamValue = teamSelect.options[teamSelect.selectedIndex].value;
-			const inputs = document.getElementsByTagName('input');
-			let updatedStats = JSON.parse(localStorage.getItem('schedule'));
-			let rosterData = JSON.parse(localStorage.getItem('roster'));
-			let team;
+	function addEvent(e) {
+		e.preventDefault();
+		const playerNumberInput = document.getElementById('playerNumber-input');
+		const eventSelect = document.getElementById('event-type-selection');
+		const teamSelect = document.getElementById('team-type-selection');
+		const eventValue = eventSelect.options[eventSelect.selectedIndex].value;
+		const teamValue = teamSelect.options[teamSelect.selectedIndex].value;
+		const inputs = document.getElementsByTagName('input');
+		let updatedStats = JSON.parse(localStorage.getItem('schedule'));
+		let rosterData = JSON.parse(localStorage.getItem('roster'));
+		let team;
 
-			if(checkEmptyInput(inputs)){
-				var newEvent = {
-					"playerNumber": parseInt(playerNumberInput.value),
-					"event": eventValue,
-					"team": teamValue
-				};
+		if (checkEmptyInput(inputs)) {
+			var newEvent = {
+				"playerNumber": parseInt(playerNumberInput.value, 0),
+				"event": eventValue,
+				"team": teamValue
+			};
 
-				let playerIndex;
-				const isTeamOne = !!teamChoice;
-				var teamChoice = (newEvent.team == mainGame.team1);
-				const playerData = rosterData.find((player, i) => {
-					playerIndex = i;
-					return player.number == playerNumberInput.value ? player : false;
-				});
+			let playerIndex;
+			var isTeamOne = (newEvent.team == mainGame.team1)
+			// const playerData = rosterData.find((player, i) => {
+			// 	playerIndex = i;
+			// 	return player.number == playerNumberInput.value ? player : false;
+			// });
 
-				for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
-					if(  (updatedStats[i]).date == mainGame.date) {
-						team = i;
-						if(isTeamOne){
-							if(eventValue == "Goal Attempt"){
-								updatedStats[i].team1Shots += 1;
-							}	else if(eventValue == "Goal"){
-								updatedStats[i].team1Goals += 1;
-							} else if(eventValue == "Foul") {
-                updatedStats[i].team1Fouls +=1;
-							}	else if (eventValue == "Goal Kick") {
-								updatedStats[i].team1GoalKicks += 1;
-							} else if(eventValue == "Corner Kick"){
-								updatedStats[i].team1Corners += 1;
-							} else if(eventValue == "Yellow Card"){
-								updatedStats[i].team1YellowCards += 1;
-							} else if(eventValue == "Red Card"){
-								updatedStats[i].team1RedCards += 1;
-							}
-						} else if(!isTeamOne) {
-							if(eventValue == "Goal Attempt"){
-								updatedStats[i].team2Shots += 1;
-							}	else if(eventValue == "Goal"){
-								updatedStats[i].team2Goals += 1;
-							} else if(eventValue == "Foul") {
-                updatedStats[i].team2Fouls += 1;
-							} else if (eventValue == "Goal Kick") {
-								updatedStats[i].team2GoalKicks += 1;
-							} else if(eventValue == "Corner Kick"){
-								updatedStats[i].team2Corners += 1;
-							} else if(eventValue == "Yellow Card"){
-								updatedStats[i].team2YellowCards += 1;
-							} else if(eventValue == "Red Card"){
-								updatedStats[i].team2RedCards += 1;
-							}
+			for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
+				if ((updatedStats[i]).date == mainGame.date) {
+					team = i;
+					//if main team
+					if (isTeamOne) {
+						console.log('updating team 1');
+						if (eventValue == "Goal Attempt") {
+							updatedStats[i].team1Shots += 1;
+						} else if (eventValue == "Goal") {
+							updatedStats[i].team1Goals += 1;
+						} else if (eventValue == "Foul") {
+							updatedStats[i].team1Fouls += 1;
+						} else if (eventValue == "Goal Kick") {
+							updatedStats[i].team1GoalKicks += 1;
+						} else if (eventValue == "Corner Kick") {
+							updatedStats[i].team1Corners += 1;
+						} else if (eventValue == "Yellow Card") {
+							updatedStats[i].team1YellowCards += 1;
+						} else if (eventValue == "Red Card") {
+							updatedStats[i].team1RedCards += 1;
 						}
-
-						updatedStats[i].events.push(newEvent);
-
-						rosterData[playerIndex] = {
-							...playerData,
-							goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
-							fouls: isTeamOne ? updatedStats[i].team1Fouls : updatedStats[i].team2Fouls,
-		          shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
-							yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
-							redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
-							goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
-							cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
-						};
+					} else {
+						console.log('updating team 2');
+						if (eventValue == "Goal Attempt") {
+							updatedStats[i].team2Shots += 1;
+						} else if (eventValue == "Goal") {
+							updatedStats[i].team2Goals += 1;
+						} else if (eventValue == "Foul") {
+							updatedStats[i].team2Fouls += 1;
+						} else if (eventValue == "Goal Kick") {
+							updatedStats[i].team2GoalKicks += 1;
+						} else if (eventValue == "Corner Kick") {
+							updatedStats[i].team2Corners += 1;
+						} else if (eventValue == "Yellow Card") {
+							updatedStats[i].team2YellowCards += 1;
+						} else if (eventValue == "Red Card") {
+							updatedStats[i].team2RedCards += 1;
+						}
 					}
-			  }
+
+					updatedStats[i].events.push(newEvent);
+
+					rosterData[playerIndex] = {
+						//...playerData,
+						goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
+						fouls: isTeamOne ? updatedStats[i].team1Fouls : updatedStats[i].team2Fouls,
+						shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
+						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
+						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
+						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
+						cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
+					};
+				}
+			}
 
 			localStorage.setItem('schedule', JSON.stringify(updatedStats));
 			localStorage.setItem('roster', JSON.stringify(rosterData));
-			} else {
-				return false;
-			}
+		} else {
+			return false;
+		}
 		renderEventPage();
 		renderEventFeed(updatedStats[team].events);
 	}
@@ -397,9 +398,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
 	function renderEventFeed(feed) {
 		const feedContainer = document.getElementById("event-feed");
-		const feedContent = feed.map((feedItem) => {
-			return `<p>${feedItem.team}: Player #${feedItem.playerNumber} ${feedItem.event}</p>`;
-		}).join('');
+		const feedContent = feed.map(feedItem => `<p>${feedItem.team}: Player #${feedItem.playerNumber} ${feedItem.event}</p>`).join('');
 		feedContainer.innerHTML = feedContent;
 	}
 

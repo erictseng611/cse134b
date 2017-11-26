@@ -526,6 +526,12 @@ figcaption:hover {
   background-color: darkblue;
   cursor: pointer;
 }
+
+#event-feed p {
+  background-color: blue;
+  color: white;
+  padding: 1rem;
+}
 /* Select Role Page */
 
 .select-role {
