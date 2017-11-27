@@ -56,7 +56,14 @@ window.addEventListener("DOMContentLoaded", function() {
 					"name": name,
 					"number": number,
 					"position": position,
-					"img": imgCanvas.toDataURL('image/png', .5)
+					"img": imgCanvas.toDataURL('image/png', .5),
+					"goals": 0,
+					"fouls": 0,
+					"yellowCards": 0,
+					"redCards": 0,
+					"shotsOnGoal": 0,
+					"cornerKicks": 0,
+					"goalKicks": 0
 				}
 
 				//console.log(addedPlayer);

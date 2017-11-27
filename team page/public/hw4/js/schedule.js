@@ -46,7 +46,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		document.querySelector('#addGame-button').classList.remove('hidden');
 	}
 
-	function returnToHome(){
+	function returnToHome() {
 		window.location.href = "./homepage.html";
 	}
 
@@ -323,78 +323,77 @@ window.addEventListener("DOMContentLoaded", function() {
 		let rosterData = JSON.parse(localStorage.getItem('roster'));
 		let team;
 
-		if (checkEmptyInput(inputs)) {
-			var newEvent = {
-				"playerNumber": parseInt(playerNumberInput.value, 0),
-				"event": eventValue,
-				"team": teamValue
-			};
-
-			let playerIndex;
-			var isTeamOne = (newEvent.team == mainGame.team1)
-				// const playerData = rosterData.find((player, i) => {
-				// 	playerIndex = i;
-				// 	return player.number == playerNumberInput.value ? player : false;
-				// });
-
-			for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
-				if ((updatedStats[i]).date == mainGame.date) {
-					team = i;
-					//if main team
-					if (isTeamOne) {
-						if (eventValue == "Goal Attempt") {
-							updatedStats[i].team1Shots += 1;
-						} else if (eventValue == "Goal") {
-							updatedStats[i].team1Goals += 1;
-						} else if (eventValue == "Foul") {
-							updatedStats[i].team1Fouls += 1;
-						} else if (eventValue == "Goal Kick") {
-							updatedStats[i].team1GoalKicks += 1;
-						} else if (eventValue == "Corner Kick") {
-							updatedStats[i].team1Corners += 1;
-						} else if (eventValue == "Yellow Card") {
-							updatedStats[i].team1YellowCards += 1;
-						} else if (eventValue == "Red Card") {
-							updatedStats[i].team1RedCards += 1;
-						}
-					} else {
-						if (eventValue == "Goal Attempt") {
-							updatedStats[i].team2Shots += 1;
-						} else if (eventValue == "Goal") {
-							updatedStats[i].team2Goals += 1;
-						} else if (eventValue == "Foul") {
-							updatedStats[i].team2Fouls += 1;
-						} else if (eventValue == "Goal Kick") {
-							updatedStats[i].team2GoalKicks += 1;
-						} else if (eventValue == "Corner Kick") {
-							updatedStats[i].team2Corners += 1;
-						} else if (eventValue == "Yellow Card") {
-							updatedStats[i].team2YellowCards += 1;
-						} else if (eventValue == "Red Card") {
-							updatedStats[i].team2RedCards += 1;
-						}
-					}
-
-					updatedStats[i].events.push(newEvent);
-
-					rosterData[playerIndex] = {
-						//...playerData,
-						goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
-						fouls: isTeamOne ? updatedStats[i].team1Fouls : updatedStats[i].team2Fouls,
-						shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
-						yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
-						redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
-						goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
-						cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
-					};
-				}
-			}
-
-			localStorage.setItem('schedule', JSON.stringify(updatedStats));
-			localStorage.setItem('roster', JSON.stringify(rosterData));
-		} else {
+		if (!checkEmptyInput(inputs)) {
 			return false;
 		}
+		var newEvent = {
+			"playerNumber": parseInt(playerNumberInput.value, 0),
+			"event": eventValue,
+			"team": teamValue
+		};
+
+		let playerIndex;
+		var isTeamOne = (newEvent.team == mainGame.team1)
+			// const playerData = rosterData.find((player, i) => {
+			// 	playerIndex = i;
+			// 	return player.number == playerNumberInput.value ? player : false;
+			// });
+
+		for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
+			if ((updatedStats[i]).date == mainGame.date) {
+				team = i;
+				//if main team
+				if (isTeamOne) {
+					if (eventValue == "Goal Attempt") {
+						updatedStats[i].team1Shots += 1;
+					} else if (eventValue == "Goal") {
+						updatedStats[i].team1Goals += 1;
+					} else if (eventValue == "Foul") {
+						updatedStats[i].team1Fouls += 1;
+					} else if (eventValue == "Goal Kick") {
+						updatedStats[i].team1GoalKicks += 1;
+					} else if (eventValue == "Corner Kick") {
+						updatedStats[i].team1Corners += 1;
+					} else if (eventValue == "Yellow Card") {
+						updatedStats[i].team1YellowCards += 1;
+					} else if (eventValue == "Red Card") {
+						updatedStats[i].team1RedCards += 1;
+					}
+				} else if (!isTeamOne) {
+					if (eventValue == "Goal Attempt") {
+						updatedStats[i].team2Shots += 1;
+					} else if (eventValue == "Goal") {
+						updatedStats[i].team2Goals += 1;
+					} else if (eventValue == "Foul") {
+						updatedStats[i].team2Fouls += 1;
+					} else if (eventValue == "Goal Kick") {
+						updatedStats[i].team2GoalKicks += 1;
+					} else if (eventValue == "Corner Kick") {
+						updatedStats[i].team2Corners += 1;
+					} else if (eventValue == "Yellow Card") {
+						updatedStats[i].team2YellowCards += 1;
+					} else if (eventValue == "Red Card") {
+						updatedStats[i].team2RedCards += 1;
+					}
+				}
+
+				updatedStats[i].events.push(newEvent);
+
+				rosterData[playerIndex] = {
+					...playerData,
+					goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
+					fouls: isTeamOne ? updatedStats[i].team1Fouls : updatedStats[i].team2Fouls,
+					shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
+					yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
+					redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
+					goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
+					cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
+				};
+			}
+		}
+
+		localStorage.setItem('schedule', JSON.stringify(updatedStats));
+		localStorage.setItem('roster', JSON.stringify(rosterData));
 		renderEventPage();
 		renderEventFeed(updatedStats[team].events);
 	}

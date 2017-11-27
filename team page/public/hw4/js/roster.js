@@ -77,7 +77,6 @@ window.addEventListener("DOMContentLoaded", function() {
 					return false;
 				}
 			});
-			console.log(result);
 			// perform post request when using REST
 			localStorage.setItem('roster', JSON.stringify(result));
 		}
@@ -102,9 +101,9 @@ window.addEventListener("DOMContentLoaded", function() {
 
 			let t = document.getElementById('update-view');
 			let markup = `<label>Player<input name="name" data-player="${result.name}" value="${result.name}"></label>
-<label>Number<input name="number" data-number="${result.number}" value="${result.number}"></label>
-<label>Position<input name="position" data-position="${result.position}" value="${result.position}"></label>
-<button class="save-button"> save </button>`;
+							<label>Number<input name="number" data-number="${result.number}" value="${result.number}"></label>
+							<label>Position<input name="position" data-position="${result.position}" value="${result.position}"></label>
+							<button class="save-button"> save </button>`;
 			t.innerHTML = markup;
 			rosterContainer.classList.add('hidden');
 			t.classList.remove('hidden');
@@ -138,9 +137,8 @@ window.addEventListener("DOMContentLoaded", function() {
 			result.position = inputs.position.value;
 
 			localStorage.setItem('roster', JSON.stringify(rosterCopy));
-			while (playerlist.firstChild) {
-				playerlist.removeChild(playerlist.firstChild);
-			}
+			//blow out existing container
+			playerlist.parentElement.removeChild(playerlist);
 			renderRoster(rosterCopy);
 			rosterContainer.classList.remove('hidden');
 			t.classList.add('hidden');
