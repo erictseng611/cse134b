@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="../index.css" type="text/css">
+	<title> Team Watch </title>
+</head>
+<body>
+	<main class="container" id="addGame_container">
+		<h1 class="no_margin"> Add Game </h1>
+		<p><label> Opponent: <input id="opponent-input" type="text" name="opponent" list="opponentlist">
+			<datalist id="opponentlist">
+				<option value="Turtles">
+				<option value="Lions">
+				<option value="Sea Lions">
+				<option value="Monkeys">
+				<option value="Dogs">
+				<option value="Ravens">
+				<option value="Rhinos">
+				<option value="Elepehants">
+				<option value="Hogs">
+			</datalist></label></p>
+		<form>
+			<input type="text" name="location" placeholder="location">
+			<!-- Date  and Time input type is not supported on all browsers -->
+			<input type="date" name="date">
+			<input type="time" name="time">
+			<button class="form-button" type="submit" id="signUp-button">Add Game</button>
+		</form>
+	</main>
+	<footer class="bottom-logo">
+		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
+		<p class="inline_block">Team Watch</p>
+	</footer>
+
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase-auth.js"></script>
+	<script src="../js/firebase.js"></script>
+	<script src="../js/addGame.js"></script>
+</body>
+</html>
+<!-- 4 requests | 1.6 KB transferred | Finish: 229 ms |
+	DOMContentLoaded: 242 ms | Load: 252 ms -->

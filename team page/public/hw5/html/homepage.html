@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../index.css" type="text/css">
+	<link rel="shortcut icon" type="image/png" href="../images/soccerFav.jpeg" />
+	<title> Team Watch </title>
+</head>
+<body>
+	<header class="settings-bar">
+		<button id="signOut-button"> sign out</button>
+		<a href="./settings.html"><img src="../images/settings.png" alt="settings"></a>
+	</header>
+
+	<!-- Note that the team logo images should be the same size or else the logos will look slightly awkward. -->
+	<main class="homepage margin_center">
+		<section class="team-stats">
+			<img src="../images/triton.jpg" alt="Team Logo">
+			<h1 class="font_xl no_margin"> UCSD Tritons </h1>
+		</section>
+		<div>
+			<a href="./schedule.html" class="anchor_normalize"><p class="large_button"> Schedule </p></a> 	
+			<a href="./roster.html" class="anchor_normalize"><p class="large_button"> Players </p></a> 	
+		</div>
+	</main>
+	<footer class="bottom-logo">
+		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
+		<p class="inline_block">Team Watch</p>
+	</footer>
+
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase-auth.js"></script>
+	<script src="../js/firebase.js"></script>
+	<script src="../js/homepage.js"></script>
+</body>
+</html>
+<!-- 5 requests | 9.6 KB transferred | Finish: 226 ms |
+	DOMContentLoaded: 215 ms | Load: 231 ms -->

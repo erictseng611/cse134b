@@ -1,0 +1,62 @@
+/* Live Games */
+
+.live-game-teams{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
+}
+
+.live-game-team{
+	flex: 2 100px;
+	text-align: center
+}
+
+.live-game-team img{
+	max-height: 150px;
+	width: auto;
+}
+
+.live-game-stats-team{
+	border-top: 1px solid grey;
+	margin-top: 1rem;
+}
+
+.live-game-stats-team:first-child{
+	border-right: 1px solid grey;
+}
+
+.live-game-stats{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	align-items: center;
+}
+
+
+.live-game-stats-team{
+	flex: 1;
+}
+
+.stat-container {
+	width: 70%;
+	margin: 0 auto;
+	padding-left: 1rem;
+	min-width: 135px;
+}
+
+.stat-container ul{
+	list-style-type: none;
+}
+
+.stat-container ul > li{
+	text-indent: -2rem;
+}
+
+.event-feed-button{
+	margin: .5rem 0;
+}
+
+.event-feed-button p{
+	padding: .5rem 0;
+}

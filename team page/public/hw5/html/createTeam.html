@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../index.css" type="text/css">
+	<title> Team Watch </title>
+</head>
+<body>
+	<main class="create-Team container">
+		<input type="text" name="teamName" placeholder="Team Name" class="large_input margin_center">
+		<div class="team-logo">
+			<h1> Upload logo: </h1>
+			<input type="file" name="teamlogo" accept="images/*" id="uploadLogo">	
+		</div>
+		<hr>
+		<form class="create-Acc-Form text_align_center" method="post">
+			<input type="text" name="email" placeholder="E-mail">
+			<input type="password" name="password" placeholder="Password">
+			<input type="password" name="confirmPassword" placeholder="Confirm Password" >
+			<button class="form-button" type="submit" id="signUp-button">Sign Up</button>
+		</form>
+	</main>
+	<footer class="bottom-logo">
+		<img src="../images/soccerball.jpg" class="inline_block" alt="soccerball">
+		<p class="inline_block">Team Watch</p>
+	</footer>
+
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase-auth.js"></script>
+	<script src="../js/firebase.js"></script>
+	<script src="../js/createTeam.js"></script>
+</body>
+</html>
+<!-- 4 requests | 39.1 KB transferred | Finish: 510 ms |
+	DOMContentLoaded: 381 ms | Load 515 ms -->

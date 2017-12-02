@@ -1,0 +1,78 @@
+/* players page*/
+
+#roster{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#playerProfile-vew{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#returnToPlayers-button{
+	margin: 1rem;
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+}
+
+#returnToPlayers-button:hover{
+	background-color: darkblue;
+	cursor: pointer;
+}
+
+figure.player-card{
+	margin-left:0;
+	margin-right: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+figure.player-card:hover{
+	background-color: darkblue;
+	cursor: pointer;
+}
+
+figcaption {
+	margin-left: 1rem;
+	text-align: left; 
+}
+
+figcaption button{
+	margin-left: 1rem;
+}
+
+figcaption:hover{
+	cursor: default;
+}
+
+.player-card {
+	background-color: blue;
+	padding: .5rem;
+	box-sizing: border-box;
+}
+
+.player-card:first-child{
+	margin-top: 0;
+}
+
+.player-card p{
+	margin:0;
+	text-align: left;
+	color: white;
+	padding-left: 1rem;
+}
+
+.player-card span{
+	color: white;
+}
+
+.player-card img{
+	background-color: white;
+	width: 75px;
+	height: 75px;
+}

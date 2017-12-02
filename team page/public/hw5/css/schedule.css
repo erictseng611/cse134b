@@ -1,0 +1,69 @@
+/* Schedule */
+
+.schedule{
+	width: 90%;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.schedule_container .large_button p:first-child{
+	margin-top: 0;
+}
+
+.returnTo{
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+	margin-left: 2rem;
+	display: block;
+}
+
+.returnTo:hover{
+	background-color: darkblue;
+	cursor: pointer;
+}
+
+#update-view {
+	margin: 0 auto;
+	width: 80%;
+	max-width: 500px;
+}
+
+#update-view button{
+	background-color: blue;
+	padding: .5rem;
+	color: white;
+}
+
+#gamePage-view{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#eventPage-view{
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#goEventFeed-button {
+	margin: 1rem;
+	padding: 1rem;
+	background-color: blue;
+	color: white;
+}
+
+#goEventFeed-button:hover {
+	margin: 1rem;
+	padding: 1rem;
+	background-color: darkblue;
+	cursor: pointer;
+}
+
+#event-feed p{
+	background-color: blue;
+	color: white;
+	padding: 1rem;
+}
