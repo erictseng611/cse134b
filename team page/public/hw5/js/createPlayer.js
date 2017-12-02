@@ -40,6 +40,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
                     // going into local
                     localStorage.setItem('userType', 'player');
+                    window.location.href = './homepage.html';
 
                 } else {
                     console.log('not logged in')
@@ -49,7 +50,6 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     function writeUserData(email, uid, userType) {
-        console.log(userId);
         firebase.database().ref('users/' + uid).set({
             email: email,
             userType: userType

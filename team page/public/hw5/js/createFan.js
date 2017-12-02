@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", function() {
     const signUpButton = document.getElementById('signUp-button');
 
     var inputs = document.getElementsByTagName('input');
-    signUpButton.addEventListener('click', makeRequest);
+    signUpButton.addEventListener('click', submitInfo);
 
     function checkPassword() {
         if (inputs.password.value === inputs.confirmPassword.value) {
@@ -55,6 +55,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
                     // going into local
                     localStorage.setItem('userType', 'fan');
+                    window.location.href = './homepage.html';
                     //localStorage.setItem('currentTeam', teamName);
 
                 } else {
