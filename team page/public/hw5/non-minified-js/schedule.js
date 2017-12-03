@@ -305,7 +305,7 @@ window.addEventListener("DOMContentLoaded", function() {
             el.innerHTML = `${event.team}: Player #${event.playerNumber} ${event.eventType}`;
 
             //append it to the event-feed container
-            document.getElementById('event-feed').prependChild(el);
+            document.getElementById('event-feed').appendChild(el);
 
         });
 
