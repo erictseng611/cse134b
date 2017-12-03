@@ -299,7 +299,7 @@ window.addEventListener("DOMContentLoaded", function() {
         dbRefObject.on('child_added', function(snapshot) {
             //whenever a child gets added, create the dom element and stick it in the feed list
             let event = snapshot.val();
-            
+
             // create p element with correct info
             var el = document.createElement('p');
             el.innerHTML = `${event.team}: Player #${event.playerNumber} ${event.eventType}`;
@@ -337,75 +337,71 @@ window.addEventListener("DOMContentLoaded", function() {
             "team": teamValue
         };
 
+        //find the game index
         var gameIndex = findScheduleIndex(mainGame.date, mainGame.team2, updatedStats);
+        //create a unique to push the event
         var newGameKey = firebase.database().ref().child(`teams/Tritons/schedule/${gameIndex}/events`).push().key;
-        var newEvent = firebase.database().ref(`teams/Tritons/schedule/${gameIndex}/events/${newGameKey}`).set(newEvent);
-
-        let playerIndex;
-        var isTeamOne = (newEvent.team == mainGame.team1);
+        //set the event into the database
+        firebase.database().ref(`teams/Tritons/schedule/${gameIndex}/events/${newGameKey}`).set(newEvent);
 
 
-        /* Can you please refactor this ajay. I don't understand this at all */
-        for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
-            if ((updatedStats[i]).date == mainGame.date) {
-                team = i;
-                //if main team
-                if (isTeamOne) {
-                    updatedStats.[eventValue] += 1;
-                    if (eventValue == "Goal Attempt") {
-                        updatedStats[i].team1Shots += 1;
-                    } else if (eventValue == "Goal") {
-                        updatedStats[i].team1Goals += 1;
-                    } else if (eventValue == "Foul") {
-                        updatedStats[i].team1Fouls += 1;
-                    } else if (eventValue == "Goal Kick") {
-                        updatedStats[i].team1GoalKicks += 1;
-                    } else if (eventValue == "Corner Kick") {
-                        updatedStats[i].team1Corners += 1;
-                    } else if (eventValue == "Yellow Card") {
-                        updatedStats[i].team1YellowCards += 1;
-                    } else if (eventValue == "Red Card") {
-                        updatedStats[i].team1RedCards += 1;
-                    }
-                } else if (!isTeamOne) {
-                    if (eventValue == "Goal Attempt") {
-                        updatedStats[i].team2Shots += 1;
-                    } else if (eventValue == "Goal") {
-                        updatedStats[i].team2Goals += 1;
-                    } else if (eventValue == "Foul") {
-                        updatedStats[i].team2Fouls += 1;
-                    } else if (eventValue == "Goal Kick") {
-                        updatedStats[i].team2GoalKicks += 1;
-                    } else if (eventValue == "Corner Kick") {
-                        updatedStats[i].team2Corners += 1;
-                    } else if (eventValue == "Yellow Card") {
-                        updatedStats[i].team2YellowCards += 1;
-                    } else if (eventValue == "Red Card") {
-                        updatedStats[i].team2RedCards += 1;
-                    }
-                }
+        const playerData = rosterData.find((player, i) => {
+                playerIndex = i;
+                return player.number == playerNumberInput.value ? player : false;
+        });
 
-                updatedStats[i].events.push(newEvent);
-
-                rosterData[playerIndex] = {
-                    ...playerData,
-                    goals: isTeamOne ? updatedStats[i].team1Goals : updatedStats[i].team2Goals,
-                    fouls: isTeamOne ? updatedStats[i].team1Fouls : updatedStats[i].team2Fouls,
-                    shotsOnGoal: isTeamOne ? updatedStats[i].team1Shots : updatedStats[i].team2Shots,
-                    yellowCards: isTeamOne ? updatedStats[i].team1YellowCards : updatedStats[i].team2YellowCards,
-                    redCards: isTeamOne ? updatedStats[i].team1RedCards : updatedStats[i].team2RedCards,
-                    goalKicks: isTeamOne ? updatedStats[i].team1GoalKicks : updatedStats[i].team2GoalKicks,
-                    cornerKicks: isTeamOne ? updatedStats[i].team1Corners : updatedStats[i].team2Corners
-                };
+        var isTeamOne = (newEvent.team === mainGame.team1);
+        if (isTeamOne) {
+            if (eventValue == "Goal Attempt") {
+                updatedStats[gameIndex].team1Shots += 1;
+                rosterData[playerIndex].shotsOnGoal += 1;
+            } else if (eventValue == "Goal") {
+                updatedStats[gameIndex].team1Goals += 1;
+                rosterData[playerIndex].goals += 1;
+            } else if (eventValue == "Foul") {
+                updatedStats[gameIndex].team1Fouls += 1;
+                rosterData[playerIndex].fouls += 1;
+            } else if (eventValue == "Goal Kick") {
+                updatedStats[gameIndex].team1GoalKicks += 1;
+                rosterData[playerIndex].goalKicks += 1;
+            } else if (eventValue == "Corner Kick") {
+                updatedStats[gameIndex].team1Corners += 1;
+                rosterData[playerIndex].cornerKicks += 1;
+            } else if (eventValue == "Yellow Card") {
+                updatedStats[gameIndex].team1YellowCards += 1;
+                rosterData[playerIndex].yellowCards += 1;
+            } else if (eventValue == "Red Card") {
+                updatedStats[gameIndex].team1RedCards += 1;
+                rosterData[playerIndex].redCards += 1;
+            }
+        } else if (!isTeamOne) {
+            if (eventValue == "Goal Attempt") {
+                updatedStats[gameIndex].team2Shots += 1;
+            } else if (eventValue == "Goal") {
+                updatedStats[gameIndex].team2Goals += 1;
+            } else if (eventValue == "Foul") {
+                updatedStats[gameIndex].team2Fouls += 1;
+            } else if (eventValue == "Goal Kick") {
+                updatedStats[gameIndex].team2GoalKicks += 1;
+            } else if (eventValue == "Corner Kick") {
+                updatedStats[gameIndex].team2Corners += 1;
+            } else if (eventValue == "Yellow Card") {
+                updatedStats[gameIndex].team2YellowCards += 1;
+            } else if (eventValue == "Red Card") {
+                updatedStats[gameIndex].team2RedCards += 1;
             }
         }
 
+        // update the game stats page
+        firebase.database().ref(`teams/Tritons/schedule/${gameIndex}`).update(updatedStats[gameIndex]);
 
+        // update the individual's stat page
+        firebase.database().ref(`teams/Tritons/roster/${playerIndex}`).update(rosterData[playerIndex]);
 
+        // make the updates local as well
         localStorage.setItem('schedule', JSON.stringify(updatedStats));
         localStorage.setItem('roster', JSON.stringify(rosterData));
         renderEventPage();
-        renderEventFeed(updatedStats[team].events);
     }
 
     // returns true if all are true
