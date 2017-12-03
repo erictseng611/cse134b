@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    var games = localStorage.getItem('schedule');
+    var games = JSON.parse(localStorage.getItem('schedule'));
     var userType = localStorage.getItem('userType');
     var scheduleContainer = document.querySelector('#view');
     var mainGame;
@@ -287,22 +287,32 @@ window.addEventListener("DOMContentLoaded", function() {
                 </section>
                 </main>`;
         eventPage.innerHTML = markup;
+
+        const feedList = document.getElementById('event-feed');
+        let localScheduleCopy = JSON.parse(localStorage.getItem('schedule'));
+        var index = findScheduleIndex(mainGame.date, mainGame.team2, localScheduleCopy);
+
+        const dbRefObject = firebase.database().ref(`teams/Tritons/schedule/${index}/events`);
+
+        let t = document.getElementById('#event-feed');
+
+        dbRefObject.on('child_added', function(snapshot) {
+            //whenever a child gets added, create the dom element and stick it in the feed list
+            let event = snapshot.val();
+            
+            // create p element with correct info
+            var el = document.createElement('p');
+            el.innerHTML = `${event.team}: Player #${event.playerNumber} ${event.eventType}`;
+
+            //append it to the event-feed container
+            document.getElementById('event-feed').appendChild(el);
+
+        });
+
         gamePage.classList.add('hidden');
         eventPage.classList.remove('hidden');
-        renderEventFeed(mainGame.events);
     }
 
-    function renderEventFeed(feed) {
-        if(feed){
-            const feedContainer = document.getElementById("event-feed");
-            const feedContent = feed.map(feedItem => `<p>${feedItem.team}: Player #${feedItem.playerNumber} ${feedItem.event}</p>`).join('');
-            feedContainer.innerHTML = feedContent;
-        } else {
-            var localscheduleCopy = localStorage.getItem('schedule');
-            
-
-        }
-    }
 
     function addEvent(e) {
         e.preventDefault();
@@ -323,18 +333,25 @@ window.addEventListener("DOMContentLoaded", function() {
 
         var newEvent = {
             "playerNumber": parseInt(playerNumberInput.value, 0),
-            "event": eventValue,
+            "eventType": eventValue,
             "team": teamValue
         };
 
-        let playerIndex;
-        var isTeamOne = (newEvent.team == mainGame.team1)
+        var gameIndex = findScheduleIndex(mainGame.date, mainGame.team2, updatedStats);
+        var newGameKey = firebase.database().ref().child(`teams/Tritons/schedule/${gameIndex}/events`).push().key;
+        var newEvent = firebase.database().ref(`teams/Tritons/schedule/${gameIndex}/events/${newGameKey}`).set(newEvent);
 
+        let playerIndex;
+        var isTeamOne = (newEvent.team == mainGame.team1);
+
+
+        /* Can you please refactor this ajay. I don't understand this at all */
         for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
             if ((updatedStats[i]).date == mainGame.date) {
                 team = i;
                 //if main team
                 if (isTeamOne) {
+                    updatedStats.[eventValue] += 1;
                     if (eventValue == "Goal Attempt") {
                         updatedStats[i].team1Shots += 1;
                     } else if (eventValue == "Goal") {
@@ -382,6 +399,8 @@ window.addEventListener("DOMContentLoaded", function() {
                 };
             }
         }
+
+
 
         localStorage.setItem('schedule', JSON.stringify(updatedStats));
         localStorage.setItem('roster', JSON.stringify(rosterData));
