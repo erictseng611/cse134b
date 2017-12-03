@@ -1,15 +1,5 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    if('serviceWorker' in navigator){
-        window.addEventListener('load', function(){
-            navigator.serviceWorker.register('../workbox-sw.prod.v2.1.2.js').then(function(registration){
-                console.log('service worker reg was sucessfull');
-            })
-        }, function(err){
-            console.log('service worker failed');
-        });
-    }
-
     var roster = JSON.parse(localStorage.getItem('roster'));
     var rosterContainer = document.querySelector('#view');
     var userType = localStorage.getItem('userType');

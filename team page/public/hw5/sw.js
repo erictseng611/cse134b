@@ -201,6 +201,10 @@ const fileManifest = [
   {
     "url": "json/test.json",
     "revision": "c3896385ca60bad85c0a6466dfbc4d8a"
+  },
+  {
+    "url": "workbox-sw.prod.v2.1.2.js.map",
+    "revision": "8e170beaf8b748367396e6039c808c74"
   }
 ];
 

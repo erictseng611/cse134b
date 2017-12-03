@@ -1,15 +1,5 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    if('serviceWorker' in navigator){
-        window.addEventListener('load', function(){
-            navigator.serviceWorker.register('../workbox-sw.prod.v2.1.2.js').then(function(registration){
-                console.log('service worker reg was sucessfull');
-            })
-        }, function(err){
-            console.log('service worker failed');
-        });
-    }
-
     var games = JSON.parse(localStorage.getItem('schedule'));
     var userType = localStorage.getItem('userType');
     var scheduleContainer = document.querySelector('#view');
