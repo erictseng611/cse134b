@@ -1,0 +1,16 @@
+{
+  "short_name": "Team Watch",
+  "name": "Team Wawtch",
+  "icons": [
+    {
+      "src": "./soccerball.jpg",
+      "type": "image/jpg",
+      "sizes": "48x48"
+    }
+  ],
+  "start_url": "index.html?launcher=true",
+  "background_color": "#559cbe",
+  "theme_color": "#559cbe",
+  "display": "standalone",
+  "orientation": "portrait"
+}
