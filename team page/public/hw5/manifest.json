@@ -6,9 +6,19 @@
       "src": "./soccerball.jpg",
       "type": "image/jpg",
       "sizes": "48x48"
+    },
+    {
+      "src": "./soccerball.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./soccerball.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
     }
   ],
-  "start_url": "index.html?launcher=true",
+  "start_url": "./index.html",
   "background_color": "#559cbe",
   "theme_color": "#559cbe",
   "display": "standalone",
