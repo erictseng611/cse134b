@@ -305,7 +305,7 @@ window.addEventListener("DOMContentLoaded", function() {
             el.innerHTML = `${event.team}: Player #${event.playerNumber} ${event.eventType}`;
 
             //append it to the event-feed container
-            document.getElementById('event-feed').appendChild(el);
+            document.getElementById('event-feed').prependChild(el);
 
         });
 
@@ -347,7 +347,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
         const playerData = rosterData.find((player, i) => {
                 playerIndex = i;
-                return player.number == playerNumberInput.value ? player : false;
+                console.log(player.number, parseInt(playerNumberInput.value));
+                return player.number === parseInt(playerNumberInput.value) ? player : false;
         });
 
         var isTeamOne = (newEvent.team === mainGame.team1);
