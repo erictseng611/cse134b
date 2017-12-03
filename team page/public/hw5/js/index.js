@@ -1,4 +1,15 @@
 window.addEventListener("DOMContentLoaded", function() {
+
+    if('serviceWorker' in navigator){
+        window.addEventListener('load', function(){
+            navigator.serviceWorker.register('./workbox-sw.prod.v2.1.2.js').then(function(registration){
+                console.log('service worker reg was sucessfull');
+            })
+        }, function(err){
+            console.log('service worker failed');
+        });
+    }
+
     const logInButton = document.getElementById('logIn-button');
     const newUserButton = document.getElementById('newUser-button');
     const logInInput = document.getElementById('logIn-input');
