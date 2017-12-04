@@ -29,46 +29,53 @@ window.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
 
         if (checkEmptyInput(inputs) && checkPassword()) {
-            //var inviteCode = inputs.inviteCode.value;
+            var inviteCode = inputs.inviteCode.value;
             var email = inputs.email.value;
             var password = inputs.password.value;
+            var teams;
+            var teamName;
 
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert(errorCode, errorMessage);
-            });
+            var teamlist = firebase.database().ref('teams/');
+            teamlist.once('value')
+                .then(function(snapshot) {
+                    console.log(snapshot.val());
+                    teams = snapshot.val();
+                    for (var team in teams) {
+                        var currTeamInv = teams[team].inviteCode;
+                        if (currTeamInv === inviteCode) {
+                            teamName = team;
+                        }
+                    }
 
-            //grab the team name from the team invite code
-            // var teamName;
-            // for (var team in teams) {
-            //  var currTeamInv = teams[team].inviteCode;
-            //  if (currTeamInv === inviteCode) {
-            //      teamName = team;
-            //  }
-            // }
+                    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        alert(errorCode, errorMessage);
+                    });
+                });
+
 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    //SET THE ROLE TO THIS USER IS A FAN IN THE DATABASE
-                    writeUserData(email, user.uid, 'fan');
+                    console.log(teamName);
+                    //SET THE ROLE TO THIS USER AS A PLAYER IN THE DATABASE
+                    writeUserData(email, user.uid, teamName, 'player');
 
                     // going into local
-                    localStorage.setItem('userType', 'fan');
-                    window.location.href = './homepage.html';
-                    //localStorage.setItem('currentTeam', teamName);
+                    localStorage.setItem('userType', 'player');
 
                 } else {
-
+                    console.log('not logged in')
                 }
             });
-
         }
     }
 
-    function writeUserData(email, uid, userType) {
+    function writeUserData(email, uid, teamName, userType) {
         firebase.database().ref('users/' + uid).set({
                 email: email,
+                team: teamName,
                 userType: userType
             })
             .then(function() {

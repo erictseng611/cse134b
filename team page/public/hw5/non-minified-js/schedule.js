@@ -1,7 +1,18 @@
 window.addEventListener("DOMContentLoaded", function() {
 
+    if('serviceWorker' in navigator){
+        window.addEventListener('load', function(){
+            navigator.serviceWorker.register('../sw.js').then(function(registration){
+                console.log('service worker reg was sucessfull', registration.scope);
+            })
+        }, function(err){
+            console.log('service worker failed');
+        });
+    }
+
     var games = JSON.parse(localStorage.getItem('schedule'));
-    var userType = localStorage.getItem('userType');
+    // var userType = localStorage.getItem('userType');
+    var userType = "coach";
     var scheduleContainer = document.querySelector('#view');
     var mainGame;
 
@@ -334,7 +345,7 @@ window.addEventListener("DOMContentLoaded", function() {
         var newEvent = {
             "playerNumber": parseInt(playerNumberInput.value, 0),
             "eventType": eventValue,
-            "team": teamValue
+            "team": 'hello'
         };
 
         //find the game index
@@ -347,7 +358,6 @@ window.addEventListener("DOMContentLoaded", function() {
 
         const playerData = rosterData.find((player, i) => {
                 playerIndex = i;
-                console.log(player.number, parseInt(playerNumberInput.value));
                 return player.number === parseInt(playerNumberInput.value) ? player : false;
         });
 

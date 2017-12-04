@@ -12,35 +12,40 @@ window.addEventListener("DOMContentLoaded", function() {
 
         // check if inputs are filled and if passwords match
         if (checkEmptyInput(inputs) && checkPassword()) {
-            //var inviteCode = inputs.inviteCode.value;
+            var inviteCode = inputs.inviteCode.value;
             var email = inputs.email.value;
-            //var username = inputs.username.value;
             var password = inputs.password.value;
+            var teams;
+            var teamName;
 
-            //grab the team name from the team invite code
-            // var teamName;
-            // for (var team in teams) {
-            //     var currTeamInv = teams[team].inviteCode;
-            //     if (currTeamInv === inviteCode) {
-            //         teamName = team;
-            //     }
-            // }
+            var teamlist = firebase.database().ref('teams/');
+            teamlist.once('value')
+                .then(function(snapshot) {
+                    console.log(snapshot.val());
+                    teams = snapshot.val();
+                    for (var team in teams) {
+                        var currTeamInv = teams[team].inviteCode;
+                        if (currTeamInv === inviteCode) {
+                            teamName = team;
+                        }
+                    }
 
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert(errorCode, errorMessage);
-            });
+                    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        alert(errorCode, errorMessage);
+                    });
+                });
+
 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    //SET THE ROLE TO THIS USER IS A PLAYER IN THE DATABASE
-                    writeUserData(email, user.uid, 'player');
+                    //SET THE ROLE TO THIS USER AS A PLAYER IN THE DATABASE
+                    writeUserData(email, user.uid, teamName, 'player');
 
                     // going into local
                     localStorage.setItem('userType', 'player');
-                    window.location.href = './homepage.html';
 
                 } else {
                     console.log('not logged in')
@@ -49,14 +54,15 @@ window.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function writeUserData(email, uid, userType) {
+    function writeUserData(email, uid, teamName, userType) {
         firebase.database().ref('users/' + uid).set({
-            email: email,
-            userType: userType
-        })
-        .then(function(){
-            window.location.href = "./homepage.html";
-        });
+                email: email,
+                team: teamName,
+                userType: userType
+            })
+            .then(function() {
+                window.location.href = "./homepage.html";
+            });
     }
 
     function checkPassword() {

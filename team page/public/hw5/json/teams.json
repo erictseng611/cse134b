@@ -1,6 +1,7 @@
 {
 	"teams":{
 		"Tritons": {
+			"name": "Tritons",
 			"schedule": [
 				{
 					"archived": false,
@@ -268,6 +269,7 @@
 		},
 
 		"Eagles": {
+			"name":"Eagles",
 			"schedule":[],
 			"roster": [
 				{
