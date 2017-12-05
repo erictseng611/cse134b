@@ -67,6 +67,46 @@ const fileManifest = [
     "revision": "fd75020da724f737293c1c30e756954a"
   },
   {
+    "url": "html/addGame.html",
+    "revision": "2d9e56505e6be1e5bea3ef664a0b8569"
+  },
+  {
+    "url": "html/addPlayer.html",
+    "revision": "f921cf96299fe2161721e826485c54dc"
+  },
+  {
+    "url": "html/createAcc.html",
+    "revision": "079387ccf1829ffc6791dbfa1ecf8bc2"
+  },
+  {
+    "url": "html/createFan.html",
+    "revision": "e081b075f9aa7dbb2c00c6da415a0bc0"
+  },
+  {
+    "url": "html/createPlayer.html",
+    "revision": "a1b896824b50588d503d5cc9b69feac3"
+  },
+  {
+    "url": "html/createTeam.html",
+    "revision": "5aa835b32d1326895484b75185105303"
+  },
+  {
+    "url": "html/eventFeed.html",
+    "revision": "69bf707437c2b9af36e8493535fe1f88"
+  },
+  {
+    "url": "html/homepage.html",
+    "revision": "dd17464590127e55e89654bd864d2346"
+  },
+  {
+    "url": "html/roster.html",
+    "revision": "b4c3749905fddfe477b4e097b104c225"
+  },
+  {
+    "url": "html/schedule.html",
+    "revision": "44a2f31cca8416a434e63d9c4392d92f"
+  },
+  {
     "url": "images/ajaygiri.jpg",
     "revision": "c26b3cf6db3fcaf96dfc2c3f449a7825"
   },
@@ -111,6 +151,10 @@ const fileManifest = [
     "revision": "ed0aecd0315f86608ffaab5c74b1401c"
   },
   {
+    "url": "index.html",
+    "revision": "d5d2e37921bdd5e17b46ec22815ab2f4"
+  },
+  {
     "url": "js/addGame.js",
     "revision": "fe50af09ab88eedf3d71b587ddae18a9"
   },
@@ -136,7 +180,7 @@ const fileManifest = [
   },
   {
     "url": "js/homepage.js",
-    "revision": "3a48f55769c5c0613df0644230f8e658"
+    "revision": "271c00a0e828571e9f0125d72b2e129e"
   },
   {
     "url": "js/index.js",
@@ -188,7 +232,7 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/homepage.js",
-    "revision": "39124f832b5e146c4a41d675c3f3c9fc"
+    "revision": "54367a641ed0c291b7be661e7509f9d1"
   },
   {
     "url": "non-minified-js/index.js",
