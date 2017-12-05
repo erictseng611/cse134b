@@ -84,9 +84,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function writeTeamData(teamName, logo) {
         firebase.database().ref('teams/' + teamName).set({
-            schedule: "hi",
-            roster: "",
-            logo: logo ? logo: "",
+            name: teamName,
+            logo: logo,
             inviteCode: `${teamName}123`
         });
     }

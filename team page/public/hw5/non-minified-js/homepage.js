@@ -1,28 +1,28 @@
 window.addEventListener("DOMContentLoaded", function() {
-	document.querySelector('#signOut-button').addEventListener('click', signOut);
+    document.querySelector('#signOut-button').addEventListener('click', signOut);
 
-	firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	    //console.log(user);
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('../sw.js').then(function(registration) {
+                console.log('service worker reg was sucessfull', registration.scope);
+            })
+        }, function(err) {
+            console.log('service worker failed');
+        });
+    }
 
-	    // load the team's logo and store into local storage
+    var teamName;
 
-	  }
-	});
+    // set the returned data into the tags
+    var team = firebase.database().ref('teams/' + 'Tritons');
+    team.on('value', function(snapshot) {
+        document.querySelector('#logo').src = snapshot.val().logo;
+        document.querySelector('#team_name').innerText = snapshot.val().name;
+    });
 
-	if('serviceWorker' in navigator){
-		window.addEventListener('load', function(){
-			navigator.serviceWorker.register('../sw.js').then(function(registration){
-				//console.log('service worker reg was sucessfull', registration.scope);
-			})
-		}, function(err){
-			//console.log('service worker failed');
-		});
-	}
-
-	function signOut() {
-		localStorage.clear();
-		firebase.auth().signOut();
-		window.location.href = "../index.html";
-	}
+    function signOut() {
+        localStorage.clear();
+        firebase.auth().signOut();
+        window.location.href = "../index.html";
+    }
 });

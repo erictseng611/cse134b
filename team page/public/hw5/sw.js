@@ -68,43 +68,43 @@ const fileManifest = [
   },
   {
     "url": "html/addGame.html",
-    "revision": "a8dc7b2d3c87e0cf5244d3525243cb09"
+    "revision": "2d9e56505e6be1e5bea3ef664a0b8569"
   },
   {
     "url": "html/addPlayer.html",
-    "revision": "270ac015b6f9dc856ed521e64c29f5b0"
+    "revision": "f921cf96299fe2161721e826485c54dc"
   },
   {
     "url": "html/createAcc.html",
-    "revision": "f8268b5bf1fe40fff98a2d2c361aa479"
+    "revision": "079387ccf1829ffc6791dbfa1ecf8bc2"
   },
   {
     "url": "html/createFan.html",
-    "revision": "ea708625dc2bd85ea296cec369609a47"
+    "revision": "e081b075f9aa7dbb2c00c6da415a0bc0"
   },
   {
     "url": "html/createPlayer.html",
-    "revision": "b96fcfc5c40ff9b46055774a619a3093"
+    "revision": "a1b896824b50588d503d5cc9b69feac3"
   },
   {
     "url": "html/createTeam.html",
-    "revision": "d3de85085d2bd95e62559329d9e56fe9"
+    "revision": "5aa835b32d1326895484b75185105303"
   },
   {
     "url": "html/eventFeed.html",
-    "revision": "36386f115919b0a49a820f2a531c815d"
+    "revision": "69bf707437c2b9af36e8493535fe1f88"
   },
   {
     "url": "html/homepage.html",
-    "revision": "3536ebba744f43e6587f3e0c580ab337"
+    "revision": "c69a5d271df97a2059789225025c2866"
   },
   {
     "url": "html/roster.html",
-    "revision": "8b1e06054d4590b1329d725d7f799ea0"
+    "revision": "b4c3749905fddfe477b4e097b104c225"
   },
   {
     "url": "html/schedule.html",
-    "revision": "f9363dfa62b4f37d98eea6971182bf11"
+    "revision": "44a2f31cca8416a434e63d9c4392d92f"
   },
   {
     "url": "images/ajaygiri.jpg",
@@ -148,59 +148,103 @@ const fileManifest = [
   },
   {
     "url": "index.css",
-    "revision": "e423aec8d7024a7c0cfffc358bb024ed"
+    "revision": "ed0aecd0315f86608ffaab5c74b1401c"
   },
   {
     "url": "index.html",
-    "revision": "0e5a9ffd4dc13e83077ef49fe10c8cf7"
+    "revision": "d5d2e37921bdd5e17b46ec22815ab2f4"
   },
   {
     "url": "js/addGame.js",
-    "revision": "dd94d930850b1e68bffd9f9d899222ba"
+    "revision": "cc9c04fcf1891b182167f7aa80ec5e88"
   },
   {
     "url": "js/addPlayer.js",
-    "revision": "633f0ef312a05932d3dd25081c13e960"
+    "revision": "309a66d87f3a36b95f408dcba04f76b5"
   },
   {
     "url": "js/createFan.js",
-    "revision": "f56b9190c31210edd8f7cb9253f795c4"
+    "revision": "b4b4e2e575a787e88d72c1875200a741"
   },
   {
     "url": "js/createPlayer.js",
-    "revision": "513aff5c13e94843bee6ecf037cf6c36"
+    "revision": "090d5e35280dda602aedce76912f372f"
   },
   {
     "url": "js/createTeam.js",
-    "revision": "d16d4748e435ad65982d7b4aea8900be"
+    "revision": "9f1f57d928ade69d6fd0a682cd3c51f2"
   },
   {
     "url": "js/firebase.js",
-    "revision": "f33b90347d84a0e2751fcc2eb14f9f4f"
+    "revision": "8d981f1c01376e91db4f1215f542bf24"
   },
   {
     "url": "js/homepage.js",
-    "revision": "57cb032c968121aeb3b5ecfb9b079e3e"
+    "revision": "3a48f55769c5c0613df0644230f8e658"
   },
   {
     "url": "js/index.js",
-    "revision": "1aae369ef5c8f636876414d3caef1432"
+    "revision": "4754da935db8667f428feb86a1c8ebfa"
   },
   {
     "url": "js/roster.js",
-    "revision": "116c3c507473097ed0e5e2cb6cfe3a54"
+    "revision": "cb9970037ecbf70e64637a5057f6b72f"
   },
   {
     "url": "js/schedule.js",
-    "revision": "f89121950e056cabed5fa06a71367790"
+    "revision": "be714b3280944e6aa334f36543c9e7e2"
   },
   {
     "url": "json/teams.json",
-    "revision": "db51f837b7b67c994c3e0bbcd37ba8d8"
+    "revision": "73cc97b6b8fda71aed294c0c45e16711"
   },
   {
     "url": "json/test.json",
     "revision": "c3896385ca60bad85c0a6466dfbc4d8a"
+  },
+  {
+    "url": "manifest.json",
+    "revision": "aecf9c45fe87f01225eb977ff2b8c3e7"
+  },
+  {
+    "url": "non-minified-js/addGame.js",
+    "revision": "dd94d930850b1e68bffd9f9d899222ba"
+  },
+  {
+    "url": "non-minified-js/addPlayer.js",
+    "revision": "633f0ef312a05932d3dd25081c13e960"
+  },
+  {
+    "url": "non-minified-js/createFan.js",
+    "revision": "0abbf91e4681c132df352f1fcb84ad27"
+  },
+  {
+    "url": "non-minified-js/createPlayer.js",
+    "revision": "79f2d75b05bd5046fc17e2d1fc2861de"
+  },
+  {
+    "url": "non-minified-js/createTeam.js",
+    "revision": "92d974c72bf032f974a12b9eecc5f19b"
+  },
+  {
+    "url": "non-minified-js/firebase.js",
+    "revision": "f33b90347d84a0e2751fcc2eb14f9f4f"
+  },
+  {
+    "url": "non-minified-js/homepage.js",
+    "revision": "7eb6ccf5e3d8872223d583baf45f8a21"
+  },
+  {
+    "url": "non-minified-js/index.js",
+    "revision": "1aae369ef5c8f636876414d3caef1432"
+  },
+  {
+    "url": "non-minified-js/roster.js",
+    "revision": "4df72513dea2ccaa82d301b0cc827032"
+  },
+  {
+    "url": "non-minified-js/schedule.js",
+    "revision": "e585f1bc971c345f7f8efa944251f7a5"
   },
   {
     "url": "workbox-sw.prod.v2.1.2.js.map",
