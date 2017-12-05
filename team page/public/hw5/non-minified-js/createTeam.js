@@ -66,7 +66,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
                     // going into local
                     localStorage.setItem('userType', 'coach');
-                    //localStorage.setItem('currentTeam', teamName);
+                    localStorage.setItem('team', teamName);
 
                     // create the new team in the database
                     // in the future: check that the existing team isn't already in use

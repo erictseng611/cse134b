@@ -96,7 +96,7 @@ const fileManifest = [
   },
   {
     "url": "html/homepage.html",
-    "revision": "dd17464590127e55e89654bd864d2346"
+    "revision": "27ad878544b71d76bb5d35479fa982e0"
   },
   {
     "url": "html/roster.html",
@@ -113,6 +113,10 @@ const fileManifest = [
   {
     "url": "images/erictseng.jpg",
     "revision": "e706f0024cc5f4978e6dcd51844f164c"
+  },
+  {
+    "url": "images/hansgamboa_playerphoto.png",
+    "revision": "10ce4b3c3d6100ca9a4890d61b44796c"
   },
   {
     "url": "images/hansgamboa.jpg",
@@ -136,11 +140,11 @@ const fileManifest = [
   },
   {
     "url": "images/soccerplayer.png",
-    "revision": "6326a4d1e343dab5a69a6b6a808778d4"
+    "revision": "a4388a024fa3fe0c9ebe84adde67e698"
   },
   {
-    "url": "images/triton.jpg",
-    "revision": "492ddd476640536a24cb9b7e63101dde"
+    "url": "images/triton.png",
+    "revision": "6b8851cec0f79e0d5ed0dda5fc499cf7"
   },
   {
     "url": "images/turtles.jpg",
@@ -156,11 +160,11 @@ const fileManifest = [
   },
   {
     "url": "js/addGame.js",
-    "revision": "fe50af09ab88eedf3d71b587ddae18a9"
+    "revision": "2e24dadaebecc8eaaa39225c93bc5089"
   },
   {
     "url": "js/addPlayer.js",
-    "revision": "c7a1adf5f85499eac0a00b51607fd9f8"
+    "revision": "620e621d61dbbdfc79e76123edf5937f"
   },
   {
     "url": "js/createFan.js",
@@ -180,19 +184,19 @@ const fileManifest = [
   },
   {
     "url": "js/homepage.js",
-    "revision": "271c00a0e828571e9f0125d72b2e129e"
+    "revision": "0418a273a778d425191c979a691fbe3d"
   },
   {
     "url": "js/index.js",
-    "revision": "4754da935db8667f428feb86a1c8ebfa"
+    "revision": "665e0d464bfd8c2d43f4eaf8f4ecc0aa"
   },
   {
     "url": "js/roster.js",
-    "revision": "cb9970037ecbf70e64637a5057f6b72f"
+    "revision": "37efbc64b3e764baee353a7a95da4de2"
   },
   {
     "url": "js/schedule.js",
-    "revision": "be714b3280944e6aa334f36543c9e7e2"
+    "revision": "be6a724e15f9b1ddb5e0af9d4dc7e4da"
   },
   {
     "url": "json/teams.json",
@@ -208,11 +212,11 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/addGame.js",
-    "revision": "a0844bf4a2ae0b49d3f8a2e4e60276d1"
+    "revision": "2d9719b87717ff3ce65cd1f41c3084f7"
   },
   {
     "url": "non-minified-js/addPlayer.js",
-    "revision": "a9789f27cc8cc8b37f638d5da61a27b7"
+    "revision": "633f0ef312a05932d3dd25081c13e960"
   },
   {
     "url": "non-minified-js/createFan.js",
@@ -232,19 +236,19 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/homepage.js",
-    "revision": "54367a641ed0c291b7be661e7509f9d1"
+    "revision": "0418a273a778d425191c979a691fbe3d"
   },
   {
     "url": "non-minified-js/index.js",
-    "revision": "1aae369ef5c8f636876414d3caef1432"
+    "revision": "7d9893951e6f3db4ca26fea3e5cc10de"
   },
   {
     "url": "non-minified-js/roster.js",
-    "revision": "4df72513dea2ccaa82d301b0cc827032"
+    "revision": "a8df83d1cc8f1df866c7a27eec90a2c3"
   },
   {
     "url": "non-minified-js/schedule.js",
-    "revision": "e585f1bc971c345f7f8efa944251f7a5"
+    "revision": "0d2dd591581bb19c1031b1afa22980c9"
   },
   {
     "url": "readme.me",

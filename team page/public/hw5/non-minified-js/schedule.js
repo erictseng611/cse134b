@@ -10,6 +10,9 @@ window.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    var teamName = localStorage.getItem('team');
+    //remove the quotes from teamName
+    teamName = teamName.replace(/\"/g, "");
     var games = JSON.parse(localStorage.getItem('schedule'));
     // var userType = localStorage.getItem('userType');
     var userType = "coach";
@@ -61,8 +64,10 @@ window.addEventListener("DOMContentLoaded", function() {
     function getScheduleData(compare) {
 
         // Once teams are setup, change Tritons to the local storage of current team if there is one 
-        schedule = firebase.database().ref('teams/' + 'Tritons' + '/schedule');
+        console.log(teamName);
+        schedule = firebase.database().ref('teams/' + teamName + '/schedule');
         schedule.on('value', function(snapshot) {
+            console.log(snapshot.val());
             localStorage.setItem('schedule', JSON.stringify(snapshot.val()));
 
             if (compare !== schedule) {
@@ -120,7 +125,7 @@ window.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem('schedule', JSON.stringify(localScheduleCopy));
 
             // make changes on the data base
-            firebase.database().ref('teams/' + 'Tritons' + `/schedule/${scheduleIndex}/archived`).set(true);
+            firebase.database().ref('teams/' + teamName + `/schedule/${scheduleIndex}/archived`).set(true);
 
         }
     }
@@ -182,8 +187,8 @@ window.addEventListener("DOMContentLoaded", function() {
         scheduleContainer.classList.remove('hidden');
 
         //make the changes to firebase
-        firebase.database().ref('teams/' + 'Tritons' + `/schedule/${index}/date`).set(inputs.date.value);
-        firebase.database().ref('teams/' + 'Tritons' + `/schedule/${index}/team2`).set(inputs.team2.value);
+        firebase.database().ref('teams/' + teamName + `/schedule/${index}/date`).set(inputs.date.value);
+        firebase.database().ref('teams/' + teamName + `/schedule/${index}/team2`).set(inputs.team2.value);
     }
 
     function renderGamePage(e) {
@@ -303,7 +308,7 @@ window.addEventListener("DOMContentLoaded", function() {
         let localScheduleCopy = JSON.parse(localStorage.getItem('schedule'));
         var index = findScheduleIndex(mainGame.date, mainGame.team2, localScheduleCopy);
 
-        const dbRefObject = firebase.database().ref(`teams/Tritons/schedule/${index}/events`);
+        const dbRefObject = firebase.database().ref(`teams/${teamName}/schedule/${index}/events`);
 
         let t = document.getElementById('#event-feed');
 
@@ -351,9 +356,9 @@ window.addEventListener("DOMContentLoaded", function() {
         //find the game index
         var gameIndex = findScheduleIndex(mainGame.date, mainGame.team2, updatedStats);
         //create a unique to push the event
-        var newGameKey = firebase.database().ref().child(`teams/Tritons/schedule/${gameIndex}/events`).push().key;
+        var newGameKey = firebase.database().ref().child(`teams/${teamName}/schedule/${gameIndex}/events`).push().key;
         //set the event into the database
-        firebase.database().ref(`teams/Tritons/schedule/${gameIndex}/events/${newGameKey}`).set(newEvent);
+        firebase.database().ref(`teams/${teamName}/schedule/${gameIndex}/events/${newGameKey}`).set(newEvent);
 
 
         const playerData = rosterData.find((player, i) => {
@@ -404,10 +409,10 @@ window.addEventListener("DOMContentLoaded", function() {
         }
 
         // update the game stats page
-        firebase.database().ref(`teams/Tritons/schedule/${gameIndex}`).update(updatedStats[gameIndex]);
+        firebase.database().ref(`teams/${teamName}/schedule/${gameIndex}`).update(updatedStats[gameIndex]);
 
         // update the individual's stat page
-        firebase.database().ref(`teams/Tritons/roster/${playerIndex}`).update(rosterData[playerIndex]);
+        firebase.database().ref(`teams/${teamName}/roster/${playerIndex}`).update(rosterData[playerIndex]);
 
         // make the updates local as well
         localStorage.setItem('schedule', JSON.stringify(updatedStats));

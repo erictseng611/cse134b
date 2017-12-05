@@ -5,6 +5,10 @@ window.addEventListener("DOMContentLoaded", function() {
 
     signUpButton.addEventListener('click', submitInfo);
 
+    var teamName = localStorage.getItem('team');
+    //remove the quotes from teamName
+    teamName = teamName.replace(/\"/g, "");
+
     function submitInfo(e) {
         e.preventDefault();
         // temporary to allow all users to edit
@@ -16,7 +20,7 @@ window.addEventListener("DOMContentLoaded", function() {
             var opponent = inputs.opponent.value;
 
             var addedGame = {
-                "team1": "Tritons",
+                "team1": teamName,
                 "team2": opponent,
                 "location": location,
                 "date": date,
@@ -43,11 +47,11 @@ window.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem('schedule', JSON.stringify(schedule));
 
             //update team when i get the chance
-            var schedule = firebase.database().ref('teams/' + 'Tritons' + '/schedule');
+            var schedule = firebase.database().ref('teams/' + teamName + '/schedule');
             schedule.once('value')
                 .then(function(snapshot) {
                     var length = snapshot.val().length;
-                    firebase.database().ref('teams/' + 'Tritons' + `/schedule/${length}`).set(addedGame);
+                    firebase.database().ref('teams/' + teamName + `/schedule/${length}`).set(addedGame);
                     window.location.href = './schedule.html';
                 });
 

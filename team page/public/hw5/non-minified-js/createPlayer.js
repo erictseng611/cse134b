@@ -46,6 +46,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
                     // going into local
                     localStorage.setItem('userType', 'player');
+                    localStorage.setItem('team', teamName);
 
                 } else {
                     console.log('not logged in')

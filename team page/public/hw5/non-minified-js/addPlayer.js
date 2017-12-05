@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function submitInfo(e) {
         e.preventDefault();
-        var userType = "coach"
+        var userType = localStorage.getItem('userType');
         if (userType === 'coach' && checkEmptyInput(inputs)) {
             var name = nameInput.value;
             var number = numberInput.value;

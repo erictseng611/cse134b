@@ -10,6 +10,10 @@ window.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    var teamName = localStorage.getItem('team');
+    //remove the quotes from teamName
+    teamName = teamName.replace(/\"/g, "");
+
     var roster = JSON.parse(localStorage.getItem('roster'));
     var rosterContainer = document.querySelector('#view');
     // var userType = localStorage.getItem('userType');
@@ -64,14 +68,14 @@ window.addEventListener("DOMContentLoaded", function() {
         let markup = team.map(player => {
             if (!player.archived) {
                 return `<figure class="player-card" id="${player.name}" onclick="">
-				<img src="${player.img}" class="inline_block" alt="player headshot">
-				<figcaption class="inline_block">
-				<p class="inline_block">${player.name}</p><span> #${player.number}</span>
-				<p> ${player.position} </p>
-				<button class="delete-button hidden" data-player="${player.name}" data-number="${player.number}">Delete</button>
-				<button class="inline_block edit-button hidden" data-player="${player.name}" data-number="${player.number}"> Edit </button>
-				</figcaption>
-				</figure>`
+                <img src="${player.img}" class="inline_block" alt="player headshot">
+                <figcaption class="inline_block">
+                <p class="inline_block">${player.name}</p><span> #${player.number}</span>
+                <p> ${player.position} </p>
+                <button class="delete-button hidden" data-player="${player.name}" data-number="${player.number}">Delete</button>
+                <button class="inline_block edit-button hidden" data-player="${player.name}" data-number="${player.number}"> Edit </button>
+                </figcaption>
+                </figure>`
             }
         }).join('');
 
@@ -106,7 +110,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
             // update the server version of the roster
             // Once teams are setup, change Tritons to the local storage of current team if there is one 
-            firebase.database().ref('teams/' + 'Tritons' + '/roster/' + playerIndex + '/archived').set(true);
+            firebase.database().ref('teams/' + teamName + '/roster/' + playerIndex + '/archived').set(true);
         }
     }
 
@@ -127,9 +131,9 @@ window.addEventListener("DOMContentLoaded", function() {
 
             let t = document.getElementById('update-view');
             let markup = `<label>Player<input name="name" data-player="${result.name}" value="${result.name}"></label>
-							<label>Number<input name="number" data-number="${result.number}" value="${result.number}"></label>
-							<label>Position<input name="position" data-position="${result.position}" value="${result.position}"></label>
-							<button class="save-button"> save </button>`;
+                            <label>Number<input name="number" data-number="${result.number}" value="${result.number}"></label>
+                            <label>Position<input name="position" data-position="${result.position}" value="${result.position}"></label>
+                            <button class="save-button"> save </button>`;
             t.innerHTML = markup;
             rosterContainer.classList.add('hidden');
             t.classList.remove('hidden');
@@ -166,9 +170,9 @@ window.addEventListener("DOMContentLoaded", function() {
 
             // update the server version of the roster
             // Once teams are setup, change Tritons to the local storage of current team if there is one 
-            firebase.database().ref('teams/' + 'Tritons' + '/roster/' + index + '/name').set(inputs.name.value);
-            firebase.database().ref('teams/' + 'Tritons' + '/roster/' + index + '/number').set(parseInt(inputs.number.value));
-            firebase.database().ref('teams/' + 'Tritons' + '/roster/' + index + '/position').set(inputs.position.value);
+            firebase.database().ref('teams/' + teamName + '/roster/' + index + '/name').set(inputs.name.value);
+            firebase.database().ref('teams/' + teamName + '/roster/' + index + '/number').set(parseInt(inputs.number.value));
+            firebase.database().ref('teams/' + teamName + '/roster/' + index + '/position').set(inputs.position.value);
         }
     }
 
@@ -187,26 +191,26 @@ window.addEventListener("DOMContentLoaded", function() {
         });
 
         let markup = `<button id="returnToPlayers-button"> Back to Players </button>
-						<div class="text_align_center">
-							<figure class="player-figure text_align_center">
-							<img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
-							<figcaption class="text_align_center no_margin">
-							<h1> ${currPlayer.name} #${currPlayer.number}</h1>
-							<h2 class="no_margin"> ${currPlayer.position} </h2>
-							</figcaption>
-							</figure>
-							<div class="player-stats">
-							<div class="margin_center">
-							<p> Goals: ${currPlayer.goals} </p>
-							<p> Fouls: ${currPlayer.fouls} </p>
-							<p> Yellow Cards: ${currPlayer.yellowCards} </p>
-							<p> Red Cards: ${currPlayer.redCards} </p>
-							<p> Shots on Goal: ${currPlayer.shotsOnGoal} </p>
-							<p> Corner Kicks: ${currPlayer.cornerKicks} </p>
-							<p> Goal Kicks: ${currPlayer.goalKicks} </p>
-							</div>
-							</div>
-						</div>`;
+                        <div class="text_align_center">
+                            <figure class="player-figure text_align_center">
+                            <img src=${currPlayer.img} class="player-profile-pic" alt="profile pic">
+                            <figcaption class="text_align_center no_margin">
+                            <h1> ${currPlayer.name} #${currPlayer.number}</h1>
+                            <h2 class="no_margin"> ${currPlayer.position} </h2>
+                            </figcaption>
+                            </figure>
+                            <div class="player-stats">
+                            <div class="margin_center">
+                            <p> Goals: ${currPlayer.goals} </p>
+                            <p> Fouls: ${currPlayer.fouls} </p>
+                            <p> Yellow Cards: ${currPlayer.yellowCards} </p>
+                            <p> Red Cards: ${currPlayer.redCards} </p>
+                            <p> Shots on Goal: ${currPlayer.shotsOnGoal} </p>
+                            <p> Corner Kicks: ${currPlayer.cornerKicks} </p>
+                            <p> Goal Kicks: ${currPlayer.goalKicks} </p>
+                            </div>
+                            </div>
+                        </div>`;
         playerProfile.innerHTML = markup;
         playerProfile.classList.remove('hidden');
     }
@@ -223,7 +227,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function getRosterData(compare) {
         // Once teams are setup, change Tritons to the local storage of current team if there is one 
-        team = firebase.database().ref('teams/' + 'Tritons' + '/roster');
+        team = firebase.database().ref('teams/' + teamName + '/roster');
         team.on('value', function(snapshot) {
             localStorage.setItem('roster', JSON.stringify(snapshot.val()));
 

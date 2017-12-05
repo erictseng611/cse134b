@@ -15,20 +15,25 @@ window.addEventListener("DOMContentLoaded", function() {
 
     // set the returned data into the tags
 
-    // var logoSrc = JSON.parse(localStorage.getItem('logo'));
-    // var teamName = JSON.parse(localStorage.getItem('team'));
-    // if (!logoSrc) {
-    //     var team = firebase.database().ref('teams/' + 'Tritons');
+
+
+
+    var logoSrc = localStorage.getItem('logo');
+    var teamName = localStorage.getItem('team');
+    document.querySelector('#team_name').innerText = teamName;
+
+    // if (!logoSrc || teamName) {
+    //     var team = firebase.database().ref('teams/' + teamName);
     //     team.on('value', function(snapshot) {
-    //         document.querySelector('#logo').src = snapshot.val().logo;
+    //         //document.querySelector('#logo').src = snapshot.val().logo;
     //         document.querySelector('#team_name').innerText = snapshot.val().name;
     //         localStorage.setItem('logo', JSON.stringify(snapshot.val().logo));
-    //         localStorage.setItem('team', JSON.stringify(snapshot.val().name));
+    //         //localStorage.setItem('team', JSON.stringify(snapshot.val().name));
     //     });
     // }
     // else{
-    //     document.querySelector('#logo').src = logoSrc;
-    //     document.querySelector('#team_name').innerText = teamName;
+    //     //document.querySelector('#logo').src = logoSrc;
+    //     //document.querySelector('#team_name').innerText = teamName;
 
     // }
 

@@ -41,8 +41,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
+                //localStorage.setItem('team')
+                var userData = firebase.database().ref('users/' + user.uid);
+                userData.on('value', function(snapshot){
+                    localStorage.setItem('team', snapshot.val().team);
+                    window.location.href = './html/homepage.html';
+                });
                 // if user successfully logs in redirect user to the homepage
-                window.location.href = './html/homepage.html';
             }
         });
 
