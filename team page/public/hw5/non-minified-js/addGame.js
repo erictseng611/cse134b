@@ -7,6 +7,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function submitInfo(e) {
         e.preventDefault();
+        // temporary to allow all users to edit
+        var userType = "coach";
         if (userType === 'coach' && checkEmptyInput(inputs)) {
             var location = inputs.location.value;
             var date = inputs.date.value.replace(/(^|-)0+/g, "$1");
