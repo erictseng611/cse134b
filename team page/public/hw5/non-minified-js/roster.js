@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 
     // later, retrieve the user type from the rest end point
-    if (userType !== 'coach') {
+    if (userType === 'coach') {
         document.querySelector('#addPlayer-button').classList.remove('hidden');
     }
 

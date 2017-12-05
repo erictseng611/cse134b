@@ -67,46 +67,6 @@ const fileManifest = [
     "revision": "fd75020da724f737293c1c30e756954a"
   },
   {
-    "url": "html/addGame.html",
-    "revision": "2d9e56505e6be1e5bea3ef664a0b8569"
-  },
-  {
-    "url": "html/addPlayer.html",
-    "revision": "f921cf96299fe2161721e826485c54dc"
-  },
-  {
-    "url": "html/createAcc.html",
-    "revision": "079387ccf1829ffc6791dbfa1ecf8bc2"
-  },
-  {
-    "url": "html/createFan.html",
-    "revision": "e081b075f9aa7dbb2c00c6da415a0bc0"
-  },
-  {
-    "url": "html/createPlayer.html",
-    "revision": "a1b896824b50588d503d5cc9b69feac3"
-  },
-  {
-    "url": "html/createTeam.html",
-    "revision": "5aa835b32d1326895484b75185105303"
-  },
-  {
-    "url": "html/eventFeed.html",
-    "revision": "69bf707437c2b9af36e8493535fe1f88"
-  },
-  {
-    "url": "html/homepage.html",
-    "revision": "c69a5d271df97a2059789225025c2866"
-  },
-  {
-    "url": "html/roster.html",
-    "revision": "b4c3749905fddfe477b4e097b104c225"
-  },
-  {
-    "url": "html/schedule.html",
-    "revision": "44a2f31cca8416a434e63d9c4392d92f"
-  },
-  {
     "url": "images/ajaygiri.jpg",
     "revision": "c26b3cf6db3fcaf96dfc2c3f449a7825"
   },
@@ -151,16 +111,12 @@ const fileManifest = [
     "revision": "ed0aecd0315f86608ffaab5c74b1401c"
   },
   {
-    "url": "index.html",
-    "revision": "d5d2e37921bdd5e17b46ec22815ab2f4"
-  },
-  {
     "url": "js/addGame.js",
-    "revision": "cc9c04fcf1891b182167f7aa80ec5e88"
+    "revision": "fe50af09ab88eedf3d71b587ddae18a9"
   },
   {
     "url": "js/addPlayer.js",
-    "revision": "309a66d87f3a36b95f408dcba04f76b5"
+    "revision": "c7a1adf5f85499eac0a00b51607fd9f8"
   },
   {
     "url": "js/createFan.js",
@@ -208,11 +164,11 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/addGame.js",
-    "revision": "dd94d930850b1e68bffd9f9d899222ba"
+    "revision": "a0844bf4a2ae0b49d3f8a2e4e60276d1"
   },
   {
     "url": "non-minified-js/addPlayer.js",
-    "revision": "633f0ef312a05932d3dd25081c13e960"
+    "revision": "a9789f27cc8cc8b37f638d5da61a27b7"
   },
   {
     "url": "non-minified-js/createFan.js",
@@ -232,7 +188,7 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/homepage.js",
-    "revision": "7eb6ccf5e3d8872223d583baf45f8a21"
+    "revision": "39124f832b5e146c4a41d675c3f3c9fc"
   },
   {
     "url": "non-minified-js/index.js",
@@ -245,6 +201,10 @@ const fileManifest = [
   {
     "url": "non-minified-js/schedule.js",
     "revision": "e585f1bc971c345f7f8efa944251f7a5"
+  },
+  {
+    "url": "readme.me",
+    "revision": "870ca5bfa43eda9946e0930d8a4333b6"
   },
   {
     "url": "workbox-sw.prod.v2.1.2.js.map",
