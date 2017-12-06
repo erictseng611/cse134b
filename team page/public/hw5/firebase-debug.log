@@ -1,0 +1,36 @@
+[debug] [2017-12-06T23:38:16.901Z] ----------------------------------------------------------------------
+[debug] [2017-12-06T23:38:16.904Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2017-12-06T23:38:16.904Z] CLI Version:   3.15.2
+[debug] [2017-12-06T23:38:16.904Z] Platform:      darwin
+[debug] [2017-12-06T23:38:16.904Z] Node Version:  v6.11.2
+[debug] [2017-12-06T23:38:16.905Z] Time:          Wed Dec 06 2017 15:38:16 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:16.905Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-06T23:38:16.928Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-06T23:38:16.928Z] > authorizing via signed-in user
+[debug] [2017-12-06T23:38:16.931Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-12-06T23:38:16.931Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/G9KpFiiEbkIYaXh8RxL8NAnPXOFC33bUmYvBE0QjDpRrD27sFo_NdyiXoZLYEc8q',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Dec 06 2017 15:38:16 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:17.079Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-06T23:38:17.086Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/cse-134b-hw2-702d4  
+ Wed Dec 06 2017 15:38:17 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:17.442Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-06T23:38:17.445Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/cse-134b-hw2-702d4/tokens  
+ Wed Dec 06 2017 15:38:17 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:17.928Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/erictseng/Desktop/School Projects/cse134b/team page'...
+[info] 
+[debug] [2017-12-06T23:38:17.933Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/cse-134b-hw2-702d4  
+ Wed Dec 06 2017 15:38:17 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:18.386Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-06T23:38:18.387Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/826913440156/clients/_:getWebAppConfig  
+ Wed Dec 06 2017 15:38:18 GMT-0800 (PST)
+[debug] [2017-12-06T23:38:18.829Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+

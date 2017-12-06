@@ -11,6 +11,9 @@ window.addEventListener("DOMContentLoaded", function() {
     var photo;
     uploadPhoto.addEventListener('change', previewPlayer);
     addPlayerButton.addEventListener('click', submitInfo);
+    var teamName = localStorage.getItem('team');
+    //remove the quotes from teamName
+    teamName = teamName.replace(/\"/g, "");
 
     function previewPlayer() {
         curFile = uploadPhoto.files;
@@ -35,7 +38,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function submitInfo(e) {
         e.preventDefault();
-        var userType = localStorage.getItem('userType');
+        var userType = 'coach';
         if (userType === 'coach' && checkEmptyInput(inputs)) {
             var name = nameInput.value;
             var number = numberInput.value;
@@ -70,11 +73,11 @@ window.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem('roster', JSON.stringify(roster));
 
             //update team when i get the chance
-            var team = firebase.database().ref('teams/' + 'Tritons' + '/roster');
+            var team = firebase.database().ref('teams/' + teamName + '/roster');
             team.once('value')
                 .then(function(snapshot) {
                     var length = snapshot.val().length;
-                    firebase.database().ref('teams/' + 'Tritons' + '/roster/' + length).set(addedPlayer);
+                    firebase.database().ref('teams/' + teamName + '/roster/' + length).set(addedPlayer);
                     window.location.href = './roster.html';
                 });
 

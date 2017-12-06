@@ -1,15 +1,5 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    if('serviceWorker' in navigator){
-        window.addEventListener('load', function(){
-            navigator.serviceWorker.register('../sw.js').then(function(registration){
-              //  console.log('service worker reg was sucessfull', registration.scope);
-            })
-        }, function(err){
-            //console.log('service worker failed');
-        });
-    }
-
     var teamName = localStorage.getItem('team');
     //remove the quotes from teamName
     teamName = teamName.replace(/\"/g, "");
@@ -102,7 +92,7 @@ window.addEventListener("DOMContentLoaded", function() {
             let localRosterCopy = JSON.parse(localStorage.getItem('roster'));
 
             var playerIndex = findPlayerIndex(finder, parseInt(e.target.dataset.number), localRosterCopy);
-
+            console.log(playerIndex);
             localRosterCopy[playerIndex].archived = "true";
 
             // perform post request when using REST
@@ -242,8 +232,11 @@ window.addEventListener("DOMContentLoaded", function() {
 
     function findPlayerIndex(playerName, playerNumber, roster) {
         var index = 9999;
+        console.log(roster);
         roster.forEach(function(player, i) {
-            if (player.name === playerName && player.number === playerNumber) {
+            console.log(player.name, playerName);
+            console.log(player.number, playerNumber);
+            if (player.name === playerName && player.number == playerNumber) {
                 index = i;
             }
         });

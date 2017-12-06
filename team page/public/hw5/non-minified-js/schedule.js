@@ -1,14 +1,5 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    if('serviceWorker' in navigator){
-        window.addEventListener('load', function(){
-            navigator.serviceWorker.register('../sw.js').then(function(registration){
-                console.log('service worker reg was sucessfull', registration.scope);
-            })
-        }, function(err){
-            console.log('service worker failed');
-        });
-    }
 
     var teamName = localStorage.getItem('team');
     //remove the quotes from teamName
