@@ -96,7 +96,7 @@ const fileManifest = [
   },
   {
     "url": "html/homepage.html",
-    "revision": "27ad878544b71d76bb5d35479fa982e0"
+    "revision": "b83d03c91271b600f31ce77e138bacde"
   },
   {
     "url": "html/roster.html",
@@ -131,6 +131,10 @@ const fileManifest = [
     "revision": "b0a317a7f2146920be7046bdda1c7fe4"
   },
   {
+    "url": "images/snipLogo.png",
+    "revision": "017e48765b01ff45a8abbab73fb316b4"
+  },
+  {
     "url": "images/soccerball.jpg",
     "revision": "3dda712041b477ad309fe24d203ec2f8"
   },
@@ -160,23 +164,23 @@ const fileManifest = [
   },
   {
     "url": "js/addGame.js",
-    "revision": "2e24dadaebecc8eaaa39225c93bc5089"
+    "revision": "58f9f882a59123019325ca9d6f0b5650"
   },
   {
     "url": "js/addPlayer.js",
-    "revision": "620e621d61dbbdfc79e76123edf5937f"
+    "revision": "309a66d87f3a36b95f408dcba04f76b5"
   },
   {
     "url": "js/createFan.js",
-    "revision": "b4b4e2e575a787e88d72c1875200a741"
+    "revision": "00dbaa6cbfdeb0475029e5d08aa1236d"
   },
   {
     "url": "js/createPlayer.js",
-    "revision": "090d5e35280dda602aedce76912f372f"
+    "revision": "eb4d023975ae70bcd6feee217bb61368"
   },
   {
     "url": "js/createTeam.js",
-    "revision": "9f1f57d928ade69d6fd0a682cd3c51f2"
+    "revision": "02b0b506d4b824eecae5fa1b43862669"
   },
   {
     "url": "js/firebase.js",
@@ -184,19 +188,19 @@ const fileManifest = [
   },
   {
     "url": "js/homepage.js",
-    "revision": "0418a273a778d425191c979a691fbe3d"
+    "revision": "11566998acc9822917c1e90870e0cd01"
   },
   {
     "url": "js/index.js",
-    "revision": "665e0d464bfd8c2d43f4eaf8f4ecc0aa"
+    "revision": "5b2e04e186c526d4c6587a99cbe0cf1f"
   },
   {
     "url": "js/roster.js",
-    "revision": "37efbc64b3e764baee353a7a95da4de2"
+    "revision": "4884a25727d5897795cda826fceb98a6"
   },
   {
     "url": "js/schedule.js",
-    "revision": "be6a724e15f9b1ddb5e0af9d4dc7e4da"
+    "revision": "97675655e3bb97bc94f60376c2e8e886"
   },
   {
     "url": "json/teams.json",
@@ -208,7 +212,7 @@ const fileManifest = [
   },
   {
     "url": "manifest.json",
-    "revision": "aecf9c45fe87f01225eb977ff2b8c3e7"
+    "revision": "28aac002c48af120e1f7203d7211162f"
   },
   {
     "url": "non-minified-js/addGame.js",
@@ -220,15 +224,15 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/createFan.js",
-    "revision": "0abbf91e4681c132df352f1fcb84ad27"
+    "revision": "07a9706f82adda284a658c19a260db79"
   },
   {
     "url": "non-minified-js/createPlayer.js",
-    "revision": "79f2d75b05bd5046fc17e2d1fc2861de"
+    "revision": "63e8ee332f68594faefa176da72946fd"
   },
   {
     "url": "non-minified-js/createTeam.js",
-    "revision": "92d974c72bf032f974a12b9eecc5f19b"
+    "revision": "547fade1d95d085cd4628dcb704bb0a8"
   },
   {
     "url": "non-minified-js/firebase.js",
