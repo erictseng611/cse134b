@@ -80,11 +80,11 @@ const fileManifest = [
   },
   {
     "url": "html/createFan.html",
-    "revision": "e081b075f9aa7dbb2c00c6da415a0bc0"
+    "revision": "209b07cfda5ed2b33e415ad34fd0ca1e"
   },
   {
     "url": "html/createPlayer.html",
-    "revision": "a1b896824b50588d503d5cc9b69feac3"
+    "revision": "6c9f1a3282ff7305816cfe0afd6155dd"
   },
   {
     "url": "html/createTeam.html",
@@ -139,6 +139,10 @@ const fileManifest = [
     "revision": "3dda712041b477ad309fe24d203ec2f8"
   },
   {
+    "url": "images/soccerball.png",
+    "revision": "89c46d9acbf6847545fcbe9b6a2b39cc"
+  },
+  {
     "url": "images/soccerFav.jpeg",
     "revision": "7be5942150675081d9f5b7be7bc81fa7"
   },
@@ -156,7 +160,7 @@ const fileManifest = [
   },
   {
     "url": "index.css",
-    "revision": "ed0aecd0315f86608ffaab5c74b1401c"
+    "revision": "7ae1a022da227b8be9da53326973ecd1"
   },
   {
     "url": "index.html",
@@ -168,7 +172,7 @@ const fileManifest = [
   },
   {
     "url": "js/addPlayer.js",
-    "revision": "309a66d87f3a36b95f408dcba04f76b5"
+    "revision": "24cb4ea0de3fcbf7940e4433ebf9c3aa"
   },
   {
     "url": "js/createFan.js",
@@ -196,11 +200,11 @@ const fileManifest = [
   },
   {
     "url": "js/roster.js",
-    "revision": "4884a25727d5897795cda826fceb98a6"
+    "revision": "ecfbed4c4f4e67ac4ed0d448305fc9cc"
   },
   {
     "url": "js/schedule.js",
-    "revision": "97675655e3bb97bc94f60376c2e8e886"
+    "revision": "ad5216de66c0c5848afb7ffb8eb9a587"
   },
   {
     "url": "json/teams.json",
@@ -212,7 +216,7 @@ const fileManifest = [
   },
   {
     "url": "manifest.json",
-    "revision": "28aac002c48af120e1f7203d7211162f"
+    "revision": "99c6d7b9699612f60523d0dcdcd9c9c3"
   },
   {
     "url": "non-minified-js/addGame.js",
@@ -220,7 +224,7 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/addPlayer.js",
-    "revision": "633f0ef312a05932d3dd25081c13e960"
+    "revision": "3425e3975149168ddb8c0a74e0ea573c"
   },
   {
     "url": "non-minified-js/createFan.js",
@@ -248,11 +252,11 @@ const fileManifest = [
   },
   {
     "url": "non-minified-js/roster.js",
-    "revision": "a8df83d1cc8f1df866c7a27eec90a2c3"
+    "revision": "616b7daed1791d904508da8271fed13f"
   },
   {
     "url": "non-minified-js/schedule.js",
-    "revision": "0d2dd591581bb19c1031b1afa22980c9"
+    "revision": "936591277aaaf5ca6a55f917c474cd78"
   },
   {
     "url": "readme.me",
