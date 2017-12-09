@@ -333,7 +333,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		};
 
 		let playerIndex;
-		var isTeamOne = (newEvent.team == mainGame.team1)
+		const isTeamOne = (newEvent.team == mainGame.team1)
 			// const playerData = rosterData.find((player, i) => {
 			// 	playerIndex = i;
 			// 	return player.number == playerNumberInput.value ? player : false;
@@ -342,8 +342,33 @@ window.addEventListener("DOMContentLoaded", function() {
 		for (var i = 0; i < (Object.keys(updatedStats)).length; i++) {
 			if ((updatedStats[i]).date == mainGame.date) {
 				team = i;
-				//if main team
 				if (isTeamOne) {
+					switch (eventValue) {
+						case "Goal Attempt":
+							updatedStats[i].team1Shots += 1;
+							break;
+						case "Goal":
+							updatedStats[i].team1Goals += 1;
+							break;
+						case "Foul":
+						  updatedStats[i].team1Fouls += 1;
+							break;
+						case "Goal Kick":
+						  updatedStats[i].team1GoalKicks += 1;
+							break;
+						case "Corner Kick":
+						  updatedStats[i].team1RedCards += 1;
+							break;
+						case: "Yellow Card":
+						  updatedStats[i].team1RedCards += 1;
+							break;
+						case: "Red Card":
+						  updatedStats[i].team1RedCards += 1;
+							break;
+					}
+
+
+					/*
 					if (eventValue == "Goal Attempt") {
 						updatedStats[i].team1Shots += 1;
 					} else if (eventValue == "Goal") {
@@ -353,9 +378,9 @@ window.addEventListener("DOMContentLoaded", function() {
 					} else if (eventValue == "Goal Kick") {
 						updatedStats[i].team1GoalKicks += 1;
 					} else if (eventValue == "Corner Kick") {
-						updatedStats[i].team1Corners += 1;
+						updatedStats[i].team1RedCards += 1;
 					} else if (eventValue == "Yellow Card") {
-						updatedStats[i].team1YellowCards += 1;
+						updatedStats[i].team1RedCards += 1;
 					} else if (eventValue == "Red Card") {
 						updatedStats[i].team1RedCards += 1;
 					}
@@ -375,7 +400,7 @@ window.addEventListener("DOMContentLoaded", function() {
 					} else if (eventValue == "Red Card") {
 						updatedStats[i].team2RedCards += 1;
 					}
-				}
+				} */
 
 				updatedStats[i].events.push(newEvent);
 
